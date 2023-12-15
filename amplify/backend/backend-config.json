@@ -1,20 +1,5 @@
 {
-  "api": {
-    "cvservice": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "cvRequestHandler"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
-    }
-  },
+  "api": {},
   "auth": {
     "weprep1538f8ae": {
       "customAuth": false,
@@ -46,11 +31,5 @@
       "service": "Cognito"
     }
   },
-  "function": {
-    "cvRequestHandler": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  }
+  "function": {}
 }
