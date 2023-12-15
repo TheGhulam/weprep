@@ -10,6 +10,14 @@
       "StackName": "amplify-weprep-dev-173140",
       "StackId": "arn:aws:cloudformation:eu-central-1:533328646379:stack/amplify-weprep-dev-173140/7af09cf0-9b67-11ee-9928-063f28b9fcef",
       "AmplifyAppId": "d1pkjyevs11s70"
+    },
+    "categories": {
+      "auth": {
+        "weprep1538f8ae": {}
+      },
+      "function": {
+        "cvRequestHandler": {}
+      }
     }
   }
 }
