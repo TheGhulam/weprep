@@ -18,11 +18,24 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
+    "S3Trigger07f2cf77": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "cvServiceHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
       "Name": "string",
+      "Region": "string"
+    }
+  },
+  "storage": {
+    "userCV": {
+      "BucketName": "string",
       "Region": "string"
     }
   }

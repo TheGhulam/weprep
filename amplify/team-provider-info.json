@@ -19,11 +19,18 @@
       "function": {
         "cvServiceHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/cvServiceHandler-7a70396e3271316e5235-build.zip"
+          "s3Key": "amplify-builds/cvServiceHandler-487146396e717a503832-build.zip"
+        },
+        "S3Trigger07f2cf77": {
+          "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+          "s3Key": "amplify-builds/S3Trigger07f2cf77-746e7a44416762697839-build.zip"
         }
       },
       "api": {
         "cvService": {}
+      },
+      "storage": {
+        "userCV": {}
       }
     }
   }
