@@ -1,12 +1,19 @@
+import base64
 import json
+import logging
+import uuid
 
 import boto3
 
 s3_client = boto3.client("s3")
 bucket_name = "user-cv173140-dev"
 
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
 
 def handler(event, context):
+    logger.info(event)
     http_method = event["httpMethod"]
 
     if http_method == "POST":
@@ -21,11 +28,12 @@ def handler(event, context):
 
 def handle_post_request(event):
     try:
-        # user_id = event['pathParameters']['userId']
-        # file_content = event['body']
-        # file_name = f"{user_id}/{uuid.uuid4()}.pdf"
+        user_id = event["pathParameters"]["user_id"]
+        file_content = event["body"]
+        file_content = base64.b64decode(file_content)
+        file_name = f"{user_id}/{uuid.uuid4()}.pdf"
 
-        # s3_client.put_object(Bucket=bucket_name, Key=file_name, Body=file_content)
+        s3_client.put_object(Bucket=bucket_name, Key=file_name, Body=file_content)
 
         return {"statusCode": 200, "body": json.dumps("File uploaded successfully.")}
     except Exception as e:
