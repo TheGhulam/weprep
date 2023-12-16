@@ -1,5 +1,20 @@
 {
-  "api": {},
+  "api": {
+    "cvService": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "cvServiceHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
   "auth": {
     "weprep1538f8ae": {
       "customAuth": false,
@@ -31,5 +46,52 @@
       "service": "Cognito"
     }
   },
-  "function": {}
+  "function": {
+    "S3Trigger07f2cf77": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "cvServiceHandler": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_cvServiceHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "cvServiceHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_cvServiceHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "cvServiceHandler"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "userCV": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "LambdaExecutionRole"
+          ],
+          "category": "function",
+          "resourceName": "S3Trigger07f2cf77"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
+  }
 }

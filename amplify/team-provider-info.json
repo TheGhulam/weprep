@@ -15,6 +15,15 @@
     "categories": {
       "auth": {
         "weprep1538f8ae": {}
+      },
+      "function": {
+        "cvServiceHandler": {
+          "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+          "s3Key": "amplify-builds/cvServiceHandler-7a70396e3271316e5235-build.zip"
+        }
+      },
+      "api": {
+        "cvService": {}
       }
     }
   }

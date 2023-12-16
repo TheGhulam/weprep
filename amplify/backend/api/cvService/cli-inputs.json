@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/cv-service": {
+      "name": "/cv-service",
+      "lambdaFunction": "cvServiceHandler",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
