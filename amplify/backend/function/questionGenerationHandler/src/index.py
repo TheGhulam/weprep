@@ -1,15 +1,18 @@
 import json
+import logging
 import time
 
 import boto3
 import requests
-
-from .utils import system_prompt
+from utils import system_prompt
 
 bucket_name = "processed-cvs"
 s3_client = boto3.client("s3")
 api_token = "r8_PTUd7opDkDJMQYOzqALeOibvYNWClDD0DwkzL"
 start_url = "https://api.replicate.com/v1/predictions"
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 
 def handler(event, context):
@@ -46,8 +49,8 @@ def handler(event, context):
         start_response = requests.post(
             start_url, headers=headers, data=json.dumps(data)
         )
-        if start_response.status_code != 200:
-            return response(500, "Error starting prediction")
+        logger.info(start_response)
+
         start_result = start_response.json()
         get_url = start_result["urls"]["get"]
         for _ in range(30):
