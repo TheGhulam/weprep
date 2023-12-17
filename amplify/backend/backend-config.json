@@ -13,6 +13,20 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
+    },
+    "cvServiceProcessed": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "cvServiceProcessingHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
     }
   },
   "auth": {
@@ -47,35 +61,24 @@
     }
   },
   "function": {
-    "S3Trigger07f2cf77": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
     "cvServiceHandler": {
       "build": true,
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "cvServiceProcessingHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userCVProcessing": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
-    "AMPLIFY_function_S3Trigger07f2cf77_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "S3Trigger07f2cf77"
-        }
-      ]
-    },
-    "AMPLIFY_function_S3Trigger07f2cf77_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "S3Trigger07f2cf77"
-        }
-      ]
-    },
     "AMPLIFY_function_cvServiceHandler_deploymentBucketName": {
       "usedBy": [
         {
@@ -91,21 +94,43 @@
           "resourceName": "cvServiceHandler"
         }
       ]
+    },
+    "AMPLIFY_function_cvServiceProcessingHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "cvServiceProcessingHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_cvServiceProcessingHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "cvServiceProcessingHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userCVProcessing_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userCVProcessing"
+        }
+      ]
+    },
+    "AMPLIFY_function_userCVProcessing_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userCVProcessing"
+        }
+      ]
     }
   },
   "storage": {
     "userCV": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn",
-            "LambdaExecutionRole"
-          ],
-          "category": "function",
-          "resourceName": "S3Trigger07f2cf77"
-        }
-      ],
+      "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "S3"
     }
