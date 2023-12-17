@@ -19,21 +19,25 @@
       "function": {
         "cvServiceHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/cvServiceHandler-54493930416279535444-build.zip"
+          "s3Key": "amplify-builds/cvServiceHandler-6f345a774b7565306250-build.zip"
+        },
+        "cvServiceProcessingHandler": {
+          "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+          "s3Key": "amplify-builds/cvServiceProcessingHandler-546d4a663666486b4c46-build.zip"
         },
         "userCVProcessing": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
           "s3Key": "amplify-builds/userCVProcessing-4f54734a542b462f6e61-build.zip"
         },
-        "cvServiceProcessingHandler": {
+        "questionGenerationHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/cvServiceProcessingHandler-337249716c6178416748-build.zip"
-        },
-        "questionGenerationHandler": {}
+          "s3Key": "amplify-builds/questionGenerationHandler-6a642f654d2b4b2b734a-build.zip"
+        }
       },
       "api": {
         "cvService": {},
-        "cvServiceProcessed": {}
+        "cvServiceProcessed": {},
+        "questionGeneration": {}
       },
       "storage": {
         "userCV": {}

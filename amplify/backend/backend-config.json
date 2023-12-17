@@ -97,56 +97,6 @@
       "service": "Lambda"
     }
   },
-  "parameters": {
-    "AMPLIFY_function_cvServiceHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "cvServiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_cvServiceHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "cvServiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_cvServiceProcessingHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "cvServiceProcessingHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_cvServiceProcessingHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "cvServiceProcessingHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_userCVProcessing_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "userCVProcessing"
-        }
-      ]
-    },
-    "AMPLIFY_function_userCVProcessing_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "userCVProcessing"
-        }
-      ]
-    }
-  },
   "storage": {
     "userCV": {
       "dependsOn": [],
