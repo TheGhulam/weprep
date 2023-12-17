@@ -21,10 +21,11 @@
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
           "s3Key": "amplify-builds/cvServiceHandler-75376143304a63765433-build.zip"
         },
-        "S3Trigger07f2cf77": {
+        "userCVProcessing": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/S3Trigger07f2cf77-746e7a44416762697839-build.zip"
-        }
+          "s3Key": "amplify-builds/userCVProcessing-776d626352692f696252-build.zip"
+        },
+        "cvServiceProcessingHandler": {}
       },
       "api": {
         "cvService": {}

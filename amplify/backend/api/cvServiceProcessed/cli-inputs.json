@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/cv-service-processed/{user-id}": {
+      "name": "/cv-service-processed/{user-id}",
+      "lambdaFunction": "cvServiceProcessingHandler",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
