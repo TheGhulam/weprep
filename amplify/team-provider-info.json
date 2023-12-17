@@ -28,7 +28,8 @@
         "cvServiceProcessingHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
           "s3Key": "amplify-builds/cvServiceProcessingHandler-337249716c6178416748-build.zip"
-        }
+        },
+        "questionGenerationHandler": {}
       },
       "api": {
         "cvService": {},

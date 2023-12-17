@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/question-generation/{user_id}": {
+      "name": "/question-generation/{user_id}",
+      "lambdaFunction": "questionGenerationHandler",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
