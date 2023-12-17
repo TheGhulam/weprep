@@ -43,7 +43,7 @@ def handle_post_request(event):
 
 def handle_get_request(event):
     try:
-        user_id = event["pathParameters"]["userId"]
+        user_id = event["pathParameters"]["user_id"]
         response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix=user_id + "/")
         files = [item["Key"] for item in response.get("Contents", [])]
 
