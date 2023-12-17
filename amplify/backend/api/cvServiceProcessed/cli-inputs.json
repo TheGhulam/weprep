@@ -1,8 +1,8 @@
 {
   "version": 1,
   "paths": {
-    "/cv-service-processed/{user-id}": {
-      "name": "/cv-service-processed/{user-id}",
+    "/cv-service-processed/{user_id}": {
+      "name": "/cv-service-processed/{user_id}",
       "lambdaFunction": "cvServiceProcessingHandler",
       "permissions": {
         "setting": "open"

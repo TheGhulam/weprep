@@ -19,16 +19,20 @@
       "function": {
         "cvServiceHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/cvServiceHandler-75376143304a63765433-build.zip"
+          "s3Key": "amplify-builds/cvServiceHandler-54493930416279535444-build.zip"
         },
         "userCVProcessing": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userCVProcessing-776d626352692f696252-build.zip"
+          "s3Key": "amplify-builds/userCVProcessing-4f54734a542b462f6e61-build.zip"
         },
-        "cvServiceProcessingHandler": {}
+        "cvServiceProcessingHandler": {
+          "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+          "s3Key": "amplify-builds/cvServiceProcessingHandler-337249716c6178416748-build.zip"
+        }
       },
       "api": {
-        "cvService": {}
+        "cvService": {},
+        "cvServiceProcessed": {}
       },
       "storage": {
         "userCV": {}
