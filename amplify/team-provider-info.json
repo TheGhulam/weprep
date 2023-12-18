@@ -31,14 +31,18 @@
         },
         "questionGenerationHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/questionGenerationHandler-57553641535137636944-build.zip"
+          "s3Key": "amplify-builds/questionGenerationHandler-624179536168426d5069-build.zip"
         },
-        "audioAnalysisHandler": {}
+        "audioAnalysisHandler": {
+          "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+          "s3Key": "amplify-builds/audioAnalysisHandler-5a57796c335730313638-build.zip"
+        }
       },
       "api": {
         "cvService": {},
         "cvServiceProcessed": {},
-        "questionGeneration": {}
+        "questionGeneration": {},
+        "analysisGenerationFromAudio": {}
       },
       "storage": {
         "userCV": {}

@@ -17,6 +17,7 @@
 *.jpg
 *.png
 *.pdf
+*.mp3
 
 # Logs and temporary files
 *.log

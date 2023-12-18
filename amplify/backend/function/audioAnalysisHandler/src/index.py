@@ -1,3 +1,4 @@
+import base64
 import json
 import time
 import uuid
@@ -9,19 +10,22 @@ s3_client = boto3.client("s3")
 bucket_name = "user-processed-data"
 
 
-def lambda_handler(event, context):
+def handler(event, context):
     user_id = event["pathParameters"]["user_id"]
-    audio_data = event["audio_data"]
+    audio_data = event["body"]
+    audio_data = base64.b64decode(audio_data)
 
-    audio_key = f"{user_id}/user_answers_audio.mp3"
+    audio_key = f"{user_id}/user_answers_audio.mp4"
     s3_client.put_object(Bucket=bucket_name, Key=audio_key, Body=audio_data)
 
     job_name = f"transcribe_{uuid.uuid4()}"
     transcribe_client.start_transcription_job(
         TranscriptionJobName=job_name,
         Media={"MediaFileUri": f"s3://{bucket_name}/{audio_key}"},
-        MediaFormat="mp3",
+        MediaFormat="mp4",
         LanguageCode="en-US",
+        OutputBucketName=bucket_name,
+        OutputKey=f"{user_id}/user_answers_audio.json",
     )
 
     transcription_result = poll_transcription_job_status(transcribe_client, job_name)
@@ -34,10 +38,7 @@ def lambda_handler(event, context):
         print("Transcription job failed.")
         return {"statusCode": 200, "body": json.dumps("User audio processing failed")}
 
-    json_key = f"{user_id}/user_answers_audio.json"
-    s3_client.put_object(
-        Bucket=bucket_name, Key=json_key, Body=json.dumps(transcription_result)
-    )
+    print(transcription_result)
 
     return {"statusCode": 200, "body": json.dumps("User audio processing successful")}
 
