@@ -7,7 +7,7 @@ import requests
 from utils.system_prompt import get_system_prompt
 
 cv_bucket_name = "processed-cvs"
-processed_questions_bucket_name = "processed-questions"
+processed_questions_bucket_name = "user-processed-data"
 s3_client = boto3.client("s3")
 polly_client = boto3.client("polly")
 api_token = "r8_PTUd7opDkDJMQYOzqALeOibvYNWClDD0DwkzL"
@@ -126,7 +126,7 @@ def save_to_s3(user_id, data, bucket_name, file_name="questions.json", is_audio=
 def text_to_speech(text, polly_client):
     try:
         response = polly_client.synthesize_speech(
-            Text=text, OutputFormat="mp3", VoiceId="Ruth"
+            Engine="neural", Text=text, OutputFormat="mp3", VoiceId="Ruth"
         )
         return response["AudioStream"].read()
     except Exception as e:

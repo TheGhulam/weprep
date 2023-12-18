@@ -1,5 +1,10 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
+    "analysisGenerationFromAudio": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
+    },
     "cvService": {
       "ApiId": "string",
       "ApiName": "string",
@@ -28,6 +33,13 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
+    "audioAnalysisHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "cvServiceHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",

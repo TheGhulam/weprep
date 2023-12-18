@@ -31,8 +31,9 @@
         },
         "questionGenerationHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/questionGenerationHandler-72705134734b76466938-build.zip"
-        }
+          "s3Key": "amplify-builds/questionGenerationHandler-57553641535137636944-build.zip"
+        },
+        "audioAnalysisHandler": {}
       },
       "api": {
         "cvService": {},

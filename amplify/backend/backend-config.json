@@ -1,5 +1,19 @@
 {
   "api": {
+    "analysisGenerationFromAudio": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "audioAnalysisHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "cvService": {
       "dependsOn": [
         {
@@ -75,6 +89,11 @@
     }
   },
   "function": {
+    "audioAnalysisHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "cvServiceHandler": {
       "build": true,
       "dependsOn": [],
@@ -95,72 +114,6 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_cvServiceHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "cvServiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_cvServiceHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "cvServiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_cvServiceProcessingHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "cvServiceProcessingHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_cvServiceProcessingHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "cvServiceProcessingHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_questionGenerationHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "questionGenerationHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_questionGenerationHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "questionGenerationHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_userCVProcessing_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "userCVProcessing"
-        }
-      ]
-    },
-    "AMPLIFY_function_userCVProcessing_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "userCVProcessing"
-        }
-      ]
     }
   },
   "storage": {
