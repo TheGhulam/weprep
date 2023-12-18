@@ -38,6 +38,13 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
+    "audioAnalysisProcessingHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "cvServiceHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",

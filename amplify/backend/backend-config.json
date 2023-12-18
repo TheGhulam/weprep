@@ -103,6 +103,11 @@
     }
   },
   "function": {
+    "audioAnalysisProcessingHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "cvServiceHandler": {
       "build": true,
       "dependsOn": [],
@@ -136,6 +141,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_audioAnalysisProcessingHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "audioAnalysisProcessingHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_audioAnalysisProcessingHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "audioAnalysisProcessingHandler"
+        }
+      ]
+    },
     "AMPLIFY_function_cvServiceHandler_deploymentBucketName": {
       "usedBy": [
         {

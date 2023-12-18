@@ -82,7 +82,7 @@ def handler(event, context):
                     return response(500, {"message": "Error generating audio file URL"})
             elif poll_result["status"] == "failed":
                 return response(500, "Prediction failed")
-            time.sleep(2)
+            time.sleep(0.5)
         return response(408, "Request timed out")
     else:
         return response(404, "No CV found for the given user ID")

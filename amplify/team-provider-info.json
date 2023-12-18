@@ -31,7 +31,7 @@
         },
         "questionGenerationHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/questionGenerationHandler-624179536168426d5069-build.zip"
+          "s3Key": "amplify-builds/questionGenerationHandler-6852503250754348466c-build.zip"
         },
         "uploadAudioFileHandler": {},
         "uploadUserAudioHandler": {},
@@ -41,7 +41,11 @@
         },
         "userAudioAnalysisHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userAudioAnalysisHandler-41374843684238532f35-build.zip"
+          "s3Key": "amplify-builds/userAudioAnalysisHandler-637572496263726e4d50-build.zip"
+        },
+        "audioAnalysisProcessingHandler": {
+          "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+          "s3Key": "amplify-builds/audioAnalysisProcessingHandler-39365a39305333375531-build.zip"
         }
       },
       "api": {
