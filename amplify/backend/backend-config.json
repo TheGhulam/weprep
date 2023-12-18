@@ -1,19 +1,5 @@
 {
   "api": {
-    "analysisGenerationFromAudio": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "audioAnalysisHandler"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
-    },
     "cvService": {
       "dependsOn": [
         {
@@ -51,6 +37,20 @@
           ],
           "category": "function",
           "resourceName": "questionGenerationHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "uploadUserAudio": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userAudioUploadHandler"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -106,6 +106,11 @@
       "service": "Lambda"
     },
     "questionGenerationHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userAudioUploadHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -178,6 +183,22 @@
         {
           "category": "function",
           "resourceName": "questionGenerationHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userAudioUploadHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userAudioUploadHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userAudioUploadHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userAudioUploadHandler"
         }
       ]
     },
