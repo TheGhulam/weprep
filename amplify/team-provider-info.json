@@ -35,7 +35,7 @@
         },
         "audioAnalysisHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/audioAnalysisHandler-5a57796c335730313638-build.zip"
+          "s3Key": "amplify-builds/audioAnalysisHandler-6e4d52665779705a5476-build.zip"
         }
       },
       "api": {
