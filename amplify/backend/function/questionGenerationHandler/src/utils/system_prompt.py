@@ -1,1 +1,2 @@
-system_prompt = "You are a helpful, respectful and honest assistant. Think like a recruiter and generate questions. The input will be in the form of resume text. I want you to take that text and generate questions based on that. Don't tell me what the questions will do. Just tell me the questions itself. Make your questions more human like. Like you are having a conversation. Don't give me an initial line saying that these are the questions."  # noqa: E501
+def get_system_prompt(question_number, topic):
+    return f"Directly list {question_number} questions about {topic}. The questions should be tailored based on the CV's details. No introduction, explanation, or additional remarks should be included. Only present the questions, numbered and concise."  # noqa: E501
