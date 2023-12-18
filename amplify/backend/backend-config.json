@@ -55,6 +55,20 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
+    },
+    "userAudioAnalysis": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userAudioAnalysisHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
     }
   },
   "auth": {
@@ -89,11 +103,6 @@
     }
   },
   "function": {
-    "audioAnalysisHandler": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
     "cvServiceHandler": {
       "build": true,
       "dependsOn": [],
@@ -110,6 +119,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "userAudioAnalysisHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "userAudioUploadHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -122,22 +136,6 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_audioAnalysisHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "audioAnalysisHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_audioAnalysisHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "audioAnalysisHandler"
-        }
-      ]
-    },
     "AMPLIFY_function_cvServiceHandler_deploymentBucketName": {
       "usedBy": [
         {
@@ -183,6 +181,22 @@
         {
           "category": "function",
           "resourceName": "questionGenerationHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userAudioAnalysisHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userAudioAnalysisHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userAudioAnalysisHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userAudioAnalysisHandler"
         }
       ]
     },

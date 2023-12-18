@@ -19,6 +19,11 @@ export type AmplifyDependentResourcesAttributes = {
       "ApiId": "string",
       "ApiName": "string",
       "RootUrl": "string"
+    },
+    "userAudioAnalysis": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
     }
   },
   "auth": {
@@ -33,13 +38,6 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
-    "audioAnalysisHandler": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
     "cvServiceHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -55,6 +53,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "questionGenerationHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "userAudioAnalysisHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
