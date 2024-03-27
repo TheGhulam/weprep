@@ -1,10 +1,10 @@
 # Video Analysis Backend
 
-Welcome to the backend repository for our video analysis platform! This serverless backend is built using Python 3.9, AWS Lambda, and Amazon DynamoDB to provide a scalable and efficient infrastructure for analyzing user-uploaded videos.
+Welcome to the backend repository for our video analysis platform! This serverless backend is built using Python 3.8, AWS Lambda, and Amazon DynamoDB to provide a scalable and efficient infrastructure for analyzing user-uploaded videos.
 
 ## Technologies Used
 
-- **Python 3.9:** Our backend is powered by Python 3.9, leveraging its versatility and rich ecosystem for developing serverless functions.
+- **Python 3.8:** Our backend is powered by Python 3.8, leveraging its versatility and rich ecosystem for developing serverless functions.
 
 - **AWS Lambda:** We embrace serverless architecture to handle video processing tasks. AWS Lambda enables automatic scaling and efficient execution without the need for manual infrastructure management.
 
