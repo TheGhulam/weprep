@@ -27,11 +27,11 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "auth": {
-    "weprep1538f8ae": {
+    "weprepf140e683": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
-      "IdentityPoolId": "string",
-      "IdentityPoolName": "string",
+      "HostedUIDomain": "string",
+      "OAuthMetadata": "string",
       "UserPoolArn": "string",
       "UserPoolId": "string",
       "UserPoolName": "string"
