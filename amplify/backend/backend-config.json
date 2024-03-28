@@ -109,6 +109,12 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "cognitoTriggerForUserTable": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "cvServiceHandler": {
       "build": true,
       "dependsOn": [],
@@ -155,6 +161,22 @@
         {
           "category": "function",
           "resourceName": "audioAnalysisProcessingHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_cognitoTriggerForUserTable_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "cognitoTriggerForUserTable"
+        }
+      ]
+    },
+    "AMPLIFY_function_cognitoTriggerForUserTable_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "cognitoTriggerForUserTable"
         }
       ]
     },
@@ -260,6 +282,10 @@
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "S3"
+    },
+    "userTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
     }
   }
 }

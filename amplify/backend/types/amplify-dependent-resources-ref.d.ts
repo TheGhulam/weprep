@@ -45,6 +45,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "cognitoTriggerForUserTable": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "cvServiceHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -92,6 +99,14 @@ export type AmplifyDependentResourcesAttributes = {
     "userCV": {
       "BucketName": "string",
       "Region": "string"
+    },
+    "userTable": {
+      "Arn": "string",
+      "Name": "string",
+      "PartitionKeyName": "string",
+      "PartitionKeyType": "string",
+      "Region": "string",
+      "StreamArn": "string"
     }
   }
 }
