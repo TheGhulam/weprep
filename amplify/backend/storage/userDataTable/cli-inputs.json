@@ -1,0 +1,14 @@
+{
+  "resourceName": "userDataTable",
+  "tableName": "userDataTable",
+  "partitionKey": {
+    "fieldName": "userId",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "lastName",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}
