@@ -44,18 +44,22 @@
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
           "s3Key": "amplify-builds/audioAnalysisProcessingHandler-35334f4842466e4b6744-build.zip"
         },
-        "userDataUpdateHandler": {}
+        "userDataUpdateHandler": {
+          "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+          "s3Key": "amplify-builds/userDataUpdateHandler-4d676569593851664654-build.zip"
+        }
       },
       "api": {
         "cvService": {},
         "cvServiceProcessed": {},
         "questionGeneration": {},
         "uploadUserAudio": {},
-        "userAudioAnalysis": {}
+        "userAudioAnalysis": {},
+        "userData": {}
       },
       "storage": {
         "userCV": {},
-        "userDataTable": {}
+        "userTable": {}
       },
       "auth": {
         "weprep38b852eb": {}
