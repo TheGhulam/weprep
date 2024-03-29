@@ -69,10 +69,24 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
+    },
+    "userData": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userDataUpdateHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
     }
   },
   "auth": {
-    "weprepf140e683": {
+    "weprep38b852eb": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -85,11 +99,7 @@
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [
-          "BIRTHDATE",
-          "EMAIL",
-          "GENDER",
-          "NAME",
-          "PICTURE"
+          "EMAIL"
         ],
         "socialProviders": [],
         "usernameAttributes": [
@@ -106,12 +116,6 @@
   "function": {
     "audioAnalysisProcessingHandler": {
       "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "cognitoTriggerForUserTable": {
-      "build": true,
-      "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
@@ -145,136 +149,11 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_audioAnalysisProcessingHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "audioAnalysisProcessingHandler"
-        }
-      ]
     },
-    "AMPLIFY_function_audioAnalysisProcessingHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "audioAnalysisProcessingHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_cognitoTriggerForUserTable_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "cognitoTriggerForUserTable"
-        }
-      ]
-    },
-    "AMPLIFY_function_cognitoTriggerForUserTable_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "cognitoTriggerForUserTable"
-        }
-      ]
-    },
-    "AMPLIFY_function_cvServiceHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "cvServiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_cvServiceHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "cvServiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_cvServiceProcessingHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "cvServiceProcessingHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_cvServiceProcessingHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "cvServiceProcessingHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_questionGenerationHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "questionGenerationHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_questionGenerationHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "questionGenerationHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_userAudioAnalysisHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "userAudioAnalysisHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_userAudioAnalysisHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "userAudioAnalysisHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_userAudioUploadHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "userAudioUploadHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_userAudioUploadHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "userAudioUploadHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_userCVProcessing_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "userCVProcessing"
-        }
-      ]
-    },
-    "AMPLIFY_function_userCVProcessing_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "userCVProcessing"
-        }
-      ]
+    "userDataUpdateHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "storage": {
@@ -283,7 +162,7 @@
       "providerPlugin": "awscloudformation",
       "service": "S3"
     },
-    "userTable": {
+    "userDataTable": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     }

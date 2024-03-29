@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "cognitoTriggerForUserTable",
+            "userDataUpdateHandler",
             {
               "Fn::Join": [
                 "",
                 [
-                  "cognitoTriggerForUserTable",
+                  "userDataUpdateHandler",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "weprepLambdaRoledbf458dd",
+            "weprepLambdaRole81aa08a5",
             {
               "Fn::Join": [
                 "",
                 [
-                  "weprepLambdaRoledbf458dd",
+                  "weprepLambdaRole81aa08a5",
                   "-",
                   {
                     "Ref": "env"

@@ -44,10 +44,7 @@
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
           "s3Key": "amplify-builds/audioAnalysisProcessingHandler-35334f4842466e4b6744-build.zip"
         },
-        "cognitoTriggerForUserTable": {
-          "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/cognitoTriggerForUserTable-394666785a53706f6f48-build.zip"
-        }
+        "userDataUpdateHandler": {}
       },
       "api": {
         "cvService": {},
@@ -58,10 +55,10 @@
       },
       "storage": {
         "userCV": {},
-        "userTable": {}
+        "userDataTable": {}
       },
       "auth": {
-        "weprepf140e683": {}
+        "weprep38b852eb": {}
       }
     }
   }
