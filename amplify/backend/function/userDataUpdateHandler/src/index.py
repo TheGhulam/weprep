@@ -1,6 +1,7 @@
 import base64
 import json
 
+import bcrypt
 import boto3
 
 # Initialize DynamoDB client
@@ -10,6 +11,7 @@ cognito = boto3.client("cognito-idp")
 
 
 def handler(event, context):
+    print(event)
     http_method = event["httpMethod"]
 
     if http_method == "GET":
@@ -26,13 +28,9 @@ def handler(event, context):
 def handle_get_request(event):
 
     try:
-        user_id = event["pathParameters"]["user_id"]
+        user_id = event["pathParameters"]["user-id"]
 
         user_data = fetch_user_from_database(user_id)
-
-        user_password = get_cognito_password(user_id)
-
-        user_data["password"] = user_password
 
         return {"statusCode": 200, "body": json.dumps(user_data)}
     except Exception as e:
@@ -45,9 +43,10 @@ def handle_get_request(event):
 
 def handle_post_request(event):
     try:
-        user_id = event["pathParameters"]["user_id"]
-
-        body = json.loads(event["body"])
+        user_id = event["pathParameters"]["user-id"]
+        print("I am here")
+        body = json.loads(event.get("body"))
+        print("Body is this", body)
         password = body.get("password")
         first_name = body.get("firstName")
         last_name = body.get("lastName")
@@ -60,6 +59,16 @@ def handle_post_request(event):
         if picture_data_base64:
             picture_data = base64.b64decode(picture_data_base64)
 
+        print(
+            user_id,
+            first_name,
+            last_name,
+            email,
+            about_me,
+            skills,
+            phone_number,
+        )
+
         save_user_to_s3(user_id, picture_data)
         update_cognito_password(user_id, password)
 
@@ -71,11 +80,12 @@ def handle_post_request(event):
             about_me,
             skills,
             phone_number,
+            hash_password(password),
         )
 
         return {
             "statusCode": 200,
-            "body": json.dumps({"message": "User data saved successfully"}),
+            "body": json.dumps({"message": "User data saved successfully in DB"}),
         }
     except Exception as e:
         print("Error processing user data:", e)
@@ -93,17 +103,19 @@ def save_user_to_database(
     about_me,
     skills,
     phone_number,
+    hash_password,
 ):
-    table_name = "userDataTable-dev"
+    table_name = "userTable-dev"
     dynamodb.put_item(
         TableName=table_name,
         Item={
             "userId": {"S": user_id},
+            "password": {"S": hash_password},
             "firstName": {"S": first_name},
             "lastName": {"S": last_name},
             "email": {"S": email},
             "aboutMe": {"S": about_me},
-            "skills": {"SS": skills},  # Assuming skills is a list of strings
+            "skills": {"SS": skills},
             "phoneNumber": {"S": phone_number},
             "pictureURL": ({"S": f"{user_id}-profile-picture"}),
         },
@@ -128,13 +140,13 @@ def update_cognito_password(user_id, new_password):
 
 def fetch_user_from_database(user_id):
     response = dynamodb.get_item(
-        TableName="userDataTable-dev", Key={"user_id": {"S": user_id}}
+        TableName="userTable-dev",
+        Key={"userId": {"S": user_id}},
     )
-    return response.get("Item", {})
+    return response.get("Item")
 
 
-def get_cognito_password(user_id):
-    response = cognito.admin_get_user(
-        UserPoolId="eu-central-1_zua4po97J", Username=user_id
-    )
-    return response["UserAttributes"][0]["Value"]
+def hash_password(password):
+    salt = bcrypt.gensalt()
+    hashed_password = bcrypt.hashpw(password.encode("utf-8"), salt)
+    return hashed_password
