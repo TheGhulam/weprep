@@ -28,7 +28,7 @@ def handler(event, context):
 
 def handle_post_request(event):
     try:
-        user_id = event["pathParameters"]["user_id"]
+        user_id = event["pathParameters"]["user-id"]
         file_content = event["body"]
         file_content = base64.b64decode(file_content)
         file_name = f"{user_id}/{uuid.uuid4()}.pdf"
