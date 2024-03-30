@@ -46,7 +46,7 @@
         },
         "userDataUpdateHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userDataUpdateHandler-4d676569593851664654-build.zip"
+          "s3Key": "amplify-builds/userDataUpdateHandler-384c6974385a65466755-build.zip"
         }
       },
       "api": {
