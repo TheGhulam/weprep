@@ -46,8 +46,9 @@
         },
         "userDataUpdateHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userDataUpdateHandler-384c6974385a65466755-build.zip"
-        }
+          "s3Key": "amplify-builds/userDataUpdateHandler-734350484a5746586a79-build.zip"
+        },
+        "userAnallysisScoresHandler": {}
       },
       "api": {
         "cvService": {},
@@ -59,7 +60,8 @@
       },
       "storage": {
         "userCV": {},
-        "userTable": {}
+        "userTable": {},
+        "userAnalysisScoreTable": {}
       },
       "auth": {
         "weprep38b852eb": {}

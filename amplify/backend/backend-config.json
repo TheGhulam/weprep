@@ -79,6 +79,14 @@
           ],
           "category": "function",
           "resourceName": "userDataUpdateHandler"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userAnallysisScoresHandler"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -131,6 +139,11 @@
       "service": "Lambda"
     },
     "questionGenerationHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userAnallysisScoresHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -287,6 +300,10 @@
     }
   },
   "storage": {
+    "userAnalysisScoreTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
     "userCV": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
