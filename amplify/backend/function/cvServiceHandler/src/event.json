@@ -1,7 +1,8 @@
 {
-    "httpMethod": "GET",
-    "resource": "/cv-service/{user-id}/cv",
+    "httpMethod": "DELETE",
+    "resource": "/cv-service/{user-id}/cv/{cv-id}",
     "pathParameters": {
-        "user-id": "59c8dab4-2ce9-477c-b35f-d55ae911a750"
+        "user-id": "59c8dab4-2ce9-477c-b35f-d55ae911a750",
+        "cv-id": "453e6f06-ef33-4667-946f-4d4156b43dc8"
     }
 }
