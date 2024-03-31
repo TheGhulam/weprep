@@ -43,7 +43,7 @@ def handle_get_request(event):
 def handle_post_request(event):
     try:
         user_id = event["pathParameters"]["user-id"]
-        body = event.get("body")
+        body = json.loads(event.get("body"))
 
         # Check if required fields are present
         required_fields = ["email", "firstName", "lastName"]

@@ -122,6 +122,14 @@ export type AmplifyDependentResourcesAttributes = {
       "BucketName": "string",
       "Region": "string"
     },
+    "userCVsRecordTable": {
+      "Arn": "string",
+      "Name": "string",
+      "PartitionKeyName": "string",
+      "PartitionKeyType": "string",
+      "Region": "string",
+      "StreamArn": "string"
+    },
     "userTable": {
       "Arn": "string",
       "Name": "string",

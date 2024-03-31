@@ -7,6 +7,20 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/cv-service/{user-id}": {
+      "name": "/cv-service/{user-id}",
+      "lambdaFunction": "cvServiceHandler",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/cv-service/{user-id}/cv/{cv-id}": {
+      "name": "/cv-service/{user-id}/cv/{cv-id}",
+      "lambdaFunction": "cvServiceHandler",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

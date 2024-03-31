@@ -179,6 +179,10 @@
       "providerPlugin": "awscloudformation",
       "service": "S3"
     },
+    "userCVsRecordTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
     "userTable": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
