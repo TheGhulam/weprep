@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/user/{user-id}/pratice-data": {
+      "name": "/user/{user-id}/pratice-data",
+      "lambdaFunction": "userPracticeDataHandler",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

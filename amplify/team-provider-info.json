@@ -51,7 +51,8 @@
         "userAnallysisScoresHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
           "s3Key": "amplify-builds/userAnallysisScoresHandler-324262586639746d4e5a-build.zip"
-        }
+        },
+        "userPracticeDataHandler": {}
       },
       "api": {
         "cvService": {},
