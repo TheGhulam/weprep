@@ -1,8 +1,8 @@
 {
   "version": 1,
   "paths": {
-    "/user/{user-id}/pratice-data": {
-      "name": "/user/{user-id}/pratice-data",
+    "/user/{user-id}/practice-data-scores": {
+      "name": "/user/{user-id}/practice-data-scores",
       "lambdaFunction": "userPracticeDataHandler",
       "permissions": {
         "setting": "open"

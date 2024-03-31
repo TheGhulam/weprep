@@ -16,7 +16,7 @@
       "function": {
         "cvServiceHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/cvServiceHandler-503461414f5a2b567430-build.zip"
+          "s3Key": "amplify-builds/cvServiceHandler-6f476b485a3549465671-build.zip"
         },
         "cvServiceProcessingHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
@@ -52,7 +52,10 @@
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
           "s3Key": "amplify-builds/userAnallysisScoresHandler-324262586639746d4e5a-build.zip"
         },
-        "userPracticeDataHandler": {}
+        "userPracticeDataHandler": {
+          "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+          "s3Key": "amplify-builds/userPracticeDataHandler-326a387472546e43456d-build.zip"
+        }
       },
       "api": {
         "cvService": {},
@@ -60,7 +63,8 @@
         "questionGeneration": {},
         "uploadUserAudio": {},
         "userAudioAnalysis": {},
-        "userData": {}
+        "userData": {},
+        "userPracticeRecordGeneral": {}
       },
       "storage": {
         "userCV": {},
