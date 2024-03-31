@@ -73,6 +73,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "userAnallysisScoresHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "userAudioAnalysisHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -103,9 +110,25 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "storage": {
+    "userAnalysisScoreTable": {
+      "Arn": "string",
+      "Name": "string",
+      "PartitionKeyName": "string",
+      "PartitionKeyType": "string",
+      "Region": "string",
+      "StreamArn": "string"
+    },
     "userCV": {
       "BucketName": "string",
       "Region": "string"
+    },
+    "userCVsRecordTable": {
+      "Arn": "string",
+      "Name": "string",
+      "PartitionKeyName": "string",
+      "PartitionKeyType": "string",
+      "Region": "string",
+      "StreamArn": "string"
     },
     "userTable": {
       "Arn": "string",

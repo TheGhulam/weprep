@@ -1,0 +1,10 @@
+{
+  "resourceName": "userCVsRecordTable",
+  "tableName": "userCVsRecordTable",
+  "partitionKey": {
+    "fieldName": "cvId",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

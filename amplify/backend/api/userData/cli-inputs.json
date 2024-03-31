@@ -7,6 +7,13 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/useranalysisscores/{user-id}": {
+      "name": "/useranalysisscores/{user-id}",
+      "lambdaFunction": "userAnallysisScoresHandler",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }
