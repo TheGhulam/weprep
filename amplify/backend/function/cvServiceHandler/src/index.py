@@ -27,7 +27,8 @@ def handler(event, context):
 
     elif http_method == "GET":
         return handle_get_request(event)
-
+    elif http_method == "DELETE" and resource == "/cv-service/{user-id}/cv/{cv-id}":
+        return handle_delete_request(event)
     else:
         return {"statusCode": 405, "body": json.dumps("Method Not Allowed")}
 
@@ -154,4 +155,27 @@ def handle_get_request(event):
         return {
             "statusCode": 500,
             "body": json.dumps("Error in fetching files."),
+        }
+
+
+def handle_delete_request(event):
+    try:
+        path_parameters = event.get("pathParameters", {})
+        user_id = path_parameters.get("user-id")
+        cv_id = path_parameters.get("cv-id")
+
+        dynamodb.delete_item(
+            TableName=TABLE_NAME,
+            Key={"cvId": {"S": cv_id}},
+        )
+
+        cv_key = f"{user_id}/{cv_id}"
+        s3_client.delete_object(Bucket=BUCKET_NAME, Key=cv_key)
+        return {"statusCode": 200, "body": {"message": "CV deleted successfully"}}
+
+    except Exception as e:
+        print(e)
+        return {
+            "statusCode": 500,
+            "body": json.dumps("Error in deleting file."),
         }

@@ -91,6 +91,20 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
+    },
+    "userPracticeRecordGeneral": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userPracticeDataHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
     }
   },
   "auth": {
@@ -164,6 +178,11 @@
       "service": "Lambda"
     },
     "userDataUpdateHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userPracticeDataHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -311,6 +330,22 @@
         {
           "category": "function",
           "resourceName": "userDataUpdateHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userPracticeDataHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userPracticeDataHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userPracticeDataHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userPracticeDataHandler"
         }
       ]
     }
