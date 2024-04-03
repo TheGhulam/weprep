@@ -16,7 +16,7 @@
       "function": {
         "cvServiceHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/cvServiceHandler-6f476b485a3549465671-build.zip"
+          "s3Key": "amplify-builds/cvServiceHandler-6d58656562614f4c6e39-build.zip"
         },
         "cvServiceProcessingHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
@@ -54,7 +54,11 @@
         },
         "userPracticeDataHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userPracticeDataHandler-7037567953556c376b37-build.zip"
+          "s3Key": "amplify-builds/userPracticeDataHandler-79416272465336515361-build.zip"
+        },
+        "userMockInterviewHandler": {
+          "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+          "s3Key": "amplify-builds/userMockInterviewHandler-4d6271546b7155384363-build.zip"
         }
       },
       "api": {
@@ -64,13 +68,15 @@
         "uploadUserAudio": {},
         "userAudioAnalysis": {},
         "userData": {},
-        "userPracticeRecordGeneral": {}
+        "userPracticeRecordGeneral": {},
+        "mockInterviewService": {}
       },
       "storage": {
         "userCV": {},
         "userTable": {},
         "userAnalysisScoreTable": {},
-        "userCVsRecordTable": {}
+        "userCVsRecordTable": {},
+        "mockInterviewSessionsTable": {}
       },
       "auth": {
         "weprep38b852eb": {}

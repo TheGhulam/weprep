@@ -136,13 +136,12 @@ def handle_get_request(event):
                 cv_files = []
                 for item in items:
                     cv_id = item["cvId"]
-                    print("This is the cv_id", cv_id)
                     cv_key = f"{user_id}/{cv_id}"
                     cv_url = get_cv_url_from_s3(cv_key)
                     cv_files.append(
                         {
                             "cvId": item.get("cvId").get("S"),
-                            "cvName": item.get("cvId").get("S"),
+                            "cvName": item.get("cvName").get("S"),
                             "cvURL": cv_url,
                         }
                     )

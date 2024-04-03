@@ -10,6 +10,11 @@ export type AmplifyDependentResourcesAttributes = {
       "ApiName": "string",
       "RootUrl": "string"
     },
+    "mockInterviewService": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
+    },
     "questionGeneration": {
       "ApiId": "string",
       "ApiName": "string",
@@ -113,6 +118,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "userMockInterviewHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "userPracticeDataHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -122,6 +134,16 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "storage": {
+    "mockInterviewSessionsTable": {
+      "Arn": "string",
+      "Name": "string",
+      "PartitionKeyName": "string",
+      "PartitionKeyType": "string",
+      "Region": "string",
+      "SortKeyName": "string",
+      "SortKeyType": "string",
+      "StreamArn": "string"
+    },
     "userAnalysisScoreTable": {
       "Arn": "string",
       "Name": "string",

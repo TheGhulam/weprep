@@ -28,6 +28,20 @@
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
     },
+    "mockInterviewService": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userMockInterviewHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "questionGeneration": {
       "dependsOn": [
         {
@@ -178,6 +192,11 @@
       "service": "Lambda"
     },
     "userDataUpdateHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userMockInterviewHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -333,6 +352,22 @@
         }
       ]
     },
+    "AMPLIFY_function_userMockInterviewHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userMockInterviewHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userMockInterviewHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userMockInterviewHandler"
+        }
+      ]
+    },
     "AMPLIFY_function_userPracticeDataHandler_deploymentBucketName": {
       "usedBy": [
         {
@@ -351,6 +386,10 @@
     }
   },
   "storage": {
+    "mockInterviewSessionsTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
     "userAnalysisScoreTable": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
