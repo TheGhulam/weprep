@@ -1,1 +1,7 @@
-{ "test": "event" }
+{
+    "httpMethod": "GET",
+    "resource": "/user/{user-id}/practice-data-scores",
+    "pathParameters": {
+        "user-id": "59c8dab4-2ce9-477c-b35f-d55ae911a750"
+    }
+}
