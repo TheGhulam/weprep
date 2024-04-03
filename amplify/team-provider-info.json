@@ -58,7 +58,7 @@
         },
         "userMockInterviewHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userMockInterviewHandler-4a324d637a6866782b71-build.zip"
+          "s3Key": "amplify-builds/userMockInterviewHandler-634b48515a6f70616145-build.zip"
         }
       },
       "api": {
@@ -75,8 +75,7 @@
         "userCV": {},
         "userTable": {},
         "userAnalysisScoreTable": {},
-        "userCVsRecordTable": {},
-        "mockInterviewSessionsTable": {}
+        "userCVsRecordTable": {}
       },
       "auth": {
         "weprep38b852eb": {}

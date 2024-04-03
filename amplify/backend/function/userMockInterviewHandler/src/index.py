@@ -18,7 +18,11 @@ def handler(event, context):
         http_method == "GET"
         and resource == "/user/mock-interview/{user-id}/interview/{interview-id}"
     ):
-        pass
+        return handle_get_request_for_specific_interview(event)
+    elif (
+        http_method == "GET" and resource == "/user/mock-interview/{user-id}/interview"
+    ):
+        return handle_get_request_for_all_interviews(event)
     else:
         return {"statusCode": 405, "body": json.dumps("Method Not Allowed")}
 
@@ -45,4 +49,29 @@ def handle_post_request_for_updating_db(event):
             ),
         }
     except Exception as e:
-        return {"statusCode": 500, "body": json.dumps({"error": str(e)})}
+        print(e)
+        return {"statusCode": 500, "body": json.dumps("Error processing request")}
+
+
+def handle_get_request_for_all_interviews(event):
+    try:
+        # user_id = event["pathParameters"]["user-id"]
+
+        return {
+            "statusCode": 200,
+            # "body": json.dumps(
+            #     {
+            #         "mockInterviewId": interview_id,
+            #     }
+            # ),
+        }
+    except Exception as e:
+        print(e)
+        return {
+            "statusCode": 500,
+            "body": json.dumps("Error processing request"),
+        }
+
+
+def handle_get_request_for_specific_interview(event):
+    pass
