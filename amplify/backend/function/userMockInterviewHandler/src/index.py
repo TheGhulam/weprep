@@ -14,7 +14,11 @@ def handler(event, context):
     resource = event["resource"]
     if http_method == "POST" and resource == "/user/mock-interview/{user-id}/upload":
         return handle_post_request_for_updating_db(event)
-
+    elif (
+        http_method == "GET"
+        and resource == "/user/mock-interview/{user-id}/interview/{interview-id}"
+    ):
+        pass
     else:
         return {"statusCode": 405, "body": json.dumps("Method Not Allowed")}
 

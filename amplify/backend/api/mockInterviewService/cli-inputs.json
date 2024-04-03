@@ -7,6 +7,20 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/user/mock-interview/{user-id}/interview": {
+      "name": "/user/mock-interview/{user-id}/interview",
+      "lambdaFunction": "userMockInterviewHandler",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/user/mock-interview/{user-id}/interview/{interview-id}": {
+      "name": "/user/mock-interview/{user-id}/interview/{interview-id}",
+      "lambdaFunction": "userMockInterviewHandler",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }
