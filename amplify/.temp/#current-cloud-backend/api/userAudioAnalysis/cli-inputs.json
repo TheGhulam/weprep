@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/audio-analysis/{user_id}": {
+      "name": "/audio-analysis/{user_id}",
+      "lambdaFunction": "userAudioAnalysisHandler",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

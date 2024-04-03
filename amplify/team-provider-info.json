@@ -54,9 +54,12 @@
         },
         "userPracticeDataHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userPracticeDataHandler-7037567953556c376b37-build.zip"
+          "s3Key": "amplify-builds/userPracticeDataHandler-6c2f2f73415034334a75-build.zip"
         },
-        "userMockInterviewHandler": {}
+        "userMockInterviewHandler": {
+          "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+          "s3Key": "amplify-builds/userMockInterviewHandler-497959576154432f3353-build.zip"
+        }
       },
       "api": {
         "cvService": {},
@@ -65,13 +68,15 @@
         "uploadUserAudio": {},
         "userAudioAnalysis": {},
         "userData": {},
-        "userPracticeRecordGeneral": {}
+        "userPracticeRecordGeneral": {},
+        "mockInterviewService": {}
       },
       "storage": {
         "userCV": {},
         "userTable": {},
         "userAnalysisScoreTable": {},
-        "userCVsRecordTable": {}
+        "userCVsRecordTable": {},
+        "mockInterviewSessionsTable": {}
       },
       "auth": {
         "weprep38b852eb": {}

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/upload-audio/{user_id}": {
+      "name": "/upload-audio/{user_id}",
+      "lambdaFunction": "userAudioUploadHandler",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

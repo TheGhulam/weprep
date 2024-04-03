@@ -1,1 +1,17 @@
-{ "test": "event" }
+{
+    "httpMethod": "POST",
+    "resource": "/user/mock-interview/{user-id}/upload",
+    "pathParameters": {
+        "user-id": "59c8dab4-2ce9-477c-b35f-d55ae911a750"
+    },
+    "body":{
+        "practiceSetId": "1c23d35a-9be3-46d5-b601-a8de6895b09a",
+        "jobTitle": "Backend Developer",
+        "jobDescription": "backend development position that requires expertise in Python, FastAPI as well as AWS services like Lambdas and EC2",
+        "interviewType": "Behavorial",
+        "interviewDuration": "Short (2-3) Minutes",
+        "questionMode": "Unseen",
+        "interviewerTone": "Friendly",
+        "resumeId": "9cbf6343-3c5a-493f-b004-1a980cce0ee7"
+    }
+}

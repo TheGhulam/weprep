@@ -142,7 +142,7 @@ def handle_get_request(event):
                     cv_files.append(
                         {
                             "cvId": item.get("cvId").get("S"),
-                            "cvName": item.get("cvName").get("S"),
+                            "cvName": item.get("cvId").get("S"),
                             "cvURL": cv_url,
                         }
                     )

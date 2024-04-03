@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "userMockInterviewHandler",
+            "userAnallysisScoresHandler",
             {
               "Fn::Join": [
                 "",
                 [
-                  "userMockInterviewHandler",
+                  "userAnallysisScoresHandler",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "weprepLambdaRole8bbdd7d1",
+            "weprepLambdaRole28392c5b",
             {
               "Fn::Join": [
                 "",
                 [
-                  "weprepLambdaRole8bbdd7d1",
+                  "weprepLambdaRole28392c5b",
                   "-",
                   {
                     "Ref": "env"

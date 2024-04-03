@@ -15,6 +15,9 @@ def handler(event, context):
     if http_method == "GET" and resource == "/user/{user-id}/practice-data-scores":
         handle_get_request(event)
 
+    else:
+        return {"statusCode": 405, "body": json.dumps("Method Not Allowed")}
+
 
 def handle_get_request(event):
 
