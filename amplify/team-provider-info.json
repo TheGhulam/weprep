@@ -16,7 +16,7 @@
       "function": {
         "cvServiceHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/cvServiceHandler-786633464a505a567771-build.zip"
+          "s3Key": "amplify-builds/cvServiceHandler-6d58656562614f4c6e39-build.zip"
         },
         "cvServiceProcessingHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
@@ -58,7 +58,7 @@
         },
         "userMockInterviewHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userMockInterviewHandler-634b48515a6f70616145-build.zip"
+          "s3Key": "amplify-builds/userMockInterviewHandler-4d6271546b7155384363-build.zip"
         }
       },
       "api": {
@@ -75,7 +75,8 @@
         "userCV": {},
         "userTable": {},
         "userAnalysisScoreTable": {},
-        "userCVsRecordTable": {}
+        "userCVsRecordTable": {},
+        "mockInterviewSessionsTable": {}
       },
       "auth": {
         "weprep38b852eb": {}

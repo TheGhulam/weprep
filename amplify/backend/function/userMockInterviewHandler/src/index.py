@@ -20,15 +20,12 @@ def handler(event, context):
         and resource == "/user/mock-interview/{user-id}/interview/{interview-id}"
     ):
         return handle_get_request_for_specific_interview(event)
-    elif (
-        http_method == "GET" and resource == "/user/mock-interview/{user-id}/interview"
-    ):
+    elif http_method == "GET" and resource == "/user/mock-interview/{user-id}":
         return handle_get_request_for_all_interviews(event)
 
     elif (
         http_method == "DELETE"
-        and resource
-        == "/user/mock-interview/{user-id}/interview/interview/{interview-id}"
+        and resource == "/user/mock-interview/{user-id}/interview/{interview-id}"
     ):
         return handle_delete_request(event)
     else:
@@ -56,7 +53,7 @@ def handle_post_request_for_updating_db(event):
             "statusCode": 200,
             "body": json.dumps(
                 {
-                    "mockInterviewId": interview_id,
+                    "interviewId": interview_id,
                 }
             ),
         }
