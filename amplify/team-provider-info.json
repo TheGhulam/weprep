@@ -55,7 +55,8 @@
         "userPracticeDataHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
           "s3Key": "amplify-builds/userPracticeDataHandler-7037567953556c376b37-build.zip"
-        }
+        },
+        "userMockInterviewHandler": {}
       },
       "api": {
         "cvService": {},

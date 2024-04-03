@@ -28,6 +28,20 @@
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
     },
+    "mockInterviewService": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userMockInterviewHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "questionGeneration": {
       "dependsOn": [
         {
@@ -178,6 +192,11 @@
       "service": "Lambda"
     },
     "userDataUpdateHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userMockInterviewHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
