@@ -13,7 +13,7 @@ def handler(event, context):
     http_method = event["httpMethod"]
     resource = event["resource"]
     if http_method == "POST" and resource == "/user/mock-interview/{user-id}/upload":
-        handle_post_request_for_updating_db(event)
+        return handle_post_request_for_updating_db(event)
 
     else:
         return {"statusCode": 405, "body": json.dumps("Method Not Allowed")}
