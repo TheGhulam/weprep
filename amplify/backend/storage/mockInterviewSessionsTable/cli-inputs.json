@@ -1,0 +1,14 @@
+{
+  "resourceName": "mockInterviewSessionsTable",
+  "tableName": "mockInterviewSessionsTable",
+  "partitionKey": {
+    "fieldName": "mockInterviewId",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "userId",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

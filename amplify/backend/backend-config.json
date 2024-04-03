@@ -351,6 +351,10 @@
     }
   },
   "storage": {
+    "mockInterviewSessionsTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
     "userAnalysisScoreTable": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
