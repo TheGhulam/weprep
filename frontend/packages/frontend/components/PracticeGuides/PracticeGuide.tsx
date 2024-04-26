@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Typography, Link, Grid, Stepper, Step, StepButton, Button } from "@mui/material";
+import ReactPlayer from "react-player";
 
 interface Guide {
   title: string;
@@ -38,19 +39,15 @@ const PracticeGuide: React.FC<PracticeGuideProps> = ({ guides }) => {
           ))}
         </Stepper>
       </Grid>
-      <Grid item xs={12} sm={4} sx={{ padding: 2 }}>
-        <Link
-          href={activeGuide.youtubeLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          variant="body1"
-          color="primary"
-          underline="hover"
-        >
-          YouTube Video
-        </Link>
+      <Grid item xs={12} sm={6} sx={{ padding: 2, height: "50vh" }}>
+          <ReactPlayer
+            url={activeGuide.youtubeLink}
+            controls={true}
+            width="100%"
+            height="100%"
+          />
       </Grid>
-      <Grid item xs={12} sm={4} sx={{ padding: 2 }}>
+      <Grid item xs={12} sm={3} sx={{ padding: 2 }}>
         <Link
           href={activeGuide.courseraLink}
           target="_blank"
@@ -62,7 +59,7 @@ const PracticeGuide: React.FC<PracticeGuideProps> = ({ guides }) => {
           Coursera Course
         </Link>
       </Grid>
-      <Grid item xs={12} sm={4} sx={{ padding: 2 }}>
+      <Grid item xs={12} sm={3} sx={{ padding: 2 }}>
         <Link
           href={activeGuide.articleLink}
           target="_blank"
