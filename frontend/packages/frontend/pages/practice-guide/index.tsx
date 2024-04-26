@@ -2,32 +2,32 @@ import React from "react";
 import { Box, Grid, Typography, Button } from "@mui/material";
 import PracticeGuide from "@/components/PracticeGuides/PracticeGuide";
 
-const guides = [
-    {
-      "title": "Learn Star Method of Answering Questions",
-      "youtubeLink": "https://www.youtube.com/watch?v=uQEuo7woEEk",
-      "courseraLink": "https://www.coursera.org/projects/accomplishment-star-techniques-for-job-interviews",
-      "articleLink": "https://www.themuse.com/advice/star-interview-method"
-    },
-    {
-      "title": "Learn Spring Annotations",
-      "youtubeLink": "https://www.youtube.com/watch?v=wf70Hs-aCcI",
-      "courseraLink": "https://www.coursera.org/learn/spring-mvc-rest-controller",
-      "articleLink": "https://www.javatpoint.com/spring-boot-annotations#:~:text=Spring%20Boot%20Annotations%20is%20a,of%20the%20code%20they%20annotate."
-    },
-    {
-      "title": "Practice Word Pacing",
-      "youtubeLink": "https://www.youtube.com/watch?v=PlJaaUYIwIM",
-      "courseraLink": "https://www.coursera.org/specializations/good-with-words-speaking-and-presenting",
-      "articleLink": "https://www.linkedin.com/advice/3/how-do-you-pace-your-speech-skills-public-speaking#:~:text=5%20Pacing%20tips,-To%20effectively%20pace&text=Listen%20to%20your%20voice%20and,%2C%20articulating%2C%20and%20replacing%20them."
-    },
-    {
-      "title": "Practice Avoiding Filler Words",
-      "youtubeLink": "https://www.youtube.com/watch?v=W995352_kkw",
-      "courseraLink": "https://www.coursera.org/learn/finding-your-professional-voice",
-      "articleLink": "https://www.storytellingwithdata.com/blog/avoid-filler-words"
-    }
-  ]
+const recommendations = [
+  {
+    title: "Learn STAR Method of Answering Questions",
+    ytLink1: "https://www.youtube.com/watch?v=uQEuo7woEEk",
+    ytLink2: "https://www.youtube.com/watch?v=ZSSID5mp93o",
+    ytLink3: "https://www.youtube.com/watch?v=8QfSnuL8Ny8"
+  },
+  {
+    title: "Advanced State Management with Redux",
+    ytLink1: "https://www.youtube.com/watch?v=k1MOFQBecnE",
+    ytLink2: "https://www.youtube.com/watch?v=JkBi7l_6mEA",
+    ytLink3: "https://www.youtube.com/watch?v=rtwZrbpsbIY"
+  },
+  {
+    title: "Effective Unit Testing in React",
+    ytLink1: "https://www.youtube.com/watch?v=JBSUgDxICg8",
+    ytLink2: "https://www.youtube.com/watch?v=OVNjsIto9xM",
+    ytLink3: "https://www.youtube.com/watch?v=Xq4YmngRxxg"
+  },
+  {
+    title: "Practice Word Pacing",
+    ytLink1: "https://www.youtube.com/watch?v=032Hum9KNjw",
+    ytLink2: "https://www.youtube.com/watch?v=S2nFK_fLhu4",
+    ytLink3: "https://www.youtube.com/watch?v=PlJaaUYIwIM"
+  }
+];
 
 export default function AnalyticsPage() {
     return (
@@ -35,7 +35,7 @@ export default function AnalyticsPage() {
             <Typography variant="h2" align="center" gutterBottom>
                 Practice Guide
             </Typography>
-            <PracticeGuide guides={guides}/>
+            <PracticeGuide guides={recommendations}/>
         </>
     );
 }

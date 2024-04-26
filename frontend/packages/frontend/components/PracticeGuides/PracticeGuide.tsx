@@ -4,9 +4,9 @@ import ReactPlayer from "react-player";
 
 interface Guide {
   title: string;
-  youtubeLink: string;
-  courseraLink: string;
-  articleLink: string;
+  ytLink1: string;
+  ytLink2: string;
+  ytLink3: string;
 }
 
 interface PracticeGuideProps {
@@ -39,37 +39,29 @@ const PracticeGuide: React.FC<PracticeGuideProps> = ({ guides }) => {
           ))}
         </Stepper>
       </Grid>
-      <Grid item xs={12} sm={6} sx={{ padding: 2, height: "50vh" }}>
+      <Grid item xs={12} sm={4} sx={{ padding: 2, height: "40vh" }}>
           <ReactPlayer
-            url={activeGuide.youtubeLink}
+            url={activeGuide.ytLink1}
             controls={true}
             width="100%"
             height="100%"
           />
       </Grid>
-      <Grid item xs={12} sm={3} sx={{ padding: 2 }}>
-        <Link
-          href={activeGuide.courseraLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          variant="body1"
-          color="primary"
-          underline="hover"
-        >
-          Coursera Course
-        </Link>
+      <Grid item xs={12} sm={4} sx={{ padding: 2, height: "40vh" }}>
+          <ReactPlayer
+            url={activeGuide.ytLink2}
+            controls={true}
+            width="100%"
+            height="100%"
+          />
       </Grid>
-      <Grid item xs={12} sm={3} sx={{ padding: 2 }}>
-        <Link
-          href={activeGuide.articleLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          variant="body1"
-          color="primary"
-          underline="hover"
-        >
-          Web Article
-        </Link>
+      <Grid item xs={12} sm={4} sx={{ padding: 2, height: "40vh" }}>
+          <ReactPlayer
+            url={activeGuide.ytLink3}
+            controls={true}
+            width="100%"
+            height="100%"
+          />
       </Grid>
       <Grid item xs={12}>
         <Grid container justifyContent="center">
@@ -80,7 +72,7 @@ const PracticeGuide: React.FC<PracticeGuideProps> = ({ guides }) => {
             onClick={handleNext}
             disabled={activeStep === guides.length - 1}
           >
-            Next Step
+            Mark as Learned
           </Button>
         </Grid>
       </Grid>
