@@ -35,6 +35,11 @@ export type AmplifyDependentResourcesAttributes = {
       "ApiName": "string",
       "RootUrl": "string"
     },
+    "userInterviewVideo": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
+    },
     "userPracticeRecordGeneral": {
       "ApiId": "string",
       "ApiName": "string",
@@ -126,6 +131,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "userPracticeDataHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "userVideoService": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",

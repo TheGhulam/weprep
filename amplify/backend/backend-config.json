@@ -106,6 +106,20 @@
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
     },
+    "userInterviewVideo": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userVideoService"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "userPracticeRecordGeneral": {
       "dependsOn": [
         {
@@ -202,6 +216,11 @@
       "service": "Lambda"
     },
     "userPracticeDataHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userVideoService": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -381,6 +400,22 @@
         {
           "category": "function",
           "resourceName": "userPracticeDataHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userVideoService_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userVideoService"
+        }
+      ]
+    },
+    "AMPLIFY_function_userVideoService_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userVideoService"
         }
       ]
     }

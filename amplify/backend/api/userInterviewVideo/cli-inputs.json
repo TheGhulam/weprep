@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/{user-id}/video/{interview-id}": {
+      "name": "/{user-id}/video/{interview-id}",
+      "lambdaFunction": "userVideoService",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
