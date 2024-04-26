@@ -4,16 +4,18 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import { Image } from "@mui/icons-material";
 
 export default function AccountsPage() {
   const [isEditable, setIsEditable] = useState(false);
   const [profile, setProfile] = useState({
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    phoneNumber: "123-456-7890",
+    firstName: "Faaiz",
+    lastName: "khan",
+    email: "faaiz.khan@example.com",
+    phoneNumber: "+905527174697",
     password: "password123",
-    aboutMe: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    aboutMe:
+      "I'm Faaiz an innovative and dynamic junior Computer Engineering major at Bilkent University (Turkey). As an entrepreneurially-minded and solution-focused individual, I bring a wealth of experience in Automation/Scripting, Full-Stack, Android app, Desktop application, and Software Development to the table. My passion for intricate and challenging programming problems drives me to excel and deliver exceptional results. ",
     skills: "React, Material-UI, JavaScript",
   });
 
@@ -29,6 +31,9 @@ export default function AccountsPage() {
 
   return (
     <Box sx={{ flexGrow: 1, p: 4 }}>
+      <Typography variant="h2" align="center" gutterBottom>
+        Account
+      </Typography>
       <Grid container spacing={2}>
         {/* Left side fields */}
         <Grid item xs={12} md={6}>
@@ -53,13 +58,13 @@ export default function AccountsPage() {
             margin="normal"
           />
           <TextField
+            disabled
             fullWidth
             label="Email"
             variant="outlined"
             value={profile.email}
             onChange={handleChange}
             name="email"
-            disabled={!isEditable}
             margin="normal"
           />
           <TextField
@@ -69,7 +74,7 @@ export default function AccountsPage() {
             value={profile.phoneNumber}
             onChange={handleChange}
             name="phoneNumber"
-            disabled={!isEditable}
+            disabled
             margin="normal"
           />
           <TextField
@@ -92,15 +97,25 @@ export default function AccountsPage() {
           md={6}
           sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
         >
-          <Avatar src="/profile-pic.jpg" sx={{ width: 100, height: 100, mb: 2 }} />
+          <Avatar src="/user-avatar.svg" sx={{ width: 300, height: 300, mb: 2 }} />
           <Box sx={{ display: "flex", gap: 1 }}>
-            <IconButton color="primary" component="label">
-              <CameraAltIcon />
-              <input type="file" hidden />
-              <Typography variant="body2">Change Picture</Typography>
-            </IconButton>
-            <IconButton color="error">
-              <DeleteIcon />
+            <Button
+              size="large"
+              variant="contained"
+              sx={{ textTransform: "none", height: "fit-content" }}
+              startIcon={<Image style={{ fill: "#fff" }} />}
+            >
+              Change Photo
+            </Button>
+            <IconButton
+              sx={{
+                backgroundColor: "error.main",
+                "&:hover": {
+                  backgroundColor: "error.dark",
+                },
+              }}
+            >
+              <DeleteIcon sx={{ fill: "#fff" }} />
             </IconButton>
           </Box>
         </Grid>
@@ -135,10 +150,13 @@ export default function AccountsPage() {
         {/* Edit/Save Button */}
         <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
           <Button
-            startIcon={isEditable ? <SaveIcon /> : <EditIcon />}
+            startIcon={
+              isEditable ? <SaveIcon sx={{ fill: "#fff" }} /> : <EditIcon sx={{ fill: "#fff" }} />
+            }
             onClick={handleEditSave}
             variant="contained"
-            sx={{ mt: 2 }}
+            size="large"
+            sx={{ mt: 2, width: 300 }}
           >
             {isEditable ? "Save" : "Edit"}
           </Button>

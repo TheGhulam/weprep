@@ -11,11 +11,16 @@ import {
   Tab,
   Grid,
   Paper,
+  StepContent,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ReactPlayer from "react-player";
 import { useTheme } from "@mui/material/styles";
 import { useRouter } from "next/router";
+import TranscriptStepper from "@/components/stepper/TranscriptStepper";
+import FeedbackStepper from "@/components/stepper/FeedbackStepper";
+import RoadmapStepper from "@/components/stepper/RoadmapStepper";
+import AllEmotionChart from "@/components/charts/allEmotionChart";
 
 function SessionDetails() {
   const theme = useTheme();
@@ -28,7 +33,7 @@ function SessionDetails() {
     { label: "In Progress", description: "Practice Session under AI evaluation" },
     { label: "Analysed", description: "Feedback and Analysis Report Available" },
     {
-      label: "Suggestions Roadmap",
+      label: "Suggested Roadmap",
       description: "Custom Recommendations to continue Improving in this Practice Set",
     },
   ];
@@ -68,17 +73,18 @@ function SessionDetails() {
           Mock Interview Feedback
         </Typography>
       </Box>
-      <Stepper activeStep={1} alternativeLabel sx={{ padding: theme.spacing(3) }}>
+      <Stepper activeStep={4} alternativeLabel sx={{ padding: theme.spacing(3) }}>
         {steps.map((step, index) => (
           <Step key={step.label}>
             <StepLabel>{step.label}</StepLabel>
+            <StepContent>{step.description}</StepContent>
           </Step>
         ))}
       </Stepper>
       <Grid container spacing={2} sx={{ padding: theme.spacing(3) }}>
         <Grid item xs={12} md={6}>
           <ReactPlayer
-            url="https://www.example.com/sample.mp4"
+            url="https://www.youtube.com/watch?v=XclJ3TP4uAU"
             controls={true}
             width="100%"
             height="100%"
@@ -87,23 +93,22 @@ function SessionDetails() {
         <Grid item xs={12} md={6}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs value={activeTab} onChange={handleTabChange} aria-label="feedback tabs">
-              <Tab label="Timeline" />
-              <Tab label="Feedback" />
-              <Tab label="Roadmap Suggestion" />
+              <Tab label="Transcript" />
+              <Tab label="Expert Feedback" />
+              <Tab label="Roadmap Suggestions" />
             </Tabs>
           </Box>
-          <Typography component="div" role="tabpanel" hidden={activeTab !== 0}>
-            {/* Content for Timeline */}
-            Timeline content here...
-          </Typography>
-          <Typography component="div" role="tabpanel" hidden={activeTab !== 1}>
-            {/* Content for Feedback */}
-            Feedback content here...
-          </Typography>
-          <Typography component="div" role="tabpanel" hidden={activeTab !== 2}>
-            {/* Content for Suggestions */}
-            Suggestions content here...
-          </Typography>
+          <Box sx={{ maxHeight: 400, overflow: "auto" }}>
+            <Typography component="div" role="tabpanel" hidden={activeTab !== 0}>
+              <TranscriptStepper />
+            </Typography>
+            <Typography component="div" role="tabpanel" hidden={activeTab !== 1}>
+              <FeedbackStepper />
+            </Typography>
+            <Typography component="div" role="tabpanel" hidden={activeTab !== 2}>
+              <RoadmapStepper />
+            </Typography>
+          </Box>
         </Grid>
       </Grid>
       <Box sx={{ width: "100%" }}>
@@ -120,9 +125,8 @@ function SessionDetails() {
             <Tab label="Accuracy" />
           </Tabs>
         </Box>
-        {/* </AppBar> */}
         <Box role="tabpanel" hidden={activeDetailsTab !== 0}>
-          Emotion details here...
+          <AllEmotionChart />
         </Box>
         <Box role="tabpanel" hidden={activeDetailsTab !== 1}>
           Speech details here...

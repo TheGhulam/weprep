@@ -69,7 +69,7 @@ export const AppLightTheme: Theme = createTheme({
     text: {
       primary: "#000",
       secondary: "#00255A",
-      disabled: grey[200],
+      disabled: grey[600],
     },
     action: {
       hover: "#E2F1FA",
@@ -86,7 +86,7 @@ export const AppLightTheme: Theme = createTheme({
     h2: { ...commonTypography.h2, color: "#00255A" },
     h3: { ...commonTypography.h3, color: "#00255A" },
     h6: { color: "#00255A" },
-    body1: { ...commonTypography.body1, color: "#00255A" },
+    body1: { ...commonTypography.body1, color: "#000" },
     body2: { ...commonTypography.body2, color: "#666" },
   },
 });
@@ -108,12 +108,11 @@ export const AppDarkTheme: Theme = createTheme({
     },
     background: {
       default: "#161A23",
-      // paper: "#000",
     },
     text: {
       primary: "#fff",
       secondary: "#fff",
-      disabled: grey[800],
+      disabled: grey[500],
     },
     action: {
       hover: "#2A93D5",

@@ -54,3 +54,10 @@ a {
     opacity: 0;
   }
 }
+
+.react-pdf__Page__textContent {
+  display: none; /* Hide text layer if it is not desired */
+}
+.react-pdf__Page__annotations {
+  display: none; /* Hide annotations if they are being rendered */
+}
