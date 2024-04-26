@@ -5,36 +5,34 @@ function TranscriptStepper() {
   const theme = useTheme();
   const questions = [
     {
-      question: "Can you describe your experience with unit testing in React applications?",
+      question:
+        "Could you share your experience with unit testing in React applications? Specifically, how do you approach writing unit tests and which tools do you find most effective?",
       answer:
         "Yes, I have extensive experience with unit testing in React. I use tools like Jest and React Testing Library to write unit tests for components and utility functions. I follow best practices such as mocking dependencies and testing edge cases to ensure robust test coverage.",
     },
     {
-      question: "How do you handle state management in large-scale React applications?",
+      question:
+        "In your experience, how do you manage state in large-scale React projects? What tools and strategies do you rely on to handle complex state management effectively?",
       answer:
         "In large-scale React applications, I prefer using state management libraries like Redux or MobX to manage complex application states. These libraries provide centralized state management, making it easier to maintain and scale the application. I also utilize features like middleware and selectors to optimize performance and maintainability.",
     },
     {
       question:
-        "What strategies do you employ for optimizing the performance of React applications?",
+        "What techniques do you use to optimize the performance of React applications? Can you discuss some specific strategies that have proven effective in your past projects?",
       answer:
         "To optimize the performance of React applications, I employ various strategies such as code splitting to reduce initial bundle size, memoization to prevent unnecessary re-renders, and implementing virtualized lists for efficient rendering of large datasets. I also leverage browser dev tools like Chrome DevTools and React Developer Tools to identify performance bottlenecks and make data-driven optimizations.",
     },
     {
-      question: "How do you ensure accessibility in your React applications?",
+      question:
+        "Accessibility is critical in web development. How do you ensure your React applications are accessible? Could you describe some practices you implement to enhance accessibility?",
       answer:
         "Ensuring accessibility in React applications is crucial. I follow accessibility best practices by using semantic HTML elements, providing alternative text for images, and ensuring keyboard navigation and screen reader compatibility. I also utilize ARIA attributes and run accessibility audits using tools like Axe to identify and address accessibility issues.",
     },
     {
-      question: "Can you explain the concept of React hooks and how you use them in your projects?",
+      question:
+        "Can you explain how you incorporate React hooks into your projects? What are some of the benefits you've found in using hooks, especially compared to traditional class components?",
       answer:
         "React hooks are functions that enable functional components to use state and lifecycle features without writing a class. I extensively use hooks like useState for managing component state, useEffect for handling side effects, and custom hooks for code reuse and abstraction. Hooks allow me to write cleaner and more concise code compared to class components.",
-    },
-    {
-      question:
-        "How do you approach code organization and project structure in React applications?",
-      answer:
-        "In React applications, I follow a modular and scalable project structure. I typically organize components, styles, and utility functions into separate directories. I also employ feature-based folder structures to encapsulate related functionality. Additionally, I utilize tools like ESLint and Prettier for code formatting and adhere to coding conventions to maintain consistency across the codebase.",
     },
   ];
 

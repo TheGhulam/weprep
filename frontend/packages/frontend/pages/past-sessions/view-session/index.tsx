@@ -77,7 +77,7 @@ function SessionDetails() {
         {steps.map((step, index) => (
           <Step key={step.label}>
             <StepLabel>{step.label}</StepLabel>
-            <StepContent>{step.description}</StepContent>
+            {/* <StepContent>{step.description}</StepContent> */}
           </Step>
         ))}
       </Stepper>

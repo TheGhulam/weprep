@@ -89,21 +89,6 @@ function FeedbackStepper() {
       suggestion:
         "Explore the challenges encountered while using hooks and how they were overcome to provide a more comprehensive view.",
     },
-    {
-      question:
-        "How do you approach code organization and project structure in React applications?",
-      feedback:
-        "The candidate demonstrated strong organizational skills in React application development. Their explanation of modular and scalable project structures, feature-based folder structures, and tooling for code formatting showcased a disciplined approach to code organization. Their adherence to coding conventions ensures consistency across the codebase.",
-      correctness_score: 9,
-      structure_score: 9,
-      detail_score: 8,
-      preciseness_score: 8,
-      relevancy_score: 9,
-      comment:
-        "The candidate provides an effective overview of modern best practices in project organization for React.",
-      suggestion:
-        "Discussing how these practices integrate with continuous integration/continuous deployment (CI/CD) pipelines could provide additional insights into their development workflow.",
-    },
   ];
   const scoreLabel = (label, value, description) => (
     <Tooltip title={description} placement="right" arrow>
