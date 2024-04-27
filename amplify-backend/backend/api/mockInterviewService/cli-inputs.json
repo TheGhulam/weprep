@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "paths": {
+    "/user/mock-interview/{user-id}/upload": {
+      "name": "/user/mock-interview/{user-id}/upload",
+      "lambdaFunction": "userMockInterviewHandler",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/user/mock-interview/{user-id}/interview/{interview-id}": {
+      "name": "/user/mock-interview/{user-id}/interview/{interview-id}",
+      "lambdaFunction": "userMockInterviewHandler",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/user/mock-interview/{user-id}": {
+      "name": "/user/mock-interview/{user-id}",
+      "lambdaFunction": "userMockInterviewHandler",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

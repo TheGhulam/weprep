@@ -1,0 +1,705 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-weprep-dev-173140-authRole",
+      "UnauthRoleArn": "arn:aws:iam::533328646379:role/amplify-weprep-dev-173140-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::533328646379:role/amplify-weprep-dev-173140-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-weprep-dev-173140-deployment",
+      "UnauthRoleName": "amplify-weprep-dev-173140-unauthRole",
+      "StackName": "amplify-weprep-dev-173140",
+      "StackId": "arn:aws:cloudformation:eu-central-1:533328646379:stack/amplify-weprep-dev-173140/7af09cf0-9b67-11ee-9928-063f28b9fcef",
+      "AmplifyAppId": "d1pkjyevs11s70"
+    }
+  },
+  "auth": {
+    "weprep38b852eb": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/auth/weprep38b852eb-cloudformation-template.json",
+        "logicalId": "authweprep38b852eb"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.385Z",
+      "output": {
+        "UserPoolId": "eu-central-1_zua4po97J",
+        "AppClientIDWeb": "1t9d19oq1u7c38smdvd53qjufm",
+        "AppClientID": "3obu5fet3he68avu1u6omtnnfg",
+        "HostedUIDomain": "weprep-auth-dev",
+        "IdentityPoolId": "eu-central-1:4197b5c8-b6f7-4649-a62d-e4a06622b0c8",
+        "UserPoolArn": "arn:aws:cognito-idp:eu-central-1:533328646379:userpool/eu-central-1_zua4po97J",
+        "IdentityPoolName": "weprep38b852eb_identitypool_38b852eb__dev",
+        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://www.weprep.co/home/\"],\"LogoutURLs\":[\"htpps://www.weprep.co/\"]}",
+        "UserPoolName": "weprep38b852eb_userpool_38b852eb"
+      },
+      "lastPushDirHash": "DfBNwhejOU2IZqJ/ssLK/pQ2WGo="
+    }
+  },
+  "function": {
+    "cvServiceHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [],
+      "lastBuildTimeStamp": "2024-04-25T22:57:46.018Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2024-04-25T22:58:11.941Z",
+      "distZipFilename": "cvServiceHandler-2f564278394b6b48514f-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+        "s3Key": "amplify-builds/cvServiceHandler-2f564278394b6b48514f-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/function/cvServiceHandler-cloudformation-template.json",
+        "logicalId": "functioncvServiceHandler"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.401Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::533328646379:role/weprepLambdaRole52d6f6c1-dev",
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:lambda:eu-central-1:533328646379:function:cvServiceHandler-dev",
+        "Name": "cvServiceHandler-dev",
+        "LambdaExecutionRole": "weprepLambdaRole52d6f6c1-dev"
+      },
+      "lastPushDirHash": "iWt6yxlaKiGBjfN7WTKb7gfMUwM=",
+      "lastDevBuildTimeStamp": "2024-03-31T14:21:00.552Z"
+    },
+    "userCVProcessing": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2024-04-25T22:58:40.909Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2024-04-25T22:58:47.896Z",
+      "distZipFilename": "userCVProcessing-71646e6f662b6a434144-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+        "s3Key": "amplify-builds/userCVProcessing-71646e6f662b6a434144-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/function/userCVProcessing-cloudformation-template.json",
+        "logicalId": "functionuserCVProcessing"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.425Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::533328646379:role/weprepLambdaRolea65f566e-dev",
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:lambda:eu-central-1:533328646379:function:userCVProcessing-dev",
+        "Name": "userCVProcessing-dev",
+        "LambdaExecutionRole": "weprepLambdaRolea65f566e-dev"
+      },
+      "lastPushDirHash": "UzsY6EFZkdBlpucM9yJen0nwUQc="
+    },
+    "cvServiceProcessingHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2024-04-25T22:58:59.703Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2024-04-25T22:59:07.097Z",
+      "distZipFilename": "cvServiceProcessingHandler-566630515a70466b3956-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+        "s3Key": "amplify-builds/cvServiceProcessingHandler-566630515a70466b3956-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/function/cvServiceProcessingHandler-cloudformation-template.json",
+        "logicalId": "functioncvServiceProcessingHandler"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.448Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::533328646379:role/weprepLambdaRolee69cf0da-dev",
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:lambda:eu-central-1:533328646379:function:cvServiceProcessingHandler-dev",
+        "Name": "cvServiceProcessingHandler-dev",
+        "LambdaExecutionRole": "weprepLambdaRolee69cf0da-dev"
+      },
+      "lastPushDirHash": "D6TnDRXEnKFgSj4yfviOQ6yLxWc="
+    },
+    "questionGenerationHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2024-04-25T22:59:18.235Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2024-04-25T22:59:26.426Z",
+      "distZipFilename": "questionGenerationHandler-414f6c77426242416d72-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+        "s3Key": "amplify-builds/questionGenerationHandler-414f6c77426242416d72-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/function/questionGenerationHandler-cloudformation-template.json",
+        "logicalId": "functionquestionGenerationHandler"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.470Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::533328646379:role/weprepLambdaRole0a332018-dev",
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:lambda:eu-central-1:533328646379:function:questionGenerationHandler-dev",
+        "Name": "questionGenerationHandler-dev",
+        "LambdaExecutionRole": "weprepLambdaRole0a332018-dev"
+      },
+      "lastPushDirHash": "HLKDoKhj2Ncv2hsPj+KDNAi3O4k="
+    },
+    "userAudioUploadHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2024-04-25T22:59:39.041Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2024-04-25T22:59:46.105Z",
+      "distZipFilename": "userAudioUploadHandler-635237396d4a72725867-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+        "s3Key": "amplify-builds/userAudioUploadHandler-635237396d4a72725867-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/function/userAudioUploadHandler-cloudformation-template.json",
+        "logicalId": "functionuserAudioUploadHandler"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.496Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::533328646379:role/weprepLambdaRole93005744-dev",
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:lambda:eu-central-1:533328646379:function:userAudioUploadHandler-dev",
+        "Name": "userAudioUploadHandler-dev",
+        "LambdaExecutionRole": "weprepLambdaRole93005744-dev"
+      },
+      "lastPushDirHash": "ycb4JnEuPhOI9OIRhp+4/MkU5UE="
+    },
+    "userAudioAnalysisHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2024-04-25T22:59:56.759Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2024-04-25T23:00:05.258Z",
+      "distZipFilename": "userAudioAnalysisHandler-584a45312b763369396a-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+        "s3Key": "amplify-builds/userAudioAnalysisHandler-584a45312b763369396a-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/function/userAudioAnalysisHandler-cloudformation-template.json",
+        "logicalId": "functionuserAudioAnalysisHandler"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.519Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::533328646379:role/weprepLambdaRole42669fa5-dev",
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:lambda:eu-central-1:533328646379:function:userAudioAnalysisHandler-dev",
+        "Name": "userAudioAnalysisHandler-dev",
+        "LambdaExecutionRole": "weprepLambdaRole42669fa5-dev"
+      },
+      "lastPushDirHash": "oYMcuJDRFyiB5UqNDUae5jjW2CY="
+    },
+    "audioAnalysisProcessingHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2024-04-25T23:00:17.506Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2024-04-25T23:00:26.408Z",
+      "distZipFilename": "audioAnalysisProcessingHandler-336a7556334c54516462-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+        "s3Key": "amplify-builds/audioAnalysisProcessingHandler-336a7556334c54516462-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/function/audioAnalysisProcessingHandler-cloudformation-template.json",
+        "logicalId": "functionaudioAnalysisProcessingHandler"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.544Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::533328646379:role/weprepLambdaRole72f5e884-dev",
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:lambda:eu-central-1:533328646379:function:audioAnalysisProcessingHandler-dev",
+        "Name": "audioAnalysisProcessingHandler-dev",
+        "LambdaExecutionRole": "weprepLambdaRole72f5e884-dev"
+      },
+      "lastPushDirHash": "OQOxQKyXLiop0WThDh4P0mBJ7v8="
+    },
+    "userDataUpdateHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2024-04-25T23:00:38.808Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2024-04-25T23:01:02.211Z",
+      "distZipFilename": "userDataUpdateHandler-7a6a5839762b4c35544d-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+        "s3Key": "amplify-builds/userDataUpdateHandler-7a6a5839762b4c35544d-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/function/userDataUpdateHandler-cloudformation-template.json",
+        "logicalId": "functionuserDataUpdateHandler"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.568Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::533328646379:role/weprepLambdaRole81aa08a5-dev",
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:lambda:eu-central-1:533328646379:function:userDataUpdateHandler-dev",
+        "Name": "userDataUpdateHandler-dev",
+        "LambdaExecutionRole": "weprepLambdaRole81aa08a5-dev"
+      },
+      "lastPushDirHash": "/b00D1jKXU2MdyXqnb70ACDjKxg=",
+      "lastDevBuildTimeStamp": "2024-03-30T19:14:40.614Z"
+    },
+    "userAnallysisScoresHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2024-04-25T23:01:29.548Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2024-04-25T23:01:36.112Z",
+      "distZipFilename": "userAnallysisScoresHandler-6b5a33463147534b667a-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+        "s3Key": "amplify-builds/userAnallysisScoresHandler-6b5a33463147534b667a-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/function/userAnallysisScoresHandler-cloudformation-template.json",
+        "logicalId": "functionuserAnallysisScoresHandler"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.592Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::533328646379:role/weprepLambdaRole28392c5b-dev",
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:lambda:eu-central-1:533328646379:function:userAnallysisScoresHandler-dev",
+        "Name": "userAnallysisScoresHandler-dev",
+        "LambdaExecutionRole": "weprepLambdaRole28392c5b-dev"
+      },
+      "lastPushDirHash": "dS/dLxTLAzImnmv4d6+i1GQZ37E="
+    },
+    "userPracticeDataHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2024-04-25T23:01:47.949Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2024-04-25T23:02:13.847Z",
+      "distZipFilename": "userPracticeDataHandler-4f6c4b70716755617379-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+        "s3Key": "amplify-builds/userPracticeDataHandler-4f6c4b70716755617379-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/function/userPracticeDataHandler-cloudformation-template.json",
+        "logicalId": "functionuserPracticeDataHandler"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.615Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::533328646379:role/weprepLambdaRole13152cc3-dev",
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:lambda:eu-central-1:533328646379:function:userPracticeDataHandler-dev",
+        "Name": "userPracticeDataHandler-dev",
+        "LambdaExecutionRole": "weprepLambdaRole13152cc3-dev"
+      },
+      "lastPushDirHash": "ziJExRb3nR2Z6BpSQxwCO/JttWA=",
+      "lastDevBuildTimeStamp": "2024-04-03T01:11:32.728Z"
+    },
+    "userMockInterviewHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2024-04-25T23:02:41.256Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2024-04-25T23:03:04.755Z",
+      "distZipFilename": "userMockInterviewHandler-4e422b68484e627a4933-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+        "s3Key": "amplify-builds/userMockInterviewHandler-4e422b68484e627a4933-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/function/userMockInterviewHandler-cloudformation-template.json",
+        "logicalId": "functionuserMockInterviewHandler"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.638Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::533328646379:role/weprepLambdaRole8bbdd7d1-dev",
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:lambda:eu-central-1:533328646379:function:userMockInterviewHandler-dev",
+        "Name": "userMockInterviewHandler-dev",
+        "LambdaExecutionRole": "weprepLambdaRole8bbdd7d1-dev"
+      },
+      "lastPushDirHash": "OeaN5QY5M4gXYK18d8tqpWdTW8o=",
+      "lastDevBuildTimeStamp": "2024-04-03T01:15:55.572Z"
+    },
+    "userVideoService": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2024-04-25T23:17:12.866Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2024-04-25T23:17:15.576Z",
+      "distZipFilename": "userVideoService-7736432b753556366c46-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+        "s3Key": "amplify-builds/userVideoService-7736432b753556366c46-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/function/userVideoService-cloudformation-template.json",
+        "logicalId": "functionuserVideoService"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:27.995Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::533328646379:role/weprepLambdaRole5786ca22-dev",
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:lambda:eu-central-1:533328646379:function:userVideoService-dev",
+        "Name": "userVideoService-dev",
+        "LambdaExecutionRole": "weprepLambdaRole5786ca22-dev"
+      },
+      "lastPushDirHash": "w6C+u5V6lF28RDDKpALDOT1GQmM="
+    }
+  },
+  "api": {
+    "cvService": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "cvServiceHandler",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/api/cvService-cloudformation-template.json",
+        "logicalId": "apicvService"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.687Z",
+      "output": {
+        "ApiName": "cvService",
+        "RootUrl": "https://6m082x7fhh.execute-api.eu-central-1.amazonaws.com/dev",
+        "ApiId": "6m082x7fhh"
+      },
+      "lastPushDirHash": "EkJsip4q1x7oj/1CW7rrqiTjsQc="
+    },
+    "cvServiceProcessed": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "cvServiceProcessingHandler",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/api/cvServiceProcessed-cloudformation-template.json",
+        "logicalId": "apicvServiceProcessed"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.712Z",
+      "output": {
+        "ApiName": "cvServiceProcessed",
+        "RootUrl": "https://0jd525j1rl.execute-api.eu-central-1.amazonaws.com/dev",
+        "ApiId": "0jd525j1rl"
+      },
+      "lastPushDirHash": "7oml6h4y+B3Qm6is7N26WqWvJyU="
+    },
+    "questionGeneration": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "questionGenerationHandler",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/api/questionGeneration-cloudformation-template.json",
+        "logicalId": "apiquestionGeneration"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.736Z",
+      "output": {
+        "ApiName": "questionGeneration",
+        "RootUrl": "https://sj0d8kvmj4.execute-api.eu-central-1.amazonaws.com/dev",
+        "ApiId": "sj0d8kvmj4"
+      },
+      "lastPushDirHash": "yQlJJmkPHuYdLpIeLeCA4s1yu7E="
+    },
+    "uploadUserAudio": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "userAudioUploadHandler",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/api/uploadUserAudio-cloudformation-template.json",
+        "logicalId": "apiuploadUserAudio"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.762Z",
+      "output": {
+        "ApiName": "uploadUserAudio",
+        "RootUrl": "https://ukagvq8qp7.execute-api.eu-central-1.amazonaws.com/dev",
+        "ApiId": "ukagvq8qp7"
+      },
+      "lastPushDirHash": "WJ5tn2T5n4yQ5FhnRf7MgOVUllI="
+    },
+    "userAudioAnalysis": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "userAudioAnalysisHandler",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/api/userAudioAnalysis-cloudformation-template.json",
+        "logicalId": "apiuserAudioAnalysis"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.784Z",
+      "output": {
+        "ApiName": "userAudioAnalysis",
+        "RootUrl": "https://stbz3i2h55.execute-api.eu-central-1.amazonaws.com/dev",
+        "ApiId": "stbz3i2h55"
+      },
+      "lastPushDirHash": "KCA9Emfn7074p8Y42O21gfWDVxM="
+    },
+    "userData": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "userDataUpdateHandler",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "userAnallysisScoresHandler",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/api/userData-cloudformation-template.json",
+        "logicalId": "apiuserData"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.803Z",
+      "output": {
+        "ApiName": "userData",
+        "RootUrl": "https://gr672r8ysk.execute-api.eu-central-1.amazonaws.com/dev",
+        "ApiId": "gr672r8ysk"
+      },
+      "lastPushDirHash": "vy5uW2/pgYAwr3wV8YwTFgv5CAM="
+    },
+    "userPracticeRecordGeneral": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "userPracticeDataHandler",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/api/userPracticeRecordGeneral-cloudformation-template.json",
+        "logicalId": "apiuserPracticeRecordGeneral"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.823Z",
+      "output": {
+        "ApiName": "userPracticeRecordGeneral",
+        "RootUrl": "https://54y7pz0m42.execute-api.eu-central-1.amazonaws.com/dev",
+        "ApiId": "54y7pz0m42"
+      },
+      "lastPushDirHash": "iEe9WWXE/EjJCJWMX5wOSBSbK+A="
+    },
+    "mockInterviewService": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "userMockInterviewHandler",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/api/mockInterviewService-cloudformation-template.json",
+        "logicalId": "apimockInterviewService"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.843Z",
+      "output": {
+        "ApiName": "mockInterviewService",
+        "RootUrl": "https://1w3ubs6o56.execute-api.eu-central-1.amazonaws.com/dev",
+        "ApiId": "1w3ubs6o56"
+      },
+      "lastPushDirHash": "Zh+Dn3F5Y9czptUGH579Qao0Rbg="
+    },
+    "userInterviewVideo": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "userVideoService",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/api/userInterviewVideo-cloudformation-template.json",
+        "logicalId": "apiuserInterviewVideo"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.864Z",
+      "output": {
+        "ApiName": "userInterviewVideo",
+        "RootUrl": "https://t5e9pk9o2e.execute-api.eu-central-1.amazonaws.com/dev",
+        "ApiId": "t5e9pk9o2e"
+      },
+      "lastPushDirHash": "iuNlGM600qvZUHwa6buovz8oc44="
+    }
+  },
+  "storage": {
+    "userCV": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "lastPushTimeStamp": "2024-04-25T23:18:26.883Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "logicalId": "storageuserCV"
+      },
+      "output": {
+        "BucketName": "user-cv173140-dev",
+        "Region": "eu-central-1"
+      },
+      "lastPushDirHash": "2b3IunTobAvh5rBUhCgCAIOyyZo="
+    },
+    "userTable": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/storage/userTable-cloudformation-template.json",
+        "logicalId": "storageuserTable"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.903Z",
+      "output": {
+        "PartitionKeyName": "userId",
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:dynamodb:eu-central-1:533328646379:table/userTable-dev",
+        "StreamArn": "arn:aws:dynamodb:eu-central-1:533328646379:table/userTable-dev/stream/2024-03-29T12:38:14.346",
+        "PartitionKeyType": "S",
+        "Name": "userTable-dev"
+      },
+      "lastPushDirHash": "WUN+p8LGsg4BascuXDYMHbPW7R8="
+    },
+    "userAnalysisScoreTable": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/storage/userAnalysisScoreTable-cloudformation-template.json",
+        "logicalId": "storageuserAnalysisScoreTable"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.926Z",
+      "output": {
+        "PartitionKeyName": "userId",
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:dynamodb:eu-central-1:533328646379:table/userAnalysisScoreTable-dev",
+        "StreamArn": "arn:aws:dynamodb:eu-central-1:533328646379:table/userAnalysisScoreTable-dev/stream/2024-03-30T20:00:48.124",
+        "PartitionKeyType": "S",
+        "Name": "userAnalysisScoreTable-dev"
+      },
+      "lastPushDirHash": "gNq4TOGZAjIgvveagP8nZf3/1EQ="
+    },
+    "userCVsRecordTable": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/storage/userCVsRecordTable-cloudformation-template.json",
+        "logicalId": "storageuserCVsRecordTable"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.946Z",
+      "output": {
+        "PartitionKeyName": "cvId",
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:dynamodb:eu-central-1:533328646379:table/userCVsRecordTable-dev",
+        "StreamArn": "arn:aws:dynamodb:eu-central-1:533328646379:table/userCVsRecordTable-dev/stream/2024-03-31T00:44:44.187",
+        "PartitionKeyType": "S",
+        "Name": "userCVsRecordTable-dev"
+      },
+      "lastPushDirHash": "lDMIMEkcQkQiTT1KWSnnwCuYakQ="
+    },
+    "mockInterviewSessionsTable": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-weprep-dev-173140-deployment/amplify-cfn-templates/storage/mockInterviewSessionsTable-cloudformation-template.json",
+        "logicalId": "storagemockInterviewSessionsTable"
+      },
+      "lastPushTimeStamp": "2024-04-25T23:18:26.966Z",
+      "output": {
+        "PartitionKeyName": "userId",
+        "SortKeyName": "interviewId",
+        "SortKeyType": "S",
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:dynamodb:eu-central-1:533328646379:table/mockInterviewSessionsTable-dev",
+        "StreamArn": "arn:aws:dynamodb:eu-central-1:533328646379:table/mockInterviewSessionsTable-dev/stream/2024-04-03T02:40:08.581",
+        "PartitionKeyType": "S",
+        "Name": "mockInterviewSessionsTable-dev"
+      },
+      "lastPushDirHash": "GLo3ssl20Aly2ZciBx9SFEDEQb0="
+    }
+  }
+}

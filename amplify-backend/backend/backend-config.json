@@ -1,0 +1,446 @@
+{
+  "api": {
+    "cvService": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "cvServiceHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "cvServiceProcessed": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "cvServiceProcessingHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "mockInterviewService": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userMockInterviewHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "questionGeneration": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "questionGenerationHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "uploadUserAudio": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userAudioUploadHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "userAudioAnalysis": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userAudioAnalysisHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "userData": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userDataUpdateHandler"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userAnallysisScoresHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "userInterviewVideo": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userVideoService"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "userPracticeRecordGeneral": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userPracticeDataHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "auth": {
+    "weprep38b852eb": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {
+    "audioAnalysisProcessingHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "cvServiceHandler": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "cvServiceProcessingHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "questionGenerationHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userAnallysisScoresHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userAudioAnalysisHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userAudioUploadHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userCVProcessing": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userDataUpdateHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userMockInterviewHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userPracticeDataHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userVideoService": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_audioAnalysisProcessingHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "audioAnalysisProcessingHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_audioAnalysisProcessingHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "audioAnalysisProcessingHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_cvServiceHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "cvServiceHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_cvServiceHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "cvServiceHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_cvServiceProcessingHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "cvServiceProcessingHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_cvServiceProcessingHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "cvServiceProcessingHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_questionGenerationHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "questionGenerationHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_questionGenerationHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "questionGenerationHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userAnallysisScoresHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userAnallysisScoresHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userAnallysisScoresHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userAnallysisScoresHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userAudioAnalysisHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userAudioAnalysisHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userAudioAnalysisHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userAudioAnalysisHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userAudioUploadHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userAudioUploadHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userAudioUploadHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userAudioUploadHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userCVProcessing_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userCVProcessing"
+        }
+      ]
+    },
+    "AMPLIFY_function_userCVProcessing_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userCVProcessing"
+        }
+      ]
+    },
+    "AMPLIFY_function_userDataUpdateHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userDataUpdateHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userDataUpdateHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userDataUpdateHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userMockInterviewHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userMockInterviewHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userMockInterviewHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userMockInterviewHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userPracticeDataHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userPracticeDataHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userPracticeDataHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userPracticeDataHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userVideoService_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userVideoService"
+        }
+      ]
+    },
+    "AMPLIFY_function_userVideoService_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userVideoService"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "mockInterviewSessionsTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "userAnalysisScoreTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "userCV": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    },
+    "userCVsRecordTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "userTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    }
+  }
+}

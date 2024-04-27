@@ -1,0 +1,13 @@
+{
+  "resourceName": "userCV",
+  "policyUUID": "87ec3a52",
+  "bucketName": "user-cv",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "groupAccess": {}
+}
