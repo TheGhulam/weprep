@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { Box, Button, Grid, TextField, Typography, IconButton, Avatar } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  TextField,
+  Typography,
+  IconButton,
+  Avatar,
+  useTheme,
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";
@@ -18,6 +27,8 @@ export default function AccountsPage() {
       "I'm Faaiz an innovative and dynamic junior Computer Engineering major at Bilkent University (Turkey). As an entrepreneurially-minded and solution-focused individual, I bring a wealth of experience in Automation/Scripting, Full-Stack, Android app, Desktop application, and Software Development to the table. My passion for intricate and challenging programming problems drives me to excel and deliver exceptional results. ",
     skills: "React, Material-UI, JavaScript",
   });
+
+  const theme = useTheme();
 
   // Handlers
   const handleEditSave = () => {
@@ -46,6 +57,7 @@ export default function AccountsPage() {
             name="firstName"
             disabled={!isEditable}
             margin="normal"
+            sx={{ color: isEditable ? "initial" : theme.palette.primary.main }}
           />
           <TextField
             fullWidth
@@ -56,6 +68,7 @@ export default function AccountsPage() {
             name="lastName"
             disabled={!isEditable}
             margin="normal"
+            sx={{ color: isEditable ? "initial" : theme.palette.primary.main }}
           />
           <TextField
             disabled
@@ -66,6 +79,7 @@ export default function AccountsPage() {
             onChange={handleChange}
             name="email"
             margin="normal"
+            sx={{ color: theme.palette.primary.main }}
           />
           <TextField
             fullWidth
@@ -76,6 +90,7 @@ export default function AccountsPage() {
             name="phoneNumber"
             disabled
             margin="normal"
+            sx={{ color: theme.palette.primary.main }}
           />
           <TextField
             fullWidth
@@ -87,10 +102,9 @@ export default function AccountsPage() {
             disabled={!isEditable}
             margin="normal"
             type="password"
+            sx={{ color: isEditable ? "initial" : theme.palette.primary.main }}
           />
         </Grid>
-
-        {/* Right side profile picture */}
         <Grid
           item
           xs={12}
@@ -133,6 +147,7 @@ export default function AccountsPage() {
             multiline
             rows={4}
             margin="normal"
+            sx={{ color: isEditable ? "initial" : theme.palette.primary.main }}
           />
           <TextField
             fullWidth

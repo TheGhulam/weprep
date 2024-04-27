@@ -2,41 +2,40 @@ import React from "react";
 import { Box, Grid, Typography, Button } from "@mui/material";
 import PracticeGuide from "@/components/PracticeGuides/PracticeGuide";
 
-const guides = [
-    {
-      "title": "Learn Star Method of Answering Questions",
-      "youtubeLink": "https://www.youtube.com/watch?v=hdI2bqOjy3c",
-      "courseraLink": "https://www.coursera.org/learn/javascript",
-      "articleLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
-    },
-    {
-      "title": "Learn Spring Annotations",
-      "youtubeLink": "https://www.youtube.com/watch?v=Ke90Tje7VS0",
-      "courseraLink": "https://www.coursera.org/learn/react",
-      "articleLink": "https://reactjs.org/docs/getting-started.html"
-    },
-    {
-      "title": "Practice Word Pacing",
-      "youtubeLink": "https://www.youtube.com/watch?v=hdI2bqOjy3c",
-      "courseraLink": "https://www.coursera.org/learn/javascript",
-      "articleLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
-    },
-    {
-      "title": "Practice Avoiding Filler Words",
-      "youtubeLink": "https://www.youtube.com/watch?v=Ke90Tje7VS0",
-      "courseraLink": "https://www.coursera.org/learn/react",
-      "articleLink": "https://reactjs.org/docs/getting-started.html"
-    }
-  ]
+const recommendations = [
+  {
+    title: "Learn STAR Method of Answering Questions",
+    ytLink1: "https://www.youtube.com/watch?v=uQEuo7woEEk",
+    ytLink2: "https://www.youtube.com/watch?v=ZSSID5mp93o",
+    ytLink3: "https://www.youtube.com/watch?v=8QfSnuL8Ny8",
+  },
+  {
+    title: "Advanced State Management with Redux",
+    ytLink1: "https://www.youtube.com/watch?v=k1MOFQBecnE",
+    ytLink2: "https://www.youtube.com/watch?v=JkBi7l_6mEA",
+    ytLink3: "https://www.youtube.com/watch?v=rtwZrbpsbIY",
+  },
+  {
+    title: "Effective Unit Testing in React",
+    ytLink1: "https://www.youtube.com/watch?v=JBSUgDxICg8",
+    ytLink2: "https://www.youtube.com/watch?v=OVNjsIto9xM",
+    ytLink3: "https://www.youtube.com/watch?v=Xq4YmngRxxg",
+  },
+  {
+    title: "Practice Word Pacing",
+    ytLink1: "https://www.youtube.com/watch?v=032Hum9KNjw",
+    ytLink2: "https://www.youtube.com/watch?v=S2nFK_fLhu4",
+    ytLink3: "https://www.youtube.com/watch?v=PlJaaUYIwIM",
+  },
+];
 
 export default function AnalyticsPage() {
-    return (
-        <>
-            <Typography variant="h2" align="center" gutterBottom>
-                Practice Guide
-            </Typography>
-            <PracticeGuide guides={guides}/>
-        </>
-    );
+  return (
+    <>
+      <Typography variant="h2" align="center" gutterBottom>
+        Training Roadmap
+      </Typography>
+      <PracticeGuide guides={recommendations} />
+    </>
+  );
 }
-   

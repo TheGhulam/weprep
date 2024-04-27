@@ -32,7 +32,7 @@ import MenuBookIcon from "@mui/icons-material/MenuBookOutlined"; // Assuming the
 import { Menu } from "@mui/base/Menu";
 import { red, green } from "@mui/material/colors";
 import { Collapse, ListSubheader } from "@mui/material";
-import { StarBorder } from "@mui/icons-material";
+import { ChecklistRtl, StarBorder } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import SettingsIcon from "@mui/icons-material/SettingsOutlined";
 import LogoutIcon from "@mui/icons-material/LogoutOutlined";
@@ -169,8 +169,8 @@ export default function SideBar({ updateSideBarWidth }) {
       page: "analytics",
     },
     {
-      title: "Practice Guide",
-      icon: <MenuBookIcon style={{ fill: theme.palette.text.secondary }} />,
+      title: "Training Roadmap",
+      icon: <ChecklistRtl style={{ fill: theme.palette.text.secondary }} />,
       page: "practice-guide",
     },
   ];

@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import CancelIcon from "@mui/icons-material/Cancel";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import { SessionType } from "@/Enums/SessionType";
+import { NaturePeopleSharp } from "@mui/icons-material";
 
 interface PracticeSessionModalProps {
   open: boolean;
@@ -84,6 +85,22 @@ const StartPracticeSessionModel: React.FC<PracticeSessionModalProps> = ({
     { value: "strict", label: "Strict" },
   ];
 
+  const desiredToneOptions = [
+    { value: "friendly", label: "Friendly" },
+    { value: "neutral", label: "Neutral" },
+    { value: "strict", label: "Strict" },
+    { value: "persuasive", label: "Persuasive" },
+    { value: "natural", label: "Natural" },
+    { value: "authoritative", label: "Authoritative" },
+    { value: "inspirational", label: "Inspirational" },
+    { value: "educational", label: "Educational" },
+    { value: "formal", label: "Formal" },
+    { value: "informal", label: "Informal" },
+    { value: "enthusiastic", label: "Enthusiastic" },
+    { value: "empathetic", label: "Empathetic" },
+    { value: "humorous", label: "Humorous" },
+  ];
+
   const resumeOptions = [
     { value: "Faaiz_Resume.pdf", label: "Faaiz_Resume.pdf" },
     { value: "Maher_CV.pdf", label: "Maher_CV.pdf" },
@@ -124,34 +141,71 @@ const StartPracticeSessionModel: React.FC<PracticeSessionModalProps> = ({
             value={practiceSetId}
             onChange={(e) => setPracticeSetId(e.target.value)}
           />
-          <TextField
-            label="Job Title"
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            value={jobTitle}
-            onChange={(e) => setJobTitle(e.target.value)}
-          />
-          <TextField
-            fullWidth
-            label="Job Description"
-            variant="outlined"
-            margin="normal"
-            multiline
-            rows={3}
-            value={jobDescription}
-            onChange={(e) => setJobDescription(e.target.value)}
-          />
-          {renderSelect("Interview Type", interviewType, setInterviewType, interviewTypeOptions)}
-          {renderSelect(
-            "Interview Duration",
-            interviewDuration,
-            setInterviewDuration,
-            interviewDurationOptions
+          {sessionType === SessionType.MockInterview ? (
+            <>
+              <TextField
+                label="Job Title"
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                value={jobTitle}
+                onChange={(e) => setJobTitle(e.target.value)}
+              />
+              <TextField
+                fullWidth
+                label="Job Description"
+                variant="outlined"
+                margin="normal"
+                multiline
+                rows={3}
+                value={jobDescription}
+                onChange={(e) => setJobDescription(e.target.value)}
+              />
+              {renderSelect(
+                "Interview Type",
+                interviewType,
+                setInterviewType,
+                interviewTypeOptions
+              )}
+              {renderSelect(
+                "Interview Duration",
+                interviewDuration,
+                setInterviewDuration,
+                interviewDurationOptions
+              )}
+              {renderSelect("Question Mode", questionMode, setQuestionMode, questionModeOptions)}
+              {renderSelect(
+                "Interview Tone",
+                interviewTone,
+                setInterviewTone,
+                interviewToneOptions
+              )}
+              {renderSelect("Resume", resume, setResume, resumeOptions)}
+            </>
+          ) : (
+            <>
+              <TextField
+                label="Practice Title"
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                value={jobTitle}
+                onChange={(e) => setJobTitle(e.target.value)}
+              />
+              <TextField
+                fullWidth
+                label="Goal Description"
+                variant="outlined"
+                margin="normal"
+                multiline
+                rows={3}
+                value={jobDescription}
+                onChange={(e) => setJobDescription(e.target.value)}
+              />
+
+              {renderSelect("Desired Tone", interviewTone, setInterviewTone, desiredToneOptions)}
+            </>
           )}
-          {renderSelect("Question Mode", questionMode, setQuestionMode, questionModeOptions)}
-          {renderSelect("Interview Tone", interviewTone, setInterviewTone, interviewToneOptions)}
-          {renderSelect("Resume", resume, setResume, resumeOptions)}
         </FormGroup>
         <Box sx={{ display: "flex", justifyContent: "center", width: "100%", mt: 2, gap: 2 }}>
           <Button

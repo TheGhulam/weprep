@@ -1,11 +1,6 @@
 import React from "react";
-import { Radar } from "react-chartjs-2";
-import { Chart, LineElement, PointElement, RadialLinearScale } from "chart.js"
+import Chart from "react-apexcharts";
 
-
-Chart.register(RadialLinearScale, PointElement, LineElement)
-
-// Define the data structure for an individual entity's scores
 interface Score {
   label: string; // Name of the entity
   score: number; // Scores for each metric
@@ -16,35 +11,52 @@ interface RadarChartProps {
 }
 
 const PerformanceRadarChart: React.FC<RadarChartProps> = ({ scores }) => {
-    
-    const titles = scores.map(scores => scores.label)
-    const points = scores.map(scores => scores.score)
+  const titles = scores.map((score) => score.label);
+  const points = scores.map((score) => score.score);
 
-    // Transform the data into the format expected by Chart.js
-    const data = {
-        labels: titles,
-        datasets: [{
-            data: points,
-            backgroundColor: "rgba(54, 162, 235, 0.2)", // Blue color with transparency
-            borderColor: "rgba(54, 162, 235, 1)",
-            borderWidth: 1
-        }]
-        
+  const options = {
+    chart: {
+      height: 550,
+      type: "radar",
+    },
+    xaxis: {
+      categories: titles,
+    },
+    yaxis: {
+      min: 0,
+      max: 100, // Adjust this value based on your score range
+      tickAmount: 5, // This controls the number of ticks between min and max
+    },
+    fill: {
+      opacity: 0.4,
+      colors: ["#36A2EB"],
+    },
+    stroke: {
+      width: 2,
+      colors: ["#36A2EB"],
+    },
+    markers: {
+      size: 4,
+    },
+    tooltip: {
+      y: {
+        formatter: (val) => `${val}/100`,
+      },
+    },
+  };
 
-    };
+  const series = [
+    {
+      name: "Scores",
+      data: points,
+    },
+  ];
 
-    // Define options for the radar chart
-    const options = {
-        scales: {
-            r: {
-                min: 0,
-                max: 100, // Adjust this value based on your score range
-                stepSize: 10,
-            },
-        },
-    };
-
-    return <Radar data={data} options={options} />;
+  return (
+    <div>
+      <Chart options={options} series={series} type="radar" height={350} />
+    </div>
+  );
 };
 
 export default PerformanceRadarChart;

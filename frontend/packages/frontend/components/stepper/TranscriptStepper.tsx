@@ -1,40 +1,39 @@
 import React from "react";
 import { Typography, Stepper, Step, StepLabel, StepContent, Box, useTheme } from "@mui/material";
+import StepIcon from "../atoms/StepIcon";
 
 function TranscriptStepper() {
   const theme = useTheme();
   const questions = [
     {
-      question: "Can you describe your experience with unit testing in React applications?",
+      question:
+        "Could you share your experience with unit testing in React applications? Specifically, how do you approach writing unit tests and which tools do you find most effective?",
       answer:
-        "Yes, I have extensive experience with unit testing in React. I use tools like Jest and React Testing Library to write unit tests for components and utility functions. I follow best practices such as mocking dependencies and testing edge cases to ensure robust test coverage.",
-    },
-    {
-      question: "How do you handle state management in large-scale React applications?",
-      answer:
-        "In large-scale React applications, I prefer using state management libraries like Redux or MobX to manage complex application states. These libraries provide centralized state management, making it easier to maintain and scale the application. I also utilize features like middleware and selectors to optimize performance and maintainability.",
+        "Oh, yes, I have quite a bit of experience with unit testing in React. Umm, I typically use tools like Jest and the React Testing Library to, you know, write unit tests for both components and utility functions. I really focus on following best practices, like mocking dependencies and testing those tricky edge cases, to make sure we have solid test coverage.",
     },
     {
       question:
-        "What strategies do you employ for optimizing the performance of React applications?",
+        "In your experience, how do you manage state in large-scale React projects? What tools and strategies do you rely on to handle complex state management effectively?",
       answer:
-        "To optimize the performance of React applications, I employ various strategies such as code splitting to reduce initial bundle size, memoization to prevent unnecessary re-renders, and implementing virtualized lists for efficient rendering of large datasets. I also leverage browser dev tools like Chrome DevTools and React Developer Tools to identify performance bottlenecks and make data-driven optimizations.",
-    },
-    {
-      question: "How do you ensure accessibility in your React applications?",
-      answer:
-        "Ensuring accessibility in React applications is crucial. I follow accessibility best practices by using semantic HTML elements, providing alternative text for images, and ensuring keyboard navigation and screen reader compatibility. I also utilize ARIA attributes and run accessibility audits using tools like Axe to identify and address accessibility issues.",
-    },
-    {
-      question: "Can you explain the concept of React hooks and how you use them in your projects?",
-      answer:
-        "React hooks are functions that enable functional components to use state and lifecycle features without writing a class. I extensively use hooks like useState for managing component state, useEffect for handling side effects, and custom hooks for code reuse and abstraction. Hooks allow me to write cleaner and more concise code compared to class components.",
+        "In large-scale React projects, I usually lean towards using, um, state management libraries like Redux or MobX. These tools provide centralized state management which really helps in maintaining and scaling the application. I also like to use features like middleware and selectors to, you know, optimize performance and enhance maintainability.",
     },
     {
       question:
-        "How do you approach code organization and project structure in React applications?",
+        "What techniques do you use to optimize the performance of React applications? Can you discuss some specific strategies that have proven effective in your past projects?",
       answer:
-        "In React applications, I follow a modular and scalable project structure. I typically organize components, styles, and utility functions into separate directories. I also employ feature-based folder structures to encapsulate related functionality. Additionally, I utilize tools like ESLint and Prettier for code formatting and adhere to coding conventions to maintain consistency across the codebase.",
+        "To boost the performance of React applications, I apply a variety of strategies. Code splitting is a big one to cut down the initial bundle size, and I also use memoization to avoid unnecessary re-renders. Oh, and implementing virtualized lists is key for efficiently rendering large datasets. I frequently use browser dev tools, like Chrome DevTools and React Developer Tools, to spot performance bottlenecks and, like, make optimizations based on actual data.",
+    },
+    {
+      question:
+        "Accessibility is critical in web development. How do you ensure your React applications are accessible? Could you describe some practices you implement to enhance accessibility?",
+      answer:
+        "Accessibility, right, that's crucial. I ensure that my React applications are accessible by, um, sticking to accessibility best practices. This means using semantic HTML elements, providing alternative text for images, and making sure everything works with keyboard navigation and screen readers. I also use ARIA attributes and run accessibility audits with tools like Axe to find and fix any accessibility issues.",
+    },
+    {
+      question:
+        "Can you explain how you incorporate React hooks into your projects? What are some of the benefits you've found in using hooks, especially compared to traditional class components?",
+      answer:
+        "So, React hooks are these functions that let you use state and lifecycle features without needing to write a class. I use them a lot—like useState for managing component state, useEffect for handling side effects, and custom hooks for, you know, reusing code and creating abstractions. Hooks really help me write cleaner and more concise code, especially compared to traditional class components.",
     },
   ];
 
@@ -55,12 +54,13 @@ function TranscriptStepper() {
           "& .MuiStepLabel-label": {
             // Label styling
             color: theme.palette.text.primary, // Text color for the labels
+            fontWeight: "600",
           },
         }}
       >
         {questions.map((item, index) => (
           <Step key={index} expanded>
-            <StepLabel>{item.question}</StepLabel>
+            <StepLabel icon={<StepIcon index={index}></StepIcon>}>{item.question}</StepLabel>
             <StepContent>
               <Typography>{item.answer}</Typography>
             </StepContent>

@@ -5,14 +5,14 @@ import { EmotionCache } from "@emotion/react";
 import Layout from "@/layout";
 import ProtectedRoute from "@/auth_rowaha";
 import React from "react";
-import { Amplify } from "aws-amplify";
+// import { Amplify } from "aws-amplify";
 import { FC } from "react";
 import PageProvider from "@/components/layout/PageProvider";
-import awsconfig from "@/src/amplifyconfiguration.json";
-import AuthContext from "@/utils/AuthContext";
+// import awsconfig from "@/src/amplifyconfiguration.json";
+// import AuthContext from "@/utils/AuthContext";
 // import AuthContext from "../context/AuthContext";
 
-Amplify.configure({ ...awsconfig });
+// Amplify.configure({ ...awsconfig });
 
 export interface MUIAppProps extends AppProps {
   emotionCache?: EmotionCache;

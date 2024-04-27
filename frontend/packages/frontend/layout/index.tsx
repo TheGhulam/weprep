@@ -71,6 +71,12 @@ export default function Layout(props: LayoutProps) {
       type === SessionType.SalesPitch
     ) {
       setIsModalOpen(true);
+    } else if (type === SessionType.QuickStart) {
+      const encodedSessionType = encodeURIComponent(SessionType.MockInterview);
+      router.push({
+        pathname: "/live-practice-session",
+        query: { sessionType: encodedSessionType },
+      });
     }
   };
 

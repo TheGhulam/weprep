@@ -26,6 +26,7 @@ import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 import { circularProgressClasses } from "@mui/material/CircularProgress";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import { grey } from "@mui/material/colors";
 
 interface SessionData {
   name: string;
@@ -33,7 +34,9 @@ interface SessionData {
   date: string;
   avgScore: number;
   status: string;
+  sessionCount: number;
   duration: number;
+  imageSrc: string;
 }
 
 interface PreparationSetTableProps {
@@ -102,7 +105,10 @@ const PreparationSetTable: React.FC<PreparationSetTableProps> = ({ data }) => {
                 <TableCell sx={{ bgcolor: theme.palette.info.main }} align="center">
                   Avg Score
                 </TableCell>
-                <TableCell sx={{ bgcolor: theme.palette.info.main }}>Status</TableCell>
+                <TableCell sx={{ bgcolor: theme.palette.info.main }} align="center">
+                  Number of Practice Sessions
+                </TableCell>
+                {/* <TableCell sx={{ bgcolor: theme.palette.info.main }}>Status</TableCell> */}
                 <TableCell sx={{ bgcolor: theme.palette.info.main }} align="center">
                   Action
                 </TableCell>
@@ -116,25 +122,10 @@ const PreparationSetTable: React.FC<PreparationSetTableProps> = ({ data }) => {
                     <Box sx={{ position: "relative", width: 75, height: 75 }}>
                       <Avatar
                         variant="square"
-                        src={"/thumbnail2.png"} // Ideally, you would use session.imgUrl or a relevant image URL
+                        src={session.imageSrc} // Ideally, you would use session.imgUrl or a relevant image URL
                         alt={session.name} // Ideally, you would use session.name
                         sx={{ width: "100%", height: "100%" }}
                       />
-                      <Box
-                        sx={{
-                          position: "absolute",
-                          bottom: 0,
-                          left: 0,
-                          bgcolor: "rgba(0, 0, 0, 0.5)", // Translucent black background
-                          color: "white",
-                          px: 0.5, // Padding on the sides
-                          py: 0.25, // Padding on the top and bottom
-                          fontSize: "0.75rem", // Smaller font size for the duration text
-                          borderRadius: "0 4px 0 0", // Optional: Rounded top-right corner
-                        }}
-                      >
-                        {session.duration}
-                      </Box>
                     </Box>
                   </TableCell>
                   <TableCell>{session.name}</TableCell>
@@ -157,7 +148,7 @@ const PreparationSetTable: React.FC<PreparationSetTableProps> = ({ data }) => {
                           position: "absolute",
                           [`& .${circularProgressClasses.circle}`]: {
                             strokeLinecap: "round",
-                            stroke: theme.palette.text.disabled,
+                            stroke: theme.palette.mode === "dark" ? grey[600] : grey[300],
                           },
                         }}
                       />
@@ -179,33 +170,8 @@ const PreparationSetTable: React.FC<PreparationSetTableProps> = ({ data }) => {
                       )}
                     </ProgressContainer>
                   </TableCell>
-                  <TableCell>
-                    {session.status === "Processing" ? (
-                      <Chip
-                        sx={{
-                          backgroundColor: "#E6F1FE",
-                          color: "white",
-                          border: 2,
-                          borderBlockColor: "#006FEE",
-                        }} // Set background color and text color
-                        // size="small"
-                        icon={<AutorenewOutlinedIcon sx={{ fill: "#006FEE" }} />}
-                        label={session.status}
-                      />
-                    ) : (
-                      <Chip
-                        sx={{
-                          backgroundColor: "#F6FFED",
-                          fill: "#0E793C",
-                          border: 2,
-                          borderBlockColor: "#0E793C",
-                        }} // Set background color and text color
-                        // size="small"
-                        icon={<CheckCircleOutlineOutlinedIcon sx={{ fill: "#0E793C" }} />}
-                        label={session.status}
-                      />
-                    )}
-                  </TableCell>
+
+                  <TableCell align="center">{session.sessionCount}</TableCell>
                   <TableCell align="center">{renderActions()}</TableCell>
                 </TableRow>
               ))}
