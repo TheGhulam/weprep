@@ -113,7 +113,7 @@ function VideoCall() {
             height={"100%"}
             videoConstraints={videoConstraints}
             mirrored={true}
-            audio={true}
+            // audio={true}
           />
         </Box>
         <Box sx={{ mt: 4, display: "flex", gap: 2 }}>

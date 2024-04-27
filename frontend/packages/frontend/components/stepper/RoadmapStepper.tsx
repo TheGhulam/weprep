@@ -9,42 +9,46 @@ import {
   useTheme,
   Link,
 } from "@mui/material";
+import { IconCross } from "@tabler/icons-react";
+import {
+  ChecklistRtl,
+  CircleNotifications,
+  Lightbulb,
+  LightbulbCircle,
+  School,
+} from "@mui/icons-material";
+import StepIcon from "../atoms/StepIcon";
 
 function FeedbackStepper() {
   const theme = useTheme();
   const recommendations = [
     {
-      title: "Effective Unit Testing in React",
+      title: "Learn Start Method of Answering Questions",
       reason:
-        "This resource covers advanced techniques for unit testing in React applications, including using Jest and React Testing Library effectively, mocking dependencies, and testing edge cases. It will help the candidate further improve their unit testing skills and ensure robust test coverage.",
-      url: "https://medium.com",
+        "Learning the Start Method of Answering Questions will help you structure your responses more effectively at the beginning of interviews. This method guides you on how to clearly and concisely introduce your answers, making a strong first impression and setting the right tone for detailed discussions.",
+      url: "https://www.youtube.com/watch?v=uQEuo7woEEk",
     },
     {
       title: "Advanced State Management with Redux",
       reason:
-        "This resource dives deep into Redux and advanced state management techniques for large-scale React applications. It covers topics such as middleware, selectors, and best practices for organizing complex application states. It will enhance the candidate's understanding of state management in complex projects.",
-      url: "https://medium.com",
+        "This resource dives deep into Redux and advanced state management techniques for large-scale React applications. It covers topics such as middleware, selectors, and best practices for organizing complex application states. Enhancing your understanding of these areas will improve your ability to handle state management in complex projects more efficiently.",
+      url: "https://www.youtube.com/watch?v=rtwZrbpsbIY",
     },
     {
-      title: "React Performance Optimization Masterclass",
+      title: "Effective Unit Testing in react",
       reason:
-        "This masterclass provides comprehensive guidance on optimizing React application performance. It includes in-depth discussions on code splitting, memoization, virtualization, and performance analysis using browser dev tools. It will equip the candidate with advanced techniques to optimize the performance of their React applications.",
-      url: "https://medium.com",
+        "Studying Effective Unit Testing in React will provide you with a deeper understanding of how to create robust unit tests for your applications. You'll learn advanced techniques for using Jest and React Testing Library effectively, including mocking dependencies and testing edge cases, which are crucial for ensuring comprehensive test coverage.",
+      url: "https://www.youtube.com/watch?v=OVNjsIto9xM",
     },
     {
-      title: "Web Accessibility Best Practices for React Developers",
+      title: "Practice Word Pacing",
       reason:
-        "This resource offers practical guidance on implementing accessibility best practices in React applications. It covers topics such as using semantic HTML, providing alternative text for images, and ensuring keyboard navigation and screen reader compatibility. It will help the candidate ensure their React applications are accessible to all users.",
-      url: "https://medium.com",
+        "Practicing word pacing is essential for improving the clarity and effectiveness of your spoken responses during interviews. This skill helps in pacing your delivery to make your answers more understandable and engaging, which is crucial for communicating complex ideas clearly.",
+      url: "https://www.youtube.com/watch?v=032Hum9KNjw",
     },
   ];
   return (
     <Box mt={2}>
-      <Typography variant="body1" mb={2} mr={2} ml={2}>
-        To improve, the candidate should research and learn more about STAR answering structure.
-        They should also practice articulating their experiences and understanding of these
-        methodologies
-      </Typography>
       <Stepper
         orientation="vertical"
         nonLinear
@@ -63,17 +67,19 @@ function FeedbackStepper() {
           },
           "& .MuiStepLabel-label": {
             color: theme.palette.text.primary,
+            fontWeight: "700",
           },
         }}
       >
         {recommendations.map((item, index) => (
           <Step key={index} expanded>
-            <StepLabel>{item.title} </StepLabel>
+            <StepLabel icon={<StepIcon index={index} />}>{item.title} </StepLabel>
+
             <StepContent>
               <Typography variant="body1">
                 {item.reason}{" "}
-                <Link ml={1} href={item.url} target="_blank" rel="noopener noreferrer">
-                  Click to learn more
+                <Link href={item.url} target="_blank" rel="noopener noreferrer">
+                  Checkout resources
                 </Link>
               </Typography>
             </StepContent>

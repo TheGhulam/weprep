@@ -29,31 +29,40 @@ import StopCircleIcon from "@mui/icons-material/StopCircle";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { red, grey } from "@mui/material/colors";
 
-const exampleUrl =
-  "https://ai-interview-stub-video.s3.us-east-1.amazonaws.com/placeholder-ai-video.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGMaCXVzLWVhc3QtMSJIMEYCIQDlthtQfLMR40uCzj6QjxCOquIBMemdUTWf5I2df7r0KwIhAPPE6XzTyZIEahX2HhbLohzapX44vvoSjZl3VgUlPB6FKu0CCKz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNTMzMjY3Mzc5NDQ0IgxOLW2UPvJUPLrpuqkqwQJT0MycjxBEV85TaJAHqBHVRnE938pIQTWTCDi0GOpFxzC1AziIRVaySQMlGQeliqlYX0Wv4Q%2FxZkN3Ut3710xrMb0Yyf0R8kOahp%2F2X3zNlOWE%2Bc%2BVq6%2FVvqZz2AYi%2B6CKM9zsjRrtRp8rl%2BArVBabUEPVFr%2FkXyNz2Y%2BYbsFZNMC66jaKuNfD%2BNP8jrWqoIldLEBJDPsigDTYSmLC5Wx5TwrZte8GmeyTeOBI7BZSobeU9LIP%2BBJOPzN2jbDteKeir%2F%2FU4K%2F3sN2QW6Z1lQXpfJa%2BnxVOMdkyC6NirDbj0LuStRfwRr%2FaSQbMBw010VGflIqOaHPzd1JClFc9I%2BgTmPW%2BYmuiT2cLRc80XuybKSmpKTWULeR6s%2FKZ0iNnl8h6sQGxdXQ%2BXWE0urUtQ50PQ%2Fm4O8%2FxBIehgR5A5fgr1Pcwpc2qsQY6sgJAzHpoUMDqXg5pY%2BtakTHQVauZ%2FUV1gWNmzEvxfQ5Ccq3UYoKKBXIdEZt3DRwog8BxjG1Fxqbw7FOleA4bzZJQrCJOojbZFzffhFqnmk8IUpZYXoT9RikJmYV%2FZDZoDSE%2BfCaHrW0o2HkLL2rokY5YcXDDN2ILrecOmyg4Toov2k1yuTP6FrgwZ6gHVfkbsoGQuUJ24TXRQpcuYlyyZ2PsOXqT%2BfhrXITPBYAAC8oxDiXcnq3%2FXftAscLjjCl3l0EP9jiPuzu3OlOCbZzk4iSz%2FjrIb9Pw6od%2FUAStIRK5C6RmlCeN5%2BriIw%2BupYiksHPFHLo6YyRr1eM7JuOKXe8vFOIzH5U01EFLIC%2BG0Z606a%2F9dcfss54L6%2FpjSrztzfx2oc%2BsyrJHY57ji6OnvdcJBs4%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240425T190518Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAXYKJWOT2HPYL4TMZ%2F20240425%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=1c5556e2e80349b98f597e5edd8470f33ffa43e9a0cae4262a6b394ff1f77d30";
-
 const questionsData = [
   {
     index: 1,
-    text: "Given the requirement to scrape data from a website that employs measures like rate limiting and IP blocking to prevent scraping, walk me through your approach to designing a resilient and efficient scraping solution.",
+    text: "Hello Faaiz Khan, it's great to meet you. I'll be conducting your interview today for the Data Scientist position. We'll go through a series of questions, and you can answer each one after I finish asking it. Let's get started.",
+    videoSrc: "https://dwi4xjqduw0ng.cloudfront.net/intro-b.mp4",
   },
   {
     index: 2,
-    text: "Imagine you're tasked with processing a large dataset containing a mix of text, images, and JSON data. Describe your strategy for cleaning, transforming, and structuring this data into a format suitable for machine learning tasks.",
+    text: "Given the requirement to scrape data from a website that employs measures like rate limiting and IP blocking to prevent scraping, walk me through your approach to designing a resilient and efficient scraping solution.",
+    videoSrc: "https://dwi4xjqduw0ng.cloudfront.net/question1-b.mp4",
   },
   {
     index: 3,
-    text: "Let's say you need to build a web application for our AI team to filter and moderate scraped data. Demonstrate how you would design the user interface and core functionalities to facilitate efficient data review and labeling.",
+    text: "Imagine you're tasked with processing a large dataset containing a mix of text, images, and JSON data. Describe your strategy for cleaning, transforming, and structuring this data into a format suitable for machine learning tasks.",
+    videoSrc: "https://dwi4xjqduw0ng.cloudfront.net/question3-b.mp4",
   },
   {
     index: 4,
-    text: "Explain the concept of object storage and its advantages compared to traditional relational databases, particularly in the context of storing and managing large volumes of unstructured data.",
+    text: "Let's say you need to build a web application for our AI team to filter and moderate scraped data. Demonstrate how you would design the user interface and core functionalities to facilitate efficient data review and labeling.",
+    videoSrc: "https://dwi4xjqduw0ng.cloudfront.net/question4-b.mp4",
   },
   {
     index: 5,
+    text: "Explain the concept of object storage and its advantages compared to traditional relational databases, particularly in the context of storing and managing large volumes of unstructured data.",
+    videoSrc: "https://dwi4xjqduw0ng.cloudfront.net/question5-b.mp4",
+  },
+  {
+    index: 6,
     text: "Considering the rapidly evolving field of AI, how do you stay updated on the latest technologies and trends in data engineering and software development?",
+    videoSrc: "https://dwi4xjqduw0ng.cloudfront.net/question6-new-b.mp4",
   },
 ];
+
+const silentVideo = "https://dwi4xjqduw0ng.cloudfront.net/silence-b.mp4";
 
 enum Speaker {
   AI = "AI",
@@ -65,8 +74,23 @@ function VideoCall() {
   const [currentSpeaker, setCurrentSpeaker] = useState(Speaker.AI);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(questionsData[0]);
-  const [currentVideoUrl, setCurrentVideoUrl] = useState(exampleUrl);
+  const [currentVideoUrl, setCurrentVideoUrl] = useState(currentQuestion.videoSrc);
   const playerRef = useRef(null);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeElapsed((prev) => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+  };
+  const router = useRouter();
 
   const toggleSpeaker = () => {
     if (currentSpeaker === Speaker.AI) {
@@ -86,30 +110,20 @@ function VideoCall() {
   const onSkip = () => {
     if (questionsData.length > currentQuestion.index) {
       setCurrentQuestion(questionsData[currentQuestion.index]);
+      setCurrentVideoUrl(questionsData[currentQuestion.index].videoSrc);
       playNext();
+    } else {
+      onEndSession();
     }
   };
   const onRepeat = () => {
     setCurrentSpeaker(Speaker.AI);
+    setCurrentVideoUrl(currentQuestion.videoSrc);
     if (playerRef.current) {
       (playerRef.current as any).seekTo(0, "seconds");
       ((playerRef.current as any).getInternalPlayer() as HTMLVideoElement).play();
     }
   };
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeElapsed((prev) => prev + 1);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
-  };
-  const router = useRouter();
 
   const onEndSession = () => {
     router.push(`/live-practice-session/finished`);
@@ -117,11 +131,27 @@ function VideoCall() {
 
   const onFinishAnswer = () => {
     toggleSpeaker();
-    playNext();
+    if (questionsData.length > currentQuestion.index) {
+      setCurrentQuestion(questionsData[currentQuestion.index]);
+      onSkip();
+    } else {
+      onEndSession();
+    }
   };
 
   const handleVideoEnd = () => {
     console.log("Video ended");
+    if (currentVideoUrl === silentVideo) {
+      if (playerRef.current) {
+        (playerRef.current as any).seekTo(0, "seconds");
+        ((playerRef.current as any).getInternalPlayer() as HTMLVideoElement).play();
+      }
+      return;
+    } else if (currentQuestion === questionsData[0]) {
+      onSkip();
+      return;
+    }
+    setCurrentVideoUrl(silentVideo);
     toggleSpeaker(); // Replay the video automatically or handle as needed
   };
 
@@ -140,7 +170,7 @@ function VideoCall() {
             <VolumeUpIcon style={{ fill: "#fff" }} />
           </IconButton>
           <Typography variant="h6" sx={{ color: "#FFF" }}>
-            {currentSpeaker === Speaker.AI ? "Joy Banks | AI Interviewer" : "Faaiz Khan | You"}
+            {currentSpeaker === Speaker.AI ? "Jane Sandberg  | AI Interviewer" : "Faaiz Khan | You"}
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
@@ -221,7 +251,9 @@ function VideoCall() {
             }}
           >
             <Typography variant="h6" gutterBottom>
-              Question {currentQuestion.index}
+              {currentQuestion.index === 1
+                ? "Introduction"
+                : `Question ${currentQuestion.index - 1}`}
             </Typography>
             <Typography variant="subtitle1">{currentQuestion.text}</Typography>
             <Box
@@ -230,7 +262,7 @@ function VideoCall() {
               <Button
                 size="large"
                 variant="contained"
-                disabled={currentSpeaker == Speaker.AI}
+                disabled={currentSpeaker == Speaker.AI || currentQuestion.index === 1}
                 sx={{
                   mr: 2,
                   backgroundColor: "#2A93D5",

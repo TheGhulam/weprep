@@ -73,7 +73,7 @@ const CircularScore: React.FC<CircularScoreProps> = ({ label, toolTipInfo, progr
             position: "absolute",
             [`& .${circularProgressClasses.circle}`]: {
               strokeLinecap: "round",
-              stroke: theme.palette.text.disabled,
+              stroke: theme.palette.mode === "dark" ? grey[600] : grey[300],
             },
           }}
         />

@@ -28,6 +28,7 @@ import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutli
 import { circularProgressClasses } from "@mui/material/CircularProgress";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { useRouter } from "next/router";
+import { grey } from "@mui/material/colors";
 
 interface SessionData {
   name: string;
@@ -36,6 +37,7 @@ interface SessionData {
   avgScore: number;
   status: string;
   duration: string;
+  imageSrc: string;
 }
 
 interface PracticeSessionsTableProps {
@@ -128,7 +130,7 @@ const PracticeSessionsTable: React.FC<PracticeSessionsTableProps> = ({ data }) =
                     <Box sx={{ position: "relative", width: 75, height: 75 }}>
                       <Avatar
                         variant="square"
-                        src={"/thumbnail2.png"} // Ideally, you would use session.imgUrl or a relevant image URL
+                        src={session.imageSrc} // Ideally, you would use session.imgUrl or a relevant image URL
                         alt={session.name} // Ideally, you would use session.name
                         sx={{ width: "100%", height: "100%" }}
                       />
@@ -169,7 +171,7 @@ const PracticeSessionsTable: React.FC<PracticeSessionsTableProps> = ({ data }) =
                           position: "absolute",
                           [`& .${circularProgressClasses.circle}`]: {
                             strokeLinecap: "round",
-                            stroke: theme.palette.text.disabled,
+                            stroke: theme.palette.mode === "dark" ? grey[600] : grey[300],
                           },
                         }}
                       />

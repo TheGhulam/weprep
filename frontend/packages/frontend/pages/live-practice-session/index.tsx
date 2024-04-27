@@ -96,7 +96,7 @@ function VideoCall() {
                 height={"100%"}
                 videoConstraints={videoConstraints}
                 mirrored={true}
-                audio={true}
+                // audio={true}
               />
             </>
           ) : (
