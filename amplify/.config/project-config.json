@@ -5,10 +5,10 @@
   "javascript": {
     "framework": "none",
     "config": {
-      "SourceDir": "src",
-      "DistributionDir": "dist",
-      "BuildCommand": "npm.cmd run-script build",
-      "StartCommand": "npm.cmd run-script start"
+      "SourceDir": "packages/frontend",
+      "DistributionDir": "packages/frontend/.next",
+      "BuildCommand": "npm run build",
+      "StartCommand": "npm run dev:app"
     }
   },
   "providers": [
