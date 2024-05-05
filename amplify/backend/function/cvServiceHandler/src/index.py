@@ -132,6 +132,7 @@ def handle_get_request(event):
             )
 
             items = response["Items"]
+
             if items:
                 cv_files = []
                 for item in items:

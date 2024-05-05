@@ -2,7 +2,7 @@
   "name": "weprep.web-turborepo",
   "private": true,
   "scripts": {
-    "build": "turbo build",
+    "build": "turbo build --filter=app",
     "dev": "dotenv -- turbo dev",
     "dev:admin": "dotenv -- turbo dev --filter admin-frontend",
     "dev:app": "dotenv -- turbo dev --filter frontend",
