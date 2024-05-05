@@ -220,6 +220,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "userSpeechAnalysesHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "userVideoService": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -407,6 +412,22 @@
         {
           "category": "function",
           "resourceName": "userPracticeDataHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userSpeechAnalysesHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userSpeechAnalysesHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userSpeechAnalysesHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userSpeechAnalysesHandler"
         }
       ]
     },

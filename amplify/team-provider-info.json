@@ -16,7 +16,7 @@
       "function": {
         "cvServiceHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/cvServiceHandler-654e485261554f53657a-build.zip"
+          "s3Key": "amplify-builds/cvServiceHandler-67356d6d64446b4b7446-build.zip"
         },
         "cvServiceProcessingHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
@@ -63,6 +63,10 @@
         "userVideoService": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
           "s3Key": "amplify-builds/userVideoService-344866304f3445354474-build.zip"
+        },
+        "userSpeechAnalysesHandler": {
+          "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+          "s3Key": "amplify-builds/userSpeechAnalysesHandler-5158656e312b6c573147-build.zip"
         }
       },
       "api": {
