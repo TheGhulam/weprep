@@ -8,7 +8,7 @@ import boto3
 # Transcript and Srt data
 transcribe_client = boto3.client("transcribe")
 s3_client = boto3.client("s3")
-bucket_name = "user-processed-data"
+bucket_name = "weprep-user-audios"
 
 
 def get_most_used_words(transcript_data, n=10):

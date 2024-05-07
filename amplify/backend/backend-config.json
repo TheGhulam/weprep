@@ -65,6 +65,14 @@
           ],
           "category": "function",
           "resourceName": "userAudioUploadHandler"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userRawAudioUploadHandler"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -220,7 +228,17 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "userRawAudioUploadHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "userSpeechAnalysesHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userVideoProcessingHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -415,6 +433,22 @@
         }
       ]
     },
+    "AMPLIFY_function_userRawAudioUploadHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userRawAudioUploadHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userRawAudioUploadHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userRawAudioUploadHandler"
+        }
+      ]
+    },
     "AMPLIFY_function_userSpeechAnalysesHandler_deploymentBucketName": {
       "usedBy": [
         {
@@ -428,6 +462,22 @@
         {
           "category": "function",
           "resourceName": "userSpeechAnalysesHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userVideoProcessingHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userVideoProcessingHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userVideoProcessingHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userVideoProcessingHandler"
         }
       ]
     },

@@ -7,6 +7,20 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/raw-audio/{user-id}/upload": {
+      "name": "/raw-audio/{user-id}/upload",
+      "lambdaFunction": "userRawAudioUploadHandler",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/raw-audio/metadata/{user-id}/upload/{video-id}": {
+      "name": "/raw-audio/metadata/{user-id}/upload/{video-id}",
+      "lambdaFunction": "userAudioUploadHandler",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }
