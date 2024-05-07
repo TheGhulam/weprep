@@ -92,9 +92,8 @@ def handler(event, context):
             "body": json.dumps({"error": "Transcription job failed"}),
         }
 
-    srt_data = "TEMP VAL"
     most_used_words = get_most_used_words(transcript_data)
-    speech_speed = calculate_speech_speed(srt_data)
+    speech_speed = calculate_speech_speed(transcript_data)
     hedging_word_count = count_hedging_words(transcript_data)
     pronunciation_words, filler_word_count = count_filler_words(transcript_data)
 
@@ -210,36 +209,27 @@ def get_most_used_words(transcript_data, n=10):
     return most_common
 
 
-def calculate_speech_speed(srt_data: str) -> float:
+def calculate_speech_speed(transcript_data: dict) -> float:
     """
     Calculate the speech speed (words per minute) based on the provided SRT data.
 
     Args:
-        srt_data (str): The contents of the SRT file.
+        transcript_data (dict): The contents of the json file.
 
     Returns:
         float: The speech speed in words per minute.
     """
-    lines = srt_data.strip().split("\n")
-    text_lines = [
-        line.strip() for line in lines if "-->" not in line and not line.isdigit()
-    ]
-    text = " ".join(text_lines)
-    words_count = len(re.findall(r"\w+", text))
-
-    timestamps = [line for line in lines if "-->" in line]
-
-    start_time_str, _ = timestamps[0].split(" --> ")
-    start_datetime = datetime.datetime.strptime(start_time_str, "%H:%M:%S,%f")
-
-    _, end_time_str = timestamps[-1].split(" --> ")
-    end_datetime = datetime.datetime.strptime(end_time_str, "%H:%M:%S,%f")
-
-    total_duration = end_datetime - start_datetime
-    total_seconds = total_duration.total_seconds()
-    speed = words_count / (total_seconds / 60)
-
-    return speed
+    first_word_start_time = transcript_data['results']['items'][0]['start_time']
+    last_pronunciation_item = None
+    word_count = 0
+    for item in transcript_data['results']['items']:
+        if item['type'] == 'pronunciation':
+            last_pronunciation_item = item
+            word_count += 1
+    last_word_end_time = last_pronunciation_item['end_time']
+    duration = float(last_word_end_time) - float(first_word_start_time)
+    speech_speed = (word_count / duration) * 60
+    return int(speech_speed)
 
 
 def count_hedging_words(transcript_data: dict) -> int:
