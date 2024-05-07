@@ -209,7 +209,7 @@ def get_most_used_words(transcript_data, n=10):
     return most_common
 
 
-def calculate_speech_speed(transcript_data: dict) -> float:
+def calculate_speech_speed(transcript_data: dict) -> int:
     """
     Calculate the speech speed (words per minute) based on the provided SRT data.
 
