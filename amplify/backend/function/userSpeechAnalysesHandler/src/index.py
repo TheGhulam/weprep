@@ -190,6 +190,34 @@ def count_filler_words(transcript_data):
 
     return pronunciation_words, filler_word_count
 
+def calculate_language_positivity(transcript_data):
+    """
+    Calculate the positivity percentage of the language used in the transcript data.
+
+    Args:
+        transcript_data (dict): The transcript data as a dictionary.
+
+    Returns:
+        float: The language positivity percentage, ranging from 0 (negative) to 100 (positive).
+    """
+    positive_words = ["good", "great", "excellent", "amazing", "wonderful", "fantastic", "brilliant", "superb",
+                      "terrific"]
+    negative_words = ["bad", "terrible", "awful", "horrible", "dreadful", "unpleasant", "nasty", "lousy", "poor"]
+
+    transcript_text = " ".join(item["alternatives"][0]["content"].lower()
+                               for item in transcript_data["results"]["items"]
+                               if item["type"] == "pronunciation")
+
+    positive_count = sum(re.search(rf"\b{word}\b", transcript_text) is not None for word in positive_words)
+    negative_count = sum(re.search(rf"\b{word}\b", transcript_text) is not None for word in negative_words)
+
+    total_words = positive_count + negative_count
+    if total_words == 0:
+        positivity_percentage = 50  # Neutral
+    else:
+        positivity_percentage = (positive_count / total_words) * 100
+
+    return positivity_percentage
 
 def calculate_language_positivity(transcript_data):
     """
@@ -286,12 +314,15 @@ def handler(event, context):
     langugage_positivity = calculate_language_positivity(transcript_data)
 
     response_data = {
-        "most_used_words": most_used_words,
+        "words_count": len(pronunciation_words),
+        "filler_words_count": filler_word_count,
+        "hedging_words_count": hedging_word_count,
         "speech_speed": speech_speed,
         "hedging_word_count": hedging_word_count,
         "pronunciation_words": pronunciation_words,
         "filler_word_count": filler_word_count,
         "language_positivty": langugage_positivity,
+
     }
 
     table_name = "userAudioDataTable-dev"
