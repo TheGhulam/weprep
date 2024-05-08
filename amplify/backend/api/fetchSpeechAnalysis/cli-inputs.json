@@ -7,6 +7,13 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/{user-id}/speech/web-crawler-data/{video-id}": {
+      "name": "/{user-id}/speech/web-crawler-data/{video-id}",
+      "lambdaFunction": "fetchSpeechWebCrawlerDataHandler",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

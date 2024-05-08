@@ -10,7 +10,6 @@ logger.setLevel(logging.INFO)
 
 
 def handler(event, context):
-
     video_id = "TEMP VAR"
     user_id = "TEMP CART"
     bucket_name = "weprep-user-videos"

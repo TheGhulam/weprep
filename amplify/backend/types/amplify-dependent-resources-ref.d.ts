@@ -86,6 +86,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "fetchSpeechWebCrawlerDataHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "fetchUserSpeechAnalysisHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -178,6 +185,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "userVideoService": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "webCrawlerHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",

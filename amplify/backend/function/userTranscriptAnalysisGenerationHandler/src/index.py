@@ -5,6 +5,7 @@ import boto3
 s3 = boto3.client("s3")
 bedrock_client = boto3.client(service_name="bedrock-runtime", region_name="us-west-2")
 dynamodb = boto3.resource("dynamodb")
+lambda_client = boto3.client("lambda")
 
 
 def handler(event, context):
@@ -149,12 +150,20 @@ def handler(event, context):
                 ":sa": summary_eval_body,
             },
         )
+
     except Exception as e:
         print(f"Error updating DynamoDB table: {str(e)}")
         return {
             "statusCode": 500,
             "body": json.dumps({"error": "Failed to update DynamoDB table"}),
         }
+
+    event["summary"] = summary_eval_body
+    lambda_client.invoke(
+        FunctionName="webCrawlerhandler-dev",
+        InvocationType="Event",
+        Payload=json.dumps(event),
+    )
 
     return {
         "statusCode": 200,

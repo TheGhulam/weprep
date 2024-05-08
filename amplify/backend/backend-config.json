@@ -37,6 +37,14 @@
           ],
           "category": "function",
           "resourceName": "fetchUserSpeechAnalysisHandler"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "fetchSpeechWebCrawlerDataHandler"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -202,6 +210,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "fetchSpeechWebCrawlerDataHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "fetchUserSpeechAnalysisHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -282,6 +295,11 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "webCrawlerHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "hosting": {
@@ -337,6 +355,22 @@
         {
           "category": "function",
           "resourceName": "cvServiceProcessingHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_fetchSpeechWebCrawlerDataHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fetchSpeechWebCrawlerDataHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_fetchSpeechWebCrawlerDataHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fetchSpeechWebCrawlerDataHandler"
         }
       ]
     },
@@ -561,6 +595,22 @@
         {
           "category": "function",
           "resourceName": "userVideoService"
+        }
+      ]
+    },
+    "AMPLIFY_function_webCrawlerHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "webCrawlerHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_webCrawlerHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "webCrawlerHandler"
         }
       ]
     },

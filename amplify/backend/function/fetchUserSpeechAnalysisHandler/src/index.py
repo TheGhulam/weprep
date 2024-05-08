@@ -2,6 +2,7 @@ import boto3
 import simplejson as json
 
 dynamodb = boto3.resource("dynamodb")
+s3_client = boto3.client("s3")
 
 
 def handler(event, context):
@@ -33,8 +34,16 @@ def handler(event, context):
                 "summaryAnalysis": item.get("SummaryAnalysis"),
             }
 
-        else:
-            result = {"message": "No data found for the provided userId and videoId"}
+        user_id = result["userId"]
+        interview_id = result["interviewId"]
+        object_key = f"{user_id}/{interview_id}/{video_id}.mp4"
+        expiration = 3600
+        upload_url = s3_client.generate_presigned_url(
+            "put_object",
+            Params={"Bucket": "weprep-user-videos", "Key": object_key},
+            ExpiresIn=expiration,
+        )
+        result["uploadUrl"] = upload_url
     except Exception as e:
         print(f"Error fetching data from DynamoDB: {str(e)}")
         return {
