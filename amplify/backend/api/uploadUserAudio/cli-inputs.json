@@ -8,15 +8,15 @@
         "setting": "open"
       }
     },
-    "/raw-audio/{user-id}/upload": {
-      "name": "/raw-audio/{user-id}/upload",
+    "/raw-audio/{user-id}/upload/{interview-id}": {
+      "name": "/raw-audio/{user-id}/upload/{interview-id}",
       "lambdaFunction": "userRawAudioUploadHandler",
       "permissions": {
         "setting": "open"
       }
     },
-    "/raw-audio/metadata/{user-id}/upload/{video-id}": {
-      "name": "/raw-audio/metadata/{user-id}/upload/{video-id}",
+    "/raw-audio/metadata/{user-id}/upload/{interview-id}": {
+      "name": "/raw-audio/metadata/{user-id}/upload/{interview-id}",
       "lambdaFunction": "userAudioUploadHandler",
       "permissions": {
         "setting": "open"

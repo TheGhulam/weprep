@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.8.2\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.11.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -15,18 +15,6 @@
     },
     "s3Key": {
       "Type": "String"
-    },
-    "storagemockInterviewSessionsTableName": {
-      "Type": "String",
-      "Default": "storagemockInterviewSessionsTableName"
-    },
-    "storagemockInterviewSessionsTableArn": {
-      "Type": "String",
-      "Default": "storagemockInterviewSessionsTableArn"
-    },
-    "storagemockInterviewSessionsTableStreamArn": {
-      "Type": "String",
-      "Default": "storagemockInterviewSessionsTableArn"
     }
   },
   "Conditions": {
@@ -59,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "questionGenerationHandler",
+            "fetchUserSpeechAnalysisHandler",
             {
               "Fn::Join": [
                 "",
                 [
-                  "questionGenerationHandler",
+                  "fetchUserSpeechAnalysisHandler",
                   "-",
                   {
                     "Ref": "env"
@@ -101,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "weprepLambdaRole0a332018",
+            "weprepLambdaRolec910f603",
             {
               "Fn::Join": [
                 "",
                 [
-                  "weprepLambdaRole0a332018",
+                  "weprepLambdaRolec910f603",
                   "-",
                   {
                     "Ref": "env"

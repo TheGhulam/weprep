@@ -9,6 +9,8 @@ import boto3
 transcribe_client = boto3.client("transcribe")
 s3_client = boto3.client("s3")
 bucket_name = "user-processed-data"
+dynamodb = boto3.resource("dynamodb")
+lambda_client = boto3.client("lambda")
 
 
 def get_most_used_words(transcript_data, n=10):
@@ -76,7 +78,7 @@ def get_most_used_words(transcript_data, n=10):
     return most_common
 
 
-def calculate_speech_speed(transcript_data: dict) -> float:
+def calculate_speech_speed(transcript_data: dict) -> int:
     """
     Calculate the speech speed (words per minute) based on the provided SRT data.
 
@@ -86,14 +88,14 @@ def calculate_speech_speed(transcript_data: dict) -> float:
     Returns:
         float: The speech speed in words per minute.
     """
-    first_word_start_time = transcript_data['results']['items'][0]['start_time']
+    first_word_start_time = transcript_data["results"]["items"][0]["start_time"]
     last_pronunciation_item = None
     word_count = 0
-    for item in transcript_data['results']['items']:
-        if item['type'] == 'pronunciation':
+    for item in transcript_data["results"]["items"]:
+        if item["type"] == "pronunciation":
             last_pronunciation_item = item
             word_count += 1
-    last_word_end_time = last_pronunciation_item['end_time']
+    last_word_end_time = last_pronunciation_item["end_time"]
     duration = float(last_word_end_time) - float(first_word_start_time)
     speech_speed = (word_count / duration) * 60
     return int(speech_speed)
@@ -154,7 +156,7 @@ def count_hedging_words(transcript_data: dict) -> int:
     return hedging_word_count
 
 
-def count_filler_words(transcript_data: dict) -> tuple[list[str], int]:
+def count_filler_words(transcript_data):
     """
     Count the number of filler words in the transcript data.
 
@@ -199,16 +201,43 @@ def calculate_language_positivity(transcript_data):
     Returns:
         float: The language positivity percentage, ranging from 0 (negative) to 100 (positive).
     """
-    positive_words = ["good", "great", "excellent", "amazing", "wonderful", "fantastic", "brilliant", "superb",
-                      "terrific"]
-    negative_words = ["bad", "terrible", "awful", "horrible", "dreadful", "unpleasant", "nasty", "lousy", "poor"]
+    positive_words = [
+        "good",
+        "great",
+        "excellent",
+        "amazing",
+        "wonderful",
+        "fantastic",
+        "brilliant",
+        "superb",
+        "terrific",
+    ]
+    negative_words = [
+        "bad",
+        "terrible",
+        "awful",
+        "horrible",
+        "dreadful",
+        "unpleasant",
+        "nasty",
+        "lousy",
+        "poor",
+    ]
 
-    transcript_text = " ".join(item["alternatives"][0]["content"].lower()
-                               for item in transcript_data["results"]["items"]
-                               if item["type"] == "pronunciation")
+    transcript_text = " ".join(
+        item["alternatives"][0]["content"].lower()
+        for item in transcript_data["results"]["items"]
+        if item["type"] == "pronunciation"
+    )
 
-    positive_count = sum(re.search(rf"\b{word}\b", transcript_text) is not None for word in positive_words)
-    negative_count = sum(re.search(rf"\b{word}\b", transcript_text) is not None for word in negative_words)
+    positive_count = sum(
+        re.search(rf"\b{word}\b", transcript_text) is not None
+        for word in positive_words
+    )
+    negative_count = sum(
+        re.search(rf"\b{word}\b", transcript_text) is not None
+        for word in negative_words
+    )
 
     total_words = positive_count + negative_count
     if total_words == 0:
@@ -223,25 +252,91 @@ def handler(event, context):
     print("received event:")
     print(event)
 
-    # TODO: Get the transcript data location from the event
-    transcript_file = "x"
-    with open(transcript_file, "r") as f:
-        transcript_data = literal_eval(f.read())
+    user_id = event["user_id"]
+    interview_id = event["interview_id"]
+    video_id = event["video_id"]
+    resume_id = event["resume_id"]
 
+    transcript_key = (
+        f"{user_id}/{interview_id}/transcripts/{video_id}_raw_audio_transcript.json"
+    )
+    try:
+        transcript_response = s3_client.get_object(
+            Bucket="weprep-user-audios", Key=transcript_key
+        )
+        transcript_data = json.loads(transcript_response["Body"].read().decode("utf-8"))
+    except Exception as e:
+        print(f"Error fetching transcript data from S3: {str(e)}")
+        return {
+            "statusCode": 500,
+            "headers": {
+                "Access-Control-Allow-Headers": "*",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+            },
+            "body": json.dumps({"error": "Failed to fetch transcript data"}),
+        }
+
+    print(transcript_data)
     most_used_words = get_most_used_words(transcript_data)
     speech_speed = calculate_speech_speed(transcript_data)
     hedging_word_count = count_hedging_words(transcript_data)
+    # pronunciation_words, filler_word_count = 1,1
     pronunciation_words, filler_word_count = count_filler_words(transcript_data)
-    language_positivity_percentage = calculate_language_positivity(transcript_data)
+    langugage_positivity = calculate_language_positivity(transcript_data)
 
     response_data = {
-        "words_count": len(pronunciation_words),
-        "filler_words_count": filler_word_count,
-        "hedging_words_count": hedging_word_count,
+        "most_used_words": most_used_words,
         "speech_speed": speech_speed,
-        "language_positivity_percentage": language_positivity_percentage,
-        "most_used_words": most_used_words
+        "hedging_word_count": hedging_word_count,
+        "pronunciation_words": pronunciation_words,
+        "filler_word_count": filler_word_count,
+        "language_positivty": langugage_positivity,
     }
-    # TODO: save the response data to the database
 
-    return {"statusCode": 200, "body": json.dumps(response_data)}
+    table_name = "userAudioDataTable-dev"
+    table = dynamodb.Table(table_name)
+
+    try:
+        table.put_item(
+            Item={
+                "userId": user_id,
+                "videoId": video_id,
+                "interviewId": interview_id,
+                "resumeId": resume_id,
+                "mostUsedWords": response_data["most_used_words"],
+                "speechSpeed": response_data["speech_speed"],
+                "hedgingWordCount": response_data["hedging_word_count"],
+                "pronunciationWords": response_data["pronunciation_words"],
+                "fillerWordCount": response_data["filler_word_count"],
+                "langugagePositivity": response_data["language_positivty"],
+            }
+        )
+
+        request_body = {
+            "user_id": user_id,
+            "interview_id": interview_id,
+            "video_id": video_id,
+            "resume_id": resume_id,
+        }
+    except Exception as e:
+        print(f"Error saving response data to DynamoDB: {str(e)}")
+        return {
+            "statusCode": 500,
+            "headers": {
+                "Access-Control-Allow-Headers": "*",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+            },
+            "body": json.dumps({"error": "Failed to save response data"}),
+        }
+
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
+        "body": json.dumps(response_data),
+    }

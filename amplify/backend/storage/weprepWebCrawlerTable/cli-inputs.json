@@ -1,0 +1,10 @@
+{
+  "resourceName": "weprepWebCrawlerTable",
+  "tableName": "weprepWebCrawlerTable",
+  "partitionKey": {
+    "fieldName": "interviewId",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

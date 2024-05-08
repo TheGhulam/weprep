@@ -16,7 +16,7 @@
       "function": {
         "cvServiceHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/cvServiceHandler-67356d6d64446b4b7446-build.zip"
+          "s3Key": "amplify-builds/cvServiceHandler-56773444587167506564-build.zip"
         },
         "cvServiceProcessingHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
@@ -28,13 +28,13 @@
         },
         "questionGenerationHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/questionGenerationHandler-734c4649516d6f35344e-build.zip"
+          "s3Key": "amplify-builds/questionGenerationHandler-37685737664e65644651-build.zip"
         },
         "uploadAudioFileHandler": {},
         "uploadUserAudioHandler": {},
         "userAudioUploadHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userAudioUploadHandler-5537676435673367664f-build.zip"
+          "s3Key": "amplify-builds/userAudioUploadHandler-4e586b48577142504535-build.zip"
         },
         "userAudioAnalysisHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
@@ -42,7 +42,7 @@
         },
         "audioAnalysisProcessingHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/audioAnalysisProcessingHandler-33695851653441703861-build.zip"
+          "s3Key": "amplify-builds/audioAnalysisProcessingHandler-697278756d3449516b33-build.zip"
         },
         "userDataUpdateHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
@@ -58,7 +58,7 @@
         },
         "userMockInterviewHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userMockInterviewHandler-39566a355046336c3365-build.zip"
+          "s3Key": "amplify-builds/userMockInterviewHandler-744d61346c69444e2b72-build.zip"
         },
         "userVideoService": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
@@ -66,15 +66,23 @@
         },
         "userSpeechAnalysesHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userSpeechAnalysesHandler-50762b41643548536b31-build.zip"
+          "s3Key": "amplify-builds/userSpeechAnalysesHandler-31736f50524f63413477-build.zip"
         },
         "userVideoProcessingHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userVideoProcessingHandler-547075786f6e6c4e314b-build.zip"
+          "s3Key": "amplify-builds/userVideoProcessingHandler-377373594f3861726b69-build.zip"
         },
         "userRawAudioUploadHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userRawAudioUploadHandler-74434546495567664a72-build.zip"
+          "s3Key": "amplify-builds/userRawAudioUploadHandler-434f63372b4e796e3562-build.zip"
+        },
+        "userTranscriptAnalysisGenerationHandler": {
+          "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+          "s3Key": "amplify-builds/userTranscriptAnalysisGenerationHandler-512f454a4a69317a3575-build.zip"
+        },
+        "fetchUserSpeechAnalysisHandler": {
+          "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+          "s3Key": "amplify-builds/fetchUserSpeechAnalysisHandler-753359346b6e42495345-build.zip"
         }
       },
       "api": {
@@ -86,14 +94,18 @@
         "userData": {},
         "userPracticeRecordGeneral": {},
         "mockInterviewService": {},
-        "userInterviewVideo": {}
+        "userInterviewVideo": {},
+        "fetchSpeechAnalysis": {}
       },
       "storage": {
         "userCV": {},
         "userTable": {},
         "userAnalysisScoreTable": {},
         "userCVsRecordTable": {},
-        "mockInterviewSessionsTable": {}
+        "mockInterviewSessionsTable": {},
+        "userAudioDataTable": {},
+        "weprepWebCrawlerTable": {},
+        "userQuestionAndAnswers": {}
       },
       "auth": {
         "weprep38b852eb": {}

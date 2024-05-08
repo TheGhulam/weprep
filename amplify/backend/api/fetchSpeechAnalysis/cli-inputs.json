@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/{user-id}/speech/analysis/{video-id}": {
+      "name": "/{user-id}/speech/analysis/{video-id}",
+      "lambdaFunction": "fetchUserSpeechAnalysisHandler",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

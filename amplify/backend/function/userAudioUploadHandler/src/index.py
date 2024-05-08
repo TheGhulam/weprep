@@ -1,3 +1,4 @@
+import base64
 import io
 import json
 import os
@@ -5,6 +6,9 @@ import uuid
 
 import boto3
 from pydub import AudioSegment
+
+lambda_client = boto3.client("lambda")
+
 
 os.environ["PATH"] += os.pathsep + "/opt/bin"
 
@@ -18,16 +22,21 @@ def handler(event, context):
 
     # Get the user-id from the request path parameters
     user_id = event["pathParameters"]["user-id"]
-    video_id = event["pathParameters"]["video-id"]
+    interview_id = event["pathParameters"]["interview-id"]
 
     # Parse the JSON request body
-    json_body = json.loads(event["body"])
+    json_body = base64.b64decode(event["body"])
+    json_body = json.loads(json_body)
+
+    print(json_body)
 
     # Get the video-id and dialogues from the request body
     dialogues = json_body["dialogues"]
+    video_id = json_body["video-id"]
+    resume_id = json_body["resume-id"]
 
     # Construct the S3 object key for the raw audio file
-    raw_audio_key = f"{user_id}/raw/{video_id}.mp3"
+    raw_audio_key = f"{user_id}/{interview_id}/raw/{video_id}.mp3"
 
     # Download the raw audio file from S3
     try:
@@ -51,14 +60,14 @@ def handler(event, context):
     # Process each dialogue segment
     for dialogue in dialogues:
         title = dialogue["title"]
-        start_time = dialogue["startTime"] * 1000  # Convert seconds to milliseconds
+        start_time = dialogue["startTime"] * 1000
         end_time = dialogue["endTime"] * 1000
 
         # Extract the audio segment
         segment = audio[start_time:end_time]
 
         # Save the audio segment to S3
-        segment_key = f"{user_id}/processed/{video_id}_{title}.mp3"
+        segment_key = f"{user_id}/{interview_id}/processed/{video_id}_{title}.mp3"
         segment_data = segment.export(format="mp3").read()
         try:
             s3.put_object(
@@ -89,7 +98,7 @@ def handler(event, context):
                 MediaFormat="mp3",
                 LanguageCode="en-US",
                 OutputBucketName="weprep-user-audios",
-                OutputKey=f"{user_id}/transcripts/{video_id}_{title}.json",
+                OutputKey=f"{user_id}/{interview_id}/transcripts/{video_id}_{title}.json",
             )
             print(f"Transcription job started: {job_name}")
         except Exception as e:
@@ -103,7 +112,16 @@ def handler(event, context):
                 },
                 "body": json.dumps({"error": "Failed to start transcription job"}),
             }
-
+        request_body = {}
+        request_body["user_id"] = user_id
+        request_body["video_id"] = video_id
+        request_body["interview_id"] = interview_id
+        request_body["resume_id"] = resume_id
+        lambda_client.invoke(
+            FunctionName="userTranscriptAnalysisGenerationHandler-dev",
+            InvocationType="Event",  # Asynchronous invocation
+            Payload=json.dumps(request_body),  # Pass the updated request body
+        )
     return {
         "statusCode": 200,
         "headers": {

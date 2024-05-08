@@ -28,6 +28,20 @@
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
     },
+    "fetchSpeechAnalysis": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "fetchUserSpeechAnalysisHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "mockInterviewService": {
       "dependsOn": [
         {
@@ -188,8 +202,24 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "fetchUserSpeechAnalysisHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "questionGenerationHandler": {
       "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "mockInterviewSessionsTable"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
@@ -234,6 +264,11 @@
       "service": "Lambda"
     },
     "userSpeechAnalysesHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userTranscriptAnalysisGenerationHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -302,6 +337,22 @@
         {
           "category": "function",
           "resourceName": "cvServiceProcessingHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_fetchUserSpeechAnalysisHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fetchUserSpeechAnalysisHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_fetchUserSpeechAnalysisHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fetchUserSpeechAnalysisHandler"
         }
       ]
     },
@@ -465,6 +516,22 @@
         }
       ]
     },
+    "AMPLIFY_function_userTranscriptAnalysisGenerationHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userTranscriptAnalysisGenerationHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userTranscriptAnalysisGenerationHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userTranscriptAnalysisGenerationHandler"
+        }
+      ]
+    },
     "AMPLIFY_function_userVideoProcessingHandler_deploymentBucketName": {
       "usedBy": [
         {
@@ -523,6 +590,10 @@
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     },
+    "userAudioDataTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
     "userCV": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
@@ -532,7 +603,15 @@
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     },
+    "userQuestionAndAnswers": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
     "userTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "weprepWebCrawlerTable": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     }
