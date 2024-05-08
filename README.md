@@ -29,8 +29,9 @@ Configure the frontend by updating the necessary environment variables to connec
 Run the frontend development server using npm run dev or build the production-ready frontend using npm run build.
 Access the application through the provided URL and start uploading and analyzing videos!
 
-Contributing
+## Contributing
 We appreciate contributions from the community! If you encounter any issues or have suggestions for improvements, please open an issue on this repository. Pull requests are also welcome.
-License
+
+### License
 This project is licensed under the MIT License. Feel free to use and modify the codebase according to your needs.
 We hope you find this video analysis platform valuable and enjoy using it!
