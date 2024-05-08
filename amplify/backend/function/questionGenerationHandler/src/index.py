@@ -1,119 +1,215 @@
 import json
 import logging
-import time
 
 import boto3
-import requests
-from utils.system_prompt import get_system_prompt
+
+from utils.system_prompt import (get_behavioral_prompt,
+                                 get_conversational_prompt, get_stress_prompt,
+                                 get_technical_prompt)
 
 cv_bucket_name = "processed-cvs"
 processed_questions_bucket_name = "user-processed-data"
 s3_client = boto3.client("s3")
 polly_client = boto3.client("polly")
-api_token = "r8_PTUd7opDkDJMQYOzqALeOibvYNWClDD0DwkzL"
-start_url = "https://api.replicate.com/v1/predictions"
+bedrock_client = boto3.client(service_name="bedrock-runtime", region_name="us-west-2")
+dynamodb = boto3.client("dynamodb")
+
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 
 def handler(event, context):
-    user_id = event["pathParameters"]["user_id"]
-    try:
-        body = json.loads(event.get("body", ""))
-        num_ques = body.get("numberOfQuestions")
-        interviewer_tone = body.get("interviewerTone")
-        interview_topic = body.get("interviewTopic")
-    except json.JSONDecodeError:
-        return response(400, "Invalid JSON format")
-    objects = s3_client.list_objects_v2(Bucket=cv_bucket_name, Prefix=f"{user_id}/")
-    if "Contents" in objects:
-        cv_file_key = objects["Contents"][0]["Key"]
-        cv_object = s3_client.get_object(Bucket=cv_bucket_name, Key=cv_file_key)
-        cv_text = cv_object["Body"].read().decode("utf-8")
-        logger.info(cv_text)
-        data = {
-            "version": "02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3",
-            "input": {
-                "debug": False,
-                "top_k": 50,
-                "top_p": 1,
-                "prompt": f"{cv_text}",
-                "system_prompt": f"{get_system_prompt(num_ques, interview_topic)}. Keep your tone {interviewer_tone}.",
-                "temperature": 0.5,
-                "max_new_tokens": 500,
-                "min_new_tokens": -1,
-            },
-        }
-        headers = {
-            "Authorization": f"Token {api_token}",
-            "Content-Type": "application/json",
-        }
-        start_response = requests.post(
-            start_url, headers=headers, data=json.dumps(data)
+    logger.info("Received event: %s", json.dumps(event))
+
+    user_id = event["userId"]
+    resume_id = event.get("resumeId", "")
+    interview_id = event.get("interviewId", "")
+    interview_type = event.get("interviewType", "behavioral")
+    interview_duration = event.get("interviewDuration", "short")
+    interviewer_tone = event.get("interviewTone", "neutral")
+    interview_topic = event.get("interviewTopic", "")
+
+    logger.info("Processing interview data for user ID: %s", user_id)
+
+    if resume_id:
+        cv_file_key = f"{user_id}/{resume_id}.pdf.json"
+        logger.info(
+            "Resume ID provided, attempting to fetch CV from S3 with key: %s",
+            cv_file_key,
         )
-        logger.info(start_response.text)
 
-        start_result = start_response.json()
-        get_url = start_result["urls"]["get"]
-        for _ in range(30):
-            poll_response = requests.get(get_url, headers=headers)
-            poll_result = poll_response.json()
-            logger.info(poll_result)
+        try:
+            cv_object = s3_client.get_object(Bucket=cv_bucket_name, Key=cv_file_key)
+            cv_text = cv_object["Body"].read().decode("utf-8")
+            logger.info("CV text fetched successfully: %s", cv_text)
 
-            if poll_result["status"] == "succeeded":
-                result = join_tokens(poll_result["output"])
-                audio_stream = text_to_speech(result, polly_client)
-                save_to_s3(user_id, result, processed_questions_bucket_name)
-                save_to_s3(
-                    user_id,
-                    audio_stream,
-                    processed_questions_bucket_name,
-                    file_name="questions.mp3",
-                    is_audio=True,
-                )
-                audio_key = f"{user_id}/questions.mp3"
-                presigned_url = generate_presigned_url(
-                    processed_questions_bucket_name, audio_key
-                )
-                if presigned_url:
-                    return response(200, {"url": presigned_url})
-                else:
-                    return response(500, {"message": "Error generating audio file URL"})
-            elif poll_result["status"] == "failed":
-                return response(500, "Prediction failed")
-            time.sleep(0.5)
-        return response(408, "Request timed out")
+            num_ques = get_num_questions(interview_duration)
+            logger.info("Number of questions determined: %d", num_ques)
+
+            system_prompt = get_system_prompt(interview_type, num_ques, interview_topic)
+            logger.info("Generated system prompt: %s", system_prompt)
+
+            model_id = "anthropic.claude-3-opus-20240229-v1:0"
+            logger.info("Invoking the language model with ID: %s", model_id)
+            safe_cv_text = cv_text.replace("{", "{{").replace("}", "}}")
+            safe_system_prompt = system_prompt.replace("{", "{{").replace("}", "}}")
+            response = bedrock_client.invoke_model(
+                modelId=model_id,
+                body=json.dumps(
+                    {
+                        "anthropic_version": "bedrock-2023-05-31",
+                        "max_tokens": 1000,
+                        "messages": [
+                            {
+                                "role": "user",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": f"{safe_cv_text}\n\n The job description is {interview_topic}.{safe_system_prompt}. Keep your tone {interviewer_tone}.",  # noqa
+                                    }
+                                ],
+                            }
+                        ],
+                    }
+                ),
+            )
+            try:
+                response_body = response["body"].read()
+                response_text = response_body.decode("utf-8")
+                result = json.loads(response_text, strict=False)
+            except json.JSONDecodeError as e:
+                print(f"JSON parsing error: {str(e)}")
+                print(f"Error occurred at line {e.lineno}, column {e.colno}")
+                print(f"Error message: {e.msg}")
+                print(f"Snippet of the invalid JSON: {response_text[e.pos:e.pos+20]}")
+            logger.info("Model invocation successful")
+            try:
+
+                output_list = result.get("content", [])
+                output = output_list[0]
+                questions_binary = output["text"]
+                questions = json.loads(questions_binary, strict=False)
+                questions_data = []
+
+                for index, question in enumerate(questions["questions"]):
+                    question_text = question["text"]
+
+                    # Save question text to S3
+                    file_name = f"question{index + 1}.json"
+                    save_to_s3(
+                        user_id,
+                        interview_id,
+                        question_text,
+                        processed_questions_bucket_name,
+                        file_name,
+                    )
+
+                    # Convert text to speech
+                    audio_stream = text_to_speech(question_text, polly_client)
+
+                    # Save audio to S3
+                    audio_file_name = f"question{index + 1}.mp3"
+                    save_to_s3(
+                        user_id,
+                        interview_id,
+                        audio_stream,
+                        processed_questions_bucket_name,
+                        audio_file_name,
+                        is_audio=True,
+                    )
+
+                    questions_data.append(
+                        {"question_id": f"question{index + 1}", "text": question_text}
+                    )
+            except Exception as e:
+                logger.error(f"An error occurred: {str(e)}")
+                logger.error(f"Error occurred at line {e.__traceback__.tb_lineno}")
+
+            item = {
+                "interviewId": {"S": interview_id},
+                "userId": {"S": user_id},
+                "questions": {
+                    "L": [
+                        {
+                            "M": {
+                                "question_id": {"S": q["question_id"]},
+                                "text": {"S": q["text"]},
+                            }
+                        }
+                        for q in questions_data
+                    ]
+                },
+            }
+
+            response = dynamodb.put_item(
+                TableName="userQuestionAndAnswers-dev", Item=item
+            )
+
+            save_to_s3(
+                user_id,
+                interview_id,
+                audio_stream,
+                processed_questions_bucket_name,
+                file_name="questions.mp3",
+                is_audio=True,
+            )
+            logger.info("Audio stream saved to S3")
+
+            audio_key = f"{user_id}/questions.mp3"
+            presigned_url = generate_presigned_url(
+                processed_questions_bucket_name, audio_key
+            )
+            logger.info("Generated presigned URL: %s", presigned_url)
+            if not presigned_url:
+                logger.error("Error generating audio file URL")
+        except Exception as e:
+            logger.error(
+                "Error processing resume data for user ID: %s, error: %s",
+                user_id,
+                str(e),
+            )
     else:
-        return response(404, "No CV found for the given user ID")
+        logger.warning("No resume ID found for user ID: %s", user_id)
 
 
-def join_tokens(tokens):
-    text = ""
-    for token in tokens:
-        text += token
-    return text.strip()
+def get_num_questions(interview_duration):
+    if interview_duration == "short":
+        return 3
+    elif interview_duration == "medium":
+        return 5
+    elif interview_duration == "long":
+        return 7
+    else:
+        return 3
 
 
-def response(status_code, data):
-    return {
-        "statusCode": status_code,
-        "headers": {
-            "Access-Control-Allow-Headers": "*",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-            "Content-Type": "application/json",
-        },
-        "body": json.dumps(data),
-    }
+def get_system_prompt(interview_type, num_ques, interview_topic):
+    if interview_type == "behavioral":
+        prompt = get_behavioral_prompt(num_ques, interview_topic)
+        print(prompt)
+        return prompt
+    elif interview_type == "technical":
+        return get_technical_prompt(num_ques, interview_topic)
+    elif interview_type == "conversational":
+        return get_conversational_prompt(num_ques, interview_topic)
+    elif interview_type == "stress":
+        return get_stress_prompt(num_ques, interview_topic)
+    else:
+        return get_behavioral_prompt(num_ques, interview_topic)
 
 
-def save_to_s3(user_id, data, bucket_name, file_name="questions.json", is_audio=False):
+def save_to_s3(
+    user_id, interview_id, data, bucket_name, file_name="questions.json", is_audio=False
+):
     try:
-        key = f"{user_id}/{file_name}"
+        key = f"{user_id}/{interview_id}/{file_name}"
         if is_audio:
             s3_client.put_object(
-                Bucket=bucket_name, Key=key, Body=data, ContentType="audio/mpeg"
+                Bucket=bucket_name,
+                Key=key,
+                Body=data,
+                ContentType="audio/mpeg",
             )
         else:
             s3_client.put_object(Bucket=bucket_name, Key=key, Body=data)
@@ -145,3 +241,6 @@ def generate_presigned_url(bucket_name, object_name, expiration=3600):
         logger.error(f"Error generating presigned URL: {e}")
         return None
     return response
+
+
+# SAVE ALL 3 QUESTIONS TO S3 SEPERATELY

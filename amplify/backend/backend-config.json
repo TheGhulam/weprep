@@ -28,6 +28,28 @@
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
     },
+    "fetchSpeechAnalysis": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "fetchUserSpeechAnalysisHandler"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "fetchSpeechWebCrawlerDataHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "mockInterviewService": {
       "dependsOn": [
         {
@@ -65,6 +87,14 @@
           ],
           "category": "function",
           "resourceName": "userAudioUploadHandler"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userRawAudioUploadHandler"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -180,8 +210,29 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "fetchSpeechWebCrawlerDataHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "fetchUserSpeechAnalysisHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "questionGenerationHandler": {
       "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "mockInterviewSessionsTable"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
@@ -220,12 +271,32 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "userRawAudioUploadHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "userSpeechAnalysesHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "userTranscriptAnalysisGenerationHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userVideoProcessingHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "userVideoService": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "webCrawlerHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -284,6 +355,38 @@
         {
           "category": "function",
           "resourceName": "cvServiceProcessingHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_fetchSpeechWebCrawlerDataHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fetchSpeechWebCrawlerDataHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_fetchSpeechWebCrawlerDataHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fetchSpeechWebCrawlerDataHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_fetchUserSpeechAnalysisHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fetchUserSpeechAnalysisHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_fetchUserSpeechAnalysisHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fetchUserSpeechAnalysisHandler"
         }
       ]
     },
@@ -415,6 +518,22 @@
         }
       ]
     },
+    "AMPLIFY_function_userRawAudioUploadHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userRawAudioUploadHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userRawAudioUploadHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userRawAudioUploadHandler"
+        }
+      ]
+    },
     "AMPLIFY_function_userSpeechAnalysesHandler_deploymentBucketName": {
       "usedBy": [
         {
@@ -431,6 +550,38 @@
         }
       ]
     },
+    "AMPLIFY_function_userTranscriptAnalysisGenerationHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userTranscriptAnalysisGenerationHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userTranscriptAnalysisGenerationHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userTranscriptAnalysisGenerationHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userVideoProcessingHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userVideoProcessingHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_userVideoProcessingHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userVideoProcessingHandler"
+        }
+      ]
+    },
     "AMPLIFY_function_userVideoService_deploymentBucketName": {
       "usedBy": [
         {
@@ -444,6 +595,22 @@
         {
           "category": "function",
           "resourceName": "userVideoService"
+        }
+      ]
+    },
+    "AMPLIFY_function_webCrawlerHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "webCrawlerHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_webCrawlerHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "webCrawlerHandler"
         }
       ]
     },
@@ -473,6 +640,10 @@
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     },
+    "userAudioDataTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
     "userCV": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
@@ -482,7 +653,15 @@
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     },
+    "userQuestionAndAnswers": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
     "userTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "weprepWebCrawlerTable": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     }

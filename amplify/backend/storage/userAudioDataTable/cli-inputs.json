@@ -1,0 +1,10 @@
+{
+  "resourceName": "userAudioDataTable",
+  "tableName": "userAudioDataTable",
+  "partitionKey": {
+    "fieldName": "videoId",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

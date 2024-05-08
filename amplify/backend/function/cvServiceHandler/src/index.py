@@ -1,3 +1,4 @@
+import base64
 import json
 import logging
 import uuid
@@ -36,15 +37,17 @@ def handler(event, context):
 def handle_post_upload_cv_request(event):
     try:
         user_id = event["pathParameters"]["user-id"]
-
         file_content = event["body"]
-        # file_content = base64.b64decode(file_content)
-
+        file_content = base64.b64decode(file_content)
         cv_id = str(uuid.uuid4())
+        file_name = f"{user_id}/{cv_id}.pdf"
 
-        file_name = f"{user_id}/{cv_id}"
-
-        s3_client.put_object(Bucket=BUCKET_NAME, Key=file_name, Body=file_content)
+        s3_client.put_object(
+            Bucket=BUCKET_NAME,
+            Key=file_name,
+            Body=file_content,
+            ContentType="application/pdf",
+        )
 
         return {
             "statusCode": 200,
@@ -112,7 +115,7 @@ def handle_get_request(event):
             item = response["Items"][0]
 
             if item:
-                cv_key = f"{user_id}/{cv_id}"
+                cv_key = f"{user_id}/{cv_id}.pdf"
                 cv_url = get_cv_url_from_s3(cv_key)
                 cv_details = {
                     "userId": item.get("userId").get("S"),

@@ -6,6 +6,7 @@ import boto3
 
 dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table("mockInterviewSessionsTable-dev")
+lambda_client = boto3.client("lambda")
 
 
 def handler(event, context):
@@ -35,20 +36,28 @@ def handler(event, context):
 def handle_post_request_for_updating_db(event):
     try:
         user_id = event["pathParameters"]["user-id"]
-
         interview_id = str(uuid.uuid4())
-
         request_body = json.loads(event["body"])
 
         current_time_utc = datetime.now(timezone.utc)
         timestamp_str = current_time_utc.isoformat()
 
+        # Update the request body with additional data
         request_body["userId"] = user_id
         request_body["interviewId"] = interview_id
         request_body["createdAt"] = timestamp_str
 
+        # Assuming 'table' is initialized DynamoDB Table resource
         table.put_item(Item=request_body)
 
+        # Invoke the other Lambda function asynchronously
+        lambda_client.invoke(
+            FunctionName="questionGenerationHandler-dev",
+            InvocationType="Event",  # Asynchronous invocation
+            Payload=json.dumps(request_body),  # Pass the updated request body
+        )
+
+        # Return the interviewId immediately to the caller
         return {
             "statusCode": 200,
             "body": json.dumps(
@@ -59,7 +68,10 @@ def handle_post_request_for_updating_db(event):
         }
     except Exception as e:
         print(e)
-        return {"statusCode": 500, "body": json.dumps("Error processing request")}
+        return {
+            "statusCode": 500,
+            "body": json.dumps("Error processing request"),
+        }
 
 
 def handle_get_request_for_all_interviews(event):

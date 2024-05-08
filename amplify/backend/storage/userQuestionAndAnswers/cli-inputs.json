@@ -1,0 +1,10 @@
+{
+  "resourceName": "userQuestionAndAnswers",
+  "tableName": "userQuestionAndAnswers",
+  "partitionKey": {
+    "fieldName": "interviewId",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

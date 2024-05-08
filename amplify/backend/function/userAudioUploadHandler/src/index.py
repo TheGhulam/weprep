@@ -1,56 +1,133 @@
 import base64
+import io
 import json
-import time
+import os
 import uuid
 
 import boto3
+from pydub import AudioSegment
 
-transcribe_client = boto3.client("transcribe")
-s3_client = boto3.client("s3")
-bucket_name = "user-processed-data"
+lambda_client = boto3.client("lambda")
+
+
+os.environ["PATH"] += os.pathsep + "/opt/bin"
+
+s3 = boto3.client("s3")
+transcribe = boto3.client("transcribe")
 
 
 def handler(event, context):
-    user_id = event["pathParameters"]["user_id"]
-    audio_data = event["body"]
-    audio_data = base64.b64decode(audio_data)
+    print("received event:")
+    print(event)
 
-    audio_key = f"{user_id}/user_answers_audio.mp4"
-    s3_client.put_object(Bucket=bucket_name, Key=audio_key, Body=audio_data)
+    # Get the user-id from the request path parameters
+    user_id = event["pathParameters"]["user-id"]
+    interview_id = event["pathParameters"]["interview-id"]
 
-    job_name = f"transcribe_{uuid.uuid4()}"
-    transcribe_client.start_transcription_job(
-        TranscriptionJobName=job_name,
-        Media={"MediaFileUri": f"s3://{bucket_name}/{audio_key}"},
-        MediaFormat="mp4",
-        LanguageCode="en-US",
-        OutputBucketName=bucket_name,
-        OutputKey=f"{user_id}/user_answers_audio.json",
-    )
+    # Parse the JSON request body
+    json_body = base64.b64decode(event["body"])
+    json_body = json.loads(json_body)
 
-    transcription_result = poll_transcription_job_status(transcribe_client, job_name)
-    if (
-        transcription_result["TranscriptionJob"]["TranscriptionJobStatus"]
-        == "COMPLETED"
-    ):
-        print("Transcription completed successfully.")
-    elif transcription_result["TranscriptionJob"]["TranscriptionJobStatus"] == "FAILED":
-        print("Transcription job failed.")
-        return {"statusCode": 200, "body": json.dumps("User audio processing failed")}
+    print(json_body)
 
-    print(transcription_result)
+    # Get the video-id and dialogues from the request body
+    dialogues = json_body["dialogues"]
+    video_id = json_body["video-id"]
+    resume_id = json_body["resume-id"]
 
-    return {"statusCode": 200, "body": json.dumps("User audio processing successful")}
+    # Construct the S3 object key for the raw audio file
+    raw_audio_key = f"{user_id}/{interview_id}/raw/{video_id}.mp3"
 
+    # Download the raw audio file from S3
+    try:
+        response = s3.get_object(Bucket="weprep-user-audios", Key=raw_audio_key)
+        audio_data = response["Body"].read()
+    except Exception as e:
+        print(f"Error downloading audio file from S3: {str(e)}")
+        return {
+            "statusCode": 500,
+            "headers": {
+                "Access-Control-Allow-Headers": "*",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+            },
+            "body": json.dumps({"error": "Failed to download audio file"}),
+        }
 
-def poll_transcription_job_status(transcribe_client, job_name):
-    while True:
-        response = transcribe_client.get_transcription_job(
-            TranscriptionJobName=job_name
+    # Load the audio file using pydub
+    audio = AudioSegment.from_file(io.BytesIO(audio_data), format="mp3")
+
+    # Process each dialogue segment
+    for dialogue in dialogues:
+        title = dialogue["title"]
+        start_time = dialogue["startTime"] * 1000
+        end_time = dialogue["endTime"] * 1000
+
+        # Extract the audio segment
+        segment = audio[start_time:end_time]
+
+        # Save the audio segment to S3
+        segment_key = f"{user_id}/{interview_id}/processed/{video_id}_{title}.mp3"
+        segment_data = segment.export(format="mp3").read()
+        try:
+            s3.put_object(
+                Body=segment_data,
+                Bucket="weprep-user-audios",
+                Key=segment_key,
+                ContentType="audio/mpeg",
+            )
+            print(f"Audio segment saved to S3: {segment_key}")
+        except Exception as e:
+            print(f"Error saving audio segment to S3: {str(e)}")
+            return {
+                "statusCode": 500,
+                "headers": {
+                    "Access-Control-Allow-Headers": "*",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                },
+                "body": json.dumps({"error": "Failed to save audio segment"}),
+            }
+
+        # Run the transcription job
+        try:
+            job_name = f"{user_id}_{video_id}_{title}_{str(uuid.uuid4())}"
+            transcribe.start_transcription_job(
+                TranscriptionJobName=job_name,
+                Media={"MediaFileUri": f"s3://weprep-user-audios/{segment_key}"},
+                MediaFormat="mp3",
+                LanguageCode="en-US",
+                OutputBucketName="weprep-user-audios",
+                OutputKey=f"{user_id}/{interview_id}/transcripts/{video_id}_{title}.json",
+            )
+            print(f"Transcription job started: {job_name}")
+        except Exception as e:
+            print(f"Error starting transcription job: {str(e)}")
+            return {
+                "statusCode": 500,
+                "headers": {
+                    "Access-Control-Allow-Headers": "*",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                },
+                "body": json.dumps({"error": "Failed to start transcription job"}),
+            }
+        request_body = {}
+        request_body["user_id"] = user_id
+        request_body["video_id"] = video_id
+        request_body["interview_id"] = interview_id
+        request_body["resume_id"] = resume_id
+        lambda_client.invoke(
+            FunctionName="userTranscriptAnalysisGenerationHandler-dev",
+            InvocationType="Event",  # Asynchronous invocation
+            Payload=json.dumps(request_body),  # Pass the updated request body
         )
-        status = response["TranscriptionJob"]["TranscriptionJobStatus"]
-        if status in ["COMPLETED", "FAILED"]:
-            return response
-        else:
-            print(f"Waiting for transcription to complete. Current status: {status}")
-            time.sleep(10)
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
+        "body": json.dumps({"message": "Audio processing and transcription started"}),
+    }
