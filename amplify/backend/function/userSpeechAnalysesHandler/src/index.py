@@ -368,7 +368,7 @@ def handler(event, context):
         "pronunciation_words": pronunciation_words,
         "filler_word_count": filler_word_count,
         "language_positivty": langugage_positivity,
-
+        "most_used_words": most_used_words,
     }
 
     table_name = "userAudioDataTable-dev"
