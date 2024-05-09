@@ -1,8 +1,8 @@
 import datetime
 import json
 import re
-from collections import Counter
 import time
+from collections import Counter
 
 import boto3
 
