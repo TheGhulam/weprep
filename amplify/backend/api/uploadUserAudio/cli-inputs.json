@@ -17,7 +17,7 @@
     },
     "/raw-audio/metadata/{user-id}/upload/{interview-id}": {
       "name": "/raw-audio/metadata/{user-id}/upload/{interview-id}",
-      "lambdaFunction": "userAudioUploadHandler",
+      "lambdaFunction": "audioMetadataUploadHandler",
       "permissions": {
         "setting": "open"
       }

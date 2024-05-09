@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.8.2\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.11.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "cvServiceHandler",
+            "audioMetadataUploadHandler",
             {
               "Fn::Join": [
                 "",
                 [
-                  "cvServiceHandler",
+                  "audioMetadataUploadHandler",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "weprepLambdaRole52d6f6c1",
+            "weprepLambdaRole0820cb0a",
             {
               "Fn::Join": [
                 "",
                 [
-                  "weprepLambdaRole52d6f6c1",
+                  "weprepLambdaRole0820cb0a",
                   "-",
                   {
                     "Ref": "env"

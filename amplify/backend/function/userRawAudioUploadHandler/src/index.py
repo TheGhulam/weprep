@@ -17,10 +17,38 @@ def handler(event, context):
 
     user_id = event["pathParameters"]["user-id"]
     interview_id = event["pathParameters"]["interview-id"]
+
     resume_id = event.get("queryStringParameters", {}).get("resume-id", "")
     audio_data = event["body"]
     audio_data = base64.b64decode(audio_data)
     video_id = str(uuid.uuid4())
+
+    table_name = "userAudioDataTable-dev"
+    table = dynamodb.Table(table_name)
+
+    try:
+        table.put_item(
+            Item={
+                "userId": user_id,
+                "videoId": video_id,
+                "interviewId": interview_id,
+                "resumeId": resume_id,
+                "mostUsedWords": [],
+                "speechSpeed": None,
+                "hedgingWordCount": None,
+                "pronunciationWords": [],
+                "fillerWordCount": None,
+                "langugagePositivity": None,
+                "feedbackAnalysis": [],
+                "SummaryAnalysis": None,
+                "webCrawlerResults": [],
+                "status": "Analyzing",
+            }
+        )
+        print("Initial item inserted successfully.")
+    except Exception as e:
+        print(f"Error inserting initial item: {e}")
+
     s3_key = f"{user_id}/{interview_id}/raw/{video_id}.mp3"
 
     try:
@@ -44,71 +72,27 @@ def handler(event, context):
         }
 
     # Start the transcription job
-    try:
-        transcription_job_name = (
-            f"{user_id}_{interview_id}_{video_id}_raw_audio_transcription"
-        )
-        transcribe_client.start_transcription_job(
-            TranscriptionJobName=transcription_job_name,
-            Media={"MediaFileUri": f"s3://weprep-user-audios/{s3_key}"},
-            MediaFormat="mp3",
-            LanguageCode="en-US",
-            OutputBucketName="weprep-user-audios",
-            OutputKey=f"{user_id}/{interview_id}/transcripts/{video_id}_raw_audio_transcript.json",
-        )
-    except Exception as e:
-        print(f"Error starting transcription job: {str(e)}")
-        return {
-            "statusCode": 500,
-            "headers": {
-                "Access-Control-Allow-Headers": "*",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-            },
-            "body": json.dumps({"error": "Failed to start transcription job"}),
-        }
+    
 
-    while True:
-        status = transcribe_client.get_transcription_job(
-            TranscriptionJobName=transcription_job_name
-        )["TranscriptionJob"]["TranscriptionJobStatus"]
-        if status in ["COMPLETED", "FAILED"]:
-            break
-        time.sleep(2)
+    request_body = {}
+    request_body["user_id"] = user_id
+    request_body["video_id"] = video_id
+    request_body["interview_id"] = interview_id
+    request_body["resume_id"] = resume_id
 
-    if status == "COMPLETED":
-        request_body = {}
-        request_body["user_id"] = user_id
-        request_body["video_id"] = video_id
-        request_body["interview_id"] = interview_id
-        request_body["resume_id"] = resume_id
+    lambda_client.invoke(
+        FunctionName="userSpeechAnalysesHandler-dev",
+        InvocationType="Event",  # Asynchronous invocation
+        Payload=json.dumps(request_body),  # Pass the updated request body
+    )
 
-        lambda_client.invoke(
-            FunctionName="userSpeechAnalysesHandler-dev",
-            InvocationType="Event",  # Asynchronous invocation
-            Payload=json.dumps(request_body),  # Pass the updated request body
-        )
-
-        return {
-            "statusCode": 200,
-            "headers": {
-                "Access-Control-Allow-Headers": "*",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-            },
-            "body": json.dumps(
-                {"message": "Audio File Upload successful", "videoId": video_id}
-            ),
-        }
-
-    else:
-        print("Transcription job failed.")
-        return {
-            "statusCode": 500,
-            "headers": {
-                "Access-Control-Allow-Headers": "*",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-            },
-            "body": json.dumps({"error": "Transcription job failed"}),
-        }
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
+        "body": json.dumps(
+            {"message": "Audio File Upload successful", "videoId": video_id}
+        )}

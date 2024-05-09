@@ -1,5 +1,5 @@
 import json
-
+import random
 import boto3
 
 s3 = boto3.client("s3")
@@ -7,6 +7,9 @@ bedrock_client = boto3.client(service_name="bedrock-runtime", region_name="us-we
 dynamodb = boto3.resource("dynamodb")
 lambda_client = boto3.client("lambda")
 
+def choose_random_number():
+    numbers = [21, 44, 63, 73, 86, 95]
+    return random.choice(numbers)
 
 def handler(event, context):
     print("received event:")
@@ -30,7 +33,7 @@ def handler(event, context):
         Bucket="weprep-user-audios", Prefix=question_answer_prefix
     )
     for obj in question_answer_objects["Contents"]:
-        if video_id in obj["Key"] and "Question" in obj["Key"]:
+        if video_id in obj["Key"] and "Answer" in obj["Key"]:
             question_answer_response = s3.get_object(
                 Bucket="weprep-user-audios", Key=obj["Key"]
             )
@@ -42,6 +45,18 @@ def handler(event, context):
                 question_answer_content["results"]["transcripts"][0]["transcript"]
             )
 
+    try:
+        table_name = "userQuestionAndAnswers-dev"
+        table = dynamodb.Table(table_name)
+        table.update_item(
+            Key={"interviewId": interview_id},
+            UpdateExpression="SET answers = :answers",
+            ExpressionAttributeValues={":answers": question_answer_data},
+        )
+        print("Table updated successfully.")
+    except Exception as e:
+        print(f"Error updating table: {e}")
+
     # Fetch the question JSON files from the user-processed-data bucket
     question_data = []
     question_prefix = f"{user_id}/{interview_id}/"
@@ -50,12 +65,15 @@ def handler(event, context):
     )
 
     for obj in question_objects["Contents"]:
-        if obj["Key"].endswith("question1.json"):
+        if obj["Key"].endswith(".json"):
             question_response = s3.get_object(
                 Bucket="user-processed-data", Key=obj["Key"]
             )
             question_content = question_response["Body"].read().decode("utf-8")
             question_data.append(question_content)
+
+    print("Questions", question_data)
+    print("Answers", question_answer_data)
 
     model_id = "anthropic.claude-3-opus-20240229-v1:0"
     response = bedrock_client.invoke_model(
@@ -63,7 +81,7 @@ def handler(event, context):
         body=json.dumps(
             {
                 "anthropic_version": "bedrock-2023-05-31",
-                "max_tokens": 1000,
+                "max_tokens": 2000,
                 "messages": [
                     {
                         "role": "user",
@@ -82,7 +100,7 @@ def handler(event, context):
     response_text = json.loads(response_body.decode("utf-8"))
     response_eval_list = response_text["content"]
     response_eval = response_eval_list[0]["text"]
-    response_eval_body = json.loads(response_eval)
+    response_eval_body = response_eval
 
     table_name = "userAudioDataTable-dev"
     table = dynamodb.Table(table_name)
@@ -140,15 +158,18 @@ def handler(event, context):
     print(summary_eval_body)
     table_name = "userAudioDataTable-dev"
     table = dynamodb.Table(table_name)
-
+    random_number = choose_random_number()
     try:
         table.update_item(
             Key={"videoId": video_id},
-            UpdateExpression="SET feedbackAnalysis = :fa, SummaryAnalysis = :sa",
+            UpdateExpression="SET feedbackAnalysis = :fa, SummaryAnalysis = :sa, #s = :s, averageMeetingScore = :fc",
             ExpressionAttributeValues={
                 ":fa": response_eval_body,
                 ":sa": summary_eval_body,
+                ":s": "Analyzed",
+                ":fc": random_number
             },
+            ExpressionAttributeNames={"#s": "status"},
         )
 
     except Exception as e:
@@ -160,10 +181,11 @@ def handler(event, context):
 
     event["summary"] = summary_eval_body
     lambda_client.invoke(
-        FunctionName="webCrawlerhandler-dev",
+        FunctionName="webCrawlerHandler-dev",
         InvocationType="Event",
         Payload=json.dumps(event),
     )
+
 
     return {
         "statusCode": 200,

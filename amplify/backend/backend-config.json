@@ -95,6 +95,14 @@
           ],
           "category": "function",
           "resourceName": "userRawAudioUploadHandler"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "audioMetadataUploadHandler"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -195,6 +203,11 @@
   },
   "function": {
     "audioAnalysisProcessingHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "audioMetadataUploadHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -323,6 +336,22 @@
         {
           "category": "function",
           "resourceName": "audioAnalysisProcessingHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_audioMetadataUploadHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "audioMetadataUploadHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_audioMetadataUploadHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "audioMetadataUploadHandler"
         }
       ]
     },

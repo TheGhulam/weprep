@@ -21,14 +21,9 @@ def handler(event, context):
     print(event)
 
     # Get the user-id from the request path parameters
-    user_id = event["pathParameters"]["user-id"]
-    interview_id = event["pathParameters"]["interview-id"]
-
-    # Parse the JSON request body
-    json_body = base64.b64decode(event["body"])
-    json_body = json.loads(json_body)
-
-    print(json_body)
+    user_id = event["user_id"]
+    interview_id = event["interview_id"]
+    json_body = event["json_body"]
 
     # Get the video-id and dialogues from the request body
     dialogues = json_body["dialogues"]
@@ -112,16 +107,17 @@ def handler(event, context):
                 },
                 "body": json.dumps({"error": "Failed to start transcription job"}),
             }
-        request_body = {}
-        request_body["user_id"] = user_id
-        request_body["video_id"] = video_id
-        request_body["interview_id"] = interview_id
-        request_body["resume_id"] = resume_id
-        lambda_client.invoke(
-            FunctionName="userTranscriptAnalysisGenerationHandler-dev",
-            InvocationType="Event",  # Asynchronous invocation
-            Payload=json.dumps(request_body),  # Pass the updated request body
-        )
+    request_body = {}
+    request_body["user_id"] = user_id
+    request_body["video_id"] = video_id
+    request_body["interview_id"] = interview_id
+    request_body["resume_id"] = resume_id
+    lambda_client.invoke(
+        FunctionName="userTranscriptAnalysisGenerationHandler-dev",
+        InvocationType="Event",  # Asynchronous invocation
+        Payload=json.dumps(request_body),  # Pass the updated request body
+    )
+
     return {
         "statusCode": 200,
         "headers": {
@@ -129,5 +125,7 @@ def handler(event, context):
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
         },
-        "body": json.dumps({"message": "Audio processing and transcription started"}),
+        "body": json.dumps(
+            {"message": "Audio processing and transcription started"}
+        ),
     }

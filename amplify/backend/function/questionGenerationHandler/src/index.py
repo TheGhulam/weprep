@@ -59,7 +59,7 @@ def handler(event, context):
                 body=json.dumps(
                     {
                         "anthropic_version": "bedrock-2023-05-31",
-                        "max_tokens": 1000,
+                        "max_tokens": 1500,
                         "messages": [
                             {
                                 "role": "user",
@@ -77,6 +77,7 @@ def handler(event, context):
             try:
                 response_body = response["body"].read()
                 response_text = response_body.decode("utf-8")
+                print(response_text)
                 result = json.loads(response_text, strict=False)
             except json.JSONDecodeError as e:
                 print(f"JSON parsing error: {str(e)}")
@@ -89,6 +90,7 @@ def handler(event, context):
                 output_list = result.get("content", [])
                 output = output_list[0]
                 questions_binary = output["text"]
+                print(questions_binary)
                 questions = json.loads(questions_binary, strict=False)
                 questions_data = []
 
@@ -146,23 +148,23 @@ def handler(event, context):
                 TableName="userQuestionAndAnswers-dev", Item=item
             )
 
-            save_to_s3(
-                user_id,
-                interview_id,
-                audio_stream,
-                processed_questions_bucket_name,
-                file_name="questions.mp3",
-                is_audio=True,
-            )
-            logger.info("Audio stream saved to S3")
+            # save_to_s3(
+            #     user_id,
+            #     interview_id,
+            #     audio_stream,
+            #     processed_questions_bucket_name,
+            #     file_name="questions.mp3",
+            #     is_audio=True,
+            # )
+            # logger.info("Audio stream saved to S3")
 
-            audio_key = f"{user_id}/questions.mp3"
-            presigned_url = generate_presigned_url(
-                processed_questions_bucket_name, audio_key
-            )
-            logger.info("Generated presigned URL: %s", presigned_url)
-            if not presigned_url:
-                logger.error("Error generating audio file URL")
+            # audio_key = f"{user_id}/questions.mp3"
+            # presigned_url = generate_presigned_url(
+            #     processed_questions_bucket_name, audio_key
+            # )
+            # logger.info("Generated presigned URL: %s", presigned_url)
+            # if not presigned_url:
+            #     logger.error("Error generating audio file URL")
         except Exception as e:
             logger.error(
                 "Error processing resume data for user ID: %s, error: %s",
@@ -186,11 +188,10 @@ def get_num_questions(interview_duration):
 
 def get_system_prompt(interview_type, num_ques, interview_topic):
     if interview_type == "behavioral":
-        prompt = get_behavioral_prompt(num_ques, interview_topic)
-        print(prompt)
+        prompt = get_behavioral_prompt(num_ques)
         return prompt
     elif interview_type == "technical":
-        return get_technical_prompt(num_ques, interview_topic)
+        return get_technical_prompt(num_ques)
     elif interview_type == "conversational":
         return get_conversational_prompt(num_ques, interview_topic)
     elif interview_type == "stress":

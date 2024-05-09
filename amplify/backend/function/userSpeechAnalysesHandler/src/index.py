@@ -2,6 +2,7 @@ import datetime
 import json
 import re
 from collections import Counter
+import time
 
 import boto3
 
@@ -65,9 +66,13 @@ def get_most_used_words(transcript_data, n=10):
     ]
 
     # Remove punctuation and convert to lowercase
-    clean_words = [re.sub(r"[^a-zA-Z]", "", word) for word in pronunciation_words]
+    clean_words = [
+        re.sub(r"[^a-zA-Z]", "", word) for word in pronunciation_words
+    ]
 
-    filtered_words = [word for word in clean_words if word.lower() not in exclude_words]
+    filtered_words = [
+        word for word in clean_words if word.lower() not in exclude_words
+    ]
 
     # Count word frequencies
     word_counts = Counter(filtered_words)
@@ -88,7 +93,9 @@ def calculate_speech_speed(transcript_data: dict) -> int:
     Returns:
         float: The speech speed in words per minute.
     """
-    first_word_start_time = transcript_data["results"]["items"][0]["start_time"]
+    first_word_start_time = transcript_data["results"]["items"][0][
+        "start_time"
+    ]
     last_pronunciation_item = None
     word_count = 0
     for item in transcript_data["results"]["items"]:
@@ -150,7 +157,8 @@ def count_hedging_words(transcript_data: dict) -> int:
     )
 
     hedging_word_count = sum(
-        re.search(rf"\b{word}\b", transcript_text) is not None for word in hedging_words
+        re.search(rf"\b{word}\b", transcript_text) is not None
+        for word in hedging_words
     )
 
     return hedging_word_count
@@ -186,7 +194,9 @@ def count_filler_words(transcript_data):
         if item["type"] == "pronunciation"
     ]
 
-    filler_word_count = sum(word in filler_words for word in pronunciation_words)
+    filler_word_count = sum(
+        word in filler_words for word in pronunciation_words
+    )
 
     return pronunciation_words, filler_word_count
 
@@ -257,14 +267,48 @@ def handler(event, context):
     video_id = event["video_id"]
     resume_id = event["resume_id"]
 
-    transcript_key = (
-        f"{user_id}/{interview_id}/transcripts/{video_id}_raw_audio_transcript.json"
-    )
+    s3_key = f"{user_id}/{interview_id}/raw/{video_id}.mp3"
+
+    try:
+        transcription_job_name = (
+            f"{user_id}_{interview_id}_{video_id}_raw_audio_transcription"
+        )
+        transcribe_client.start_transcription_job(
+            TranscriptionJobName=transcription_job_name,
+            Media={"MediaFileUri": f"s3://weprep-user-audios/{s3_key}"},
+            MediaFormat="mp3",
+            LanguageCode="en-US",
+            OutputBucketName="weprep-user-audios",
+            OutputKey=f"{user_id}/{interview_id}/transcripts/{video_id}_raw_audio_transcript.json",
+        )
+    except Exception as e:
+        print(f"Error starting transcription job: {str(e)}")
+        return {
+            "statusCode": 500,
+            "headers": {
+                "Access-Control-Allow-Headers": "*",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+            },
+            "body": json.dumps({"error": "Failed to start transcription job"}),
+        }
+
+    while True:
+        status = transcribe_client.get_transcription_job(
+            TranscriptionJobName=transcription_job_name
+        )["TranscriptionJob"]["TranscriptionJobStatus"]
+        if status in ["COMPLETED", "FAILED"]:
+            break
+        time.sleep(1)
+
+    transcript_key = f"{user_id}/{interview_id}/transcripts/{video_id}_raw_audio_transcript.json"
     try:
         transcript_response = s3_client.get_object(
             Bucket="weprep-user-audios", Key=transcript_key
         )
-        transcript_data = json.loads(transcript_response["Body"].read().decode("utf-8"))
+        transcript_data = json.loads(
+            transcript_response["Body"].read().decode("utf-8")
+        )
     except Exception as e:
         print(f"Error fetching transcript data from S3: {str(e)}")
         return {
@@ -282,7 +326,9 @@ def handler(event, context):
     speech_speed = calculate_speech_speed(transcript_data)
     hedging_word_count = count_hedging_words(transcript_data)
     # pronunciation_words, filler_word_count = 1,1
-    pronunciation_words, filler_word_count = count_filler_words(transcript_data)
+    pronunciation_words, filler_word_count = count_filler_words(
+        transcript_data
+    )
     langugage_positivity = calculate_language_positivity(transcript_data)
 
     response_data = {
@@ -298,27 +344,21 @@ def handler(event, context):
     table = dynamodb.Table(table_name)
 
     try:
-        table.put_item(
-            Item={
-                "userId": user_id,
-                "videoId": video_id,
-                "interviewId": interview_id,
-                "resumeId": resume_id,
-                "mostUsedWords": response_data["most_used_words"],
-                "speechSpeed": response_data["speech_speed"],
-                "hedgingWordCount": response_data["hedging_word_count"],
-                "pronunciationWords": response_data["pronunciation_words"],
-                "fillerWordCount": response_data["filler_word_count"],
-                "langugagePositivity": response_data["language_positivty"],
-            }
+        table.update_item(
+            Key={"videoId": video_id},
+            UpdateExpression="SET mostUsedWords = :muw, speechSpeed = :ss, hedgingWordCount = :hwc, pronunciationWords = :pw, fillerWordCount = :fwc, langugagePositivity = :lp, #s = :s",
+            ExpressionAttributeValues={
+                ":muw": str(response_data["most_used_words"]),
+                ":ss": str(response_data["speech_speed"]),
+                ":hwc": str(response_data["hedging_word_count"]),
+                ":pw": str(response_data["pronunciation_words"]),
+                ":fwc": str(response_data["filler_word_count"]),
+                ":lp": str(response_data["language_positivty"]),
+                ":s": "Analyzing"
+            },
+            ExpressionAttributeNames={"#s": "status"},
         )
-
-        request_body = {
-            "user_id": user_id,
-            "interview_id": interview_id,
-            "video_id": video_id,
-            "resume_id": resume_id,
-        }
+        print("Item updated successfully.")
     except Exception as e:
         print(f"Error saving response data to DynamoDB: {str(e)}")
         return {

@@ -28,13 +28,13 @@
         },
         "questionGenerationHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/questionGenerationHandler-706572446669422b4e72-build.zip"
+          "s3Key": "amplify-builds/questionGenerationHandler-48483537743439746844-build.zip"
         },
         "uploadAudioFileHandler": {},
         "uploadUserAudioHandler": {},
         "userAudioUploadHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userAudioUploadHandler-4b506935394d48344f7a-build.zip"
+          "s3Key": "amplify-builds/userAudioUploadHandler-49435757672f44625330-build.zip"
         },
         "userAudioAnalysisHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
@@ -42,7 +42,7 @@
         },
         "audioAnalysisProcessingHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/audioAnalysisProcessingHandler-687979662b726c6c7873-build.zip"
+          "s3Key": "amplify-builds/audioAnalysisProcessingHandler-4b6e796968594f454468-build.zip"
         },
         "userDataUpdateHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
@@ -66,7 +66,7 @@
         },
         "userSpeechAnalysesHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userSpeechAnalysesHandler-5a424c2f6635534e4f4a-build.zip"
+          "s3Key": "amplify-builds/userSpeechAnalysesHandler-765639792f6974303831-build.zip"
         },
         "userVideoProcessingHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
@@ -74,23 +74,27 @@
         },
         "userRawAudioUploadHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userRawAudioUploadHandler-30756e5264324f725743-build.zip"
+          "s3Key": "amplify-builds/userRawAudioUploadHandler-2b6a626e6f6b4a397a30-build.zip"
         },
         "userTranscriptAnalysisGenerationHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/userTranscriptAnalysisGenerationHandler-666e58652b4d554e6548-build.zip"
+          "s3Key": "amplify-builds/userTranscriptAnalysisGenerationHandler-6153486e58567a62732b-build.zip"
         },
         "fetchUserSpeechAnalysisHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/fetchUserSpeechAnalysisHandler-624a4341685a6f795645-build.zip"
+          "s3Key": "amplify-builds/fetchUserSpeechAnalysisHandler-4d4d692f6d6d36734b39-build.zip"
         },
         "webCrawlerHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/webCrawlerHandler-6c4d5142326847306f68-build.zip"
+          "s3Key": "amplify-builds/webCrawlerHandler-6865516c7a4e6a516779-build.zip"
         },
         "fetchSpeechWebCrawlerDataHandler": {
           "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
-          "s3Key": "amplify-builds/fetchSpeechWebCrawlerDataHandler-7676415557616e513444-build.zip"
+          "s3Key": "amplify-builds/fetchSpeechWebCrawlerDataHandler-5357586f355438457453-build.zip"
+        },
+        "audioMetadataUploadHandler": {
+          "deploymentBucketName": "amplify-weprep-dev-173140-deployment",
+          "s3Key": "amplify-builds/audioMetadataUploadHandler-6a556d74313165663971-build.zip"
         }
       },
       "api": {
