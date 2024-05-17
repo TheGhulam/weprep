@@ -71,8 +71,8 @@ def handle_post_upload_cv_data_request(event):
         path_parameters = event.get("pathParameters", {})
         user_id = path_parameters.get("user-id")
         cv_id = path_parameters.get("cv-id")
-
-        body = json.loads(event.get("body"))
+        body = base64.b64decode(event.get("body"))
+        body = json.loads(body)
         cv_name = body["cvName"]
 
         dynamodb.put_item(

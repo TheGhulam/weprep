@@ -1,5 +1,19 @@
 {
   "api": {
+    "api2f3f3761": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userSimpleVideoUploadHandlr"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "cvService": {
       "dependsOn": [
         {
@@ -45,6 +59,20 @@
           ],
           "category": "function",
           "resourceName": "fetchSpeechWebCrawlerDataHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "fetchUserAudioVideoAnalysis": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "fetchUserVideoAudioAnalysisHandler"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -174,7 +202,7 @@
     }
   },
   "auth": {
-    "weprep38b852eb": {
+    "weprepc9d176cb": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -187,7 +215,10 @@
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [
-          "EMAIL"
+          "EMAIL",
+          "FAMILY_NAME",
+          "NAME",
+          "PHONE_NUMBER"
         ],
         "socialProviders": [],
         "usernameAttributes": [
@@ -233,6 +264,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "fetchUserVideoAudioAnalysisHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "questionGenerationHandler": {
       "build": true,
       "dependsOn": [
@@ -246,6 +282,16 @@
           "resourceName": "mockInterviewSessionsTable"
         }
       ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "s3TriggerThumbnailGenerationHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "thumbnailGenerationHandler": {
+      "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
@@ -289,6 +335,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "userSimpleVideoUploadHandlr": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "userSpeechAnalysesHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -310,6 +361,11 @@
       "service": "Lambda"
     },
     "webCrawlerHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "websocketHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -419,6 +475,22 @@
         }
       ]
     },
+    "AMPLIFY_function_fetchUserVideoAudioAnalysisHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fetchUserVideoAudioAnalysisHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_fetchUserVideoAudioAnalysisHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fetchUserVideoAudioAnalysisHandler"
+        }
+      ]
+    },
     "AMPLIFY_function_questionGenerationHandler_deploymentBucketName": {
       "usedBy": [
         {
@@ -432,6 +504,38 @@
         {
           "category": "function",
           "resourceName": "questionGenerationHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_s3TriggerThumbnailGenerationHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "s3TriggerThumbnailGenerationHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_s3TriggerThumbnailGenerationHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "s3TriggerThumbnailGenerationHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_thumbnailGenerationHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "thumbnailGenerationHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_thumbnailGenerationHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "thumbnailGenerationHandler"
         }
       ]
     },
@@ -563,6 +667,22 @@
         }
       ]
     },
+    "AMPLIFY_function_userSimpleVideoUploadHandlr_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userSimpleVideoUploadHandlr"
+        }
+      ]
+    },
+    "AMPLIFY_function_userSimpleVideoUploadHandlr_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userSimpleVideoUploadHandlr"
+        }
+      ]
+    },
     "AMPLIFY_function_userSpeechAnalysesHandler_deploymentBucketName": {
       "usedBy": [
         {
@@ -640,6 +760,22 @@
         {
           "category": "function",
           "resourceName": "webCrawlerHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_websocketHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "websocketHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_websocketHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "websocketHandler"
         }
       ]
     },

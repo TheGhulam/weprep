@@ -2,6 +2,7 @@ import datetime
 import json
 import re
 import time
+import requests
 from collections import Counter
 
 import boto3
@@ -200,6 +201,7 @@ def count_filler_words(transcript_data):
 
     return pronunciation_words, filler_word_count
 
+
 def calculate_language_positivity(transcript_data):
     """
     Calculate the positivity percentage of the language used in the transcript data.
@@ -210,16 +212,43 @@ def calculate_language_positivity(transcript_data):
     Returns:
         float: The language positivity percentage, ranging from 0 (negative) to 100 (positive).
     """
-    positive_words = ["good", "great", "excellent", "amazing", "wonderful", "fantastic", "brilliant", "superb",
-                      "terrific"]
-    negative_words = ["bad", "terrible", "awful", "horrible", "dreadful", "unpleasant", "nasty", "lousy", "poor"]
+    positive_words = [
+        "good",
+        "great",
+        "excellent",
+        "amazing",
+        "wonderful",
+        "fantastic",
+        "brilliant",
+        "superb",
+        "terrific",
+    ]
+    negative_words = [
+        "bad",
+        "terrible",
+        "awful",
+        "horrible",
+        "dreadful",
+        "unpleasant",
+        "nasty",
+        "lousy",
+        "poor",
+    ]
 
-    transcript_text = " ".join(item["alternatives"][0]["content"].lower()
-                               for item in transcript_data["results"]["items"]
-                               if item["type"] == "pronunciation")
+    transcript_text = " ".join(
+        item["alternatives"][0]["content"].lower()
+        for item in transcript_data["results"]["items"]
+        if item["type"] == "pronunciation"
+    )
 
-    positive_count = sum(re.search(rf"\b{word}\b", transcript_text) is not None for word in positive_words)
-    negative_count = sum(re.search(rf"\b{word}\b", transcript_text) is not None for word in negative_words)
+    positive_count = sum(
+        re.search(rf"\b{word}\b", transcript_text) is not None
+        for word in positive_words
+    )
+    negative_count = sum(
+        re.search(rf"\b{word}\b", transcript_text) is not None
+        for word in negative_words
+    )
 
     total_words = positive_count + negative_count
     if total_words == 0:
@@ -228,6 +257,7 @@ def calculate_language_positivity(transcript_data):
         positivity_percentage = (positive_count / total_words) * 100
 
     return positivity_percentage
+
 
 def calculate_language_positivity(transcript_data):
     """
@@ -293,7 +323,38 @@ def handler(event, context):
     user_id = event["user_id"]
     interview_id = event["interview_id"]
     video_id = event["video_id"]
-    resume_id = event["resume_id"]
+
+    s3_key = f"{user_id}/{interview_id}/raw/{video_id}.mp3"
+
+    table_name = "userAudioAndVideoAnalysis"
+    table = dynamodb.Table(table_name)
+
+    try:
+        table.put_item(
+            Item={
+                "userId": user_id,
+                "videoId": video_id,
+                "interviewId": interview_id,
+                "status": "processing",
+            }
+        )
+        print("Initial item inserted successfully.")
+    except Exception as e:
+        print(f"Error inserting initial item: {e}")
+
+    payload = {
+        "user_id": user_id,
+        "interview_id": interview_id,
+        "video_id": video_id,
+        "p": video_id,
+        "c": f"{user_id}/{interview_id}/raw",  # Replace with the actual value for 'c'
+    }
+
+    try:
+        requests.post("http://3.69.169.63:5000/analyze", json=payload)
+        print("Request to EC2 analyze endpoint was sent successfully.")
+    except requests.exceptions.RequestException as e:
+        print(f"Request to EC2 analyze endpoint failed: {e}")
 
     s3_key = f"{user_id}/{interview_id}/raw/{video_id}.mp3"
 
@@ -385,7 +446,7 @@ def handler(event, context):
                 ":pw": str(response_data["pronunciation_words"]),
                 ":fwc": str(response_data["filler_word_count"]),
                 ":lp": str(response_data["language_positivty"]),
-                ":s": "Analyzing"
+                ":s": "Analyzing",
             },
             ExpressionAttributeNames={"#s": "status"},
         )

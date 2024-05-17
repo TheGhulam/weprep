@@ -28,11 +28,16 @@ def handle_get_request(event):
     try:
         # Fetch the user data from the database
         response = table.get_item(Key={"userId": user_id})
+        print(response)
         user_data = response.get("Item", {})
         if user_data:
             return {
                 "statusCode": 200,
                 "body": json.dumps(user_data),
+                "headers": {
+                    "Access-Control-Allow-Origin" : "*",
+                    "Access-Control-Allow-Credentials" : True
+                },
             }
         else:
             return {

@@ -31,7 +31,7 @@ def handler(event, context):
         "headers": {
             "Access-Control-Allow-Headers": "*",
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET, POST",
         },
         "body": json.dumps(
             {"message": "Audio processing and transcription started"}

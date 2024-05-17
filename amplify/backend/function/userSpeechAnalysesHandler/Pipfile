@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 src = {editable = true, path = "./src"}
 boto3 = "1.34.72"
+requests = "*"
 
 [requires]
 python_version = "3.8"

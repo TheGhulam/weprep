@@ -1,19 +1,45 @@
 import json
+import boto3
+
+s3_client = boto3.client("s3")
+dynamodb = boto3.resource("dynamodb")
 
 
 def handler(event, context):
-    video_id = event["pathParameters"]["interview-id"]
-    base_url = "https://d38eh3vxny00rq.cloudfront.net/"
-    video_url = f"{base_url}{video_id}.mp4"
+    interview_id = event["pathParameters"]["interview-id"]
+    video_id = event["pathParameters"]["video-id"]
+    user_id = event["pathParameters"]["user-id"]
 
-    questions = [
-        "I noticed on your resume that you've extensively used AWS services like Kubernetes, Lambdas, and S3 in your role at Spike Technologies. Can you describe a specific project where you implemented these technologies and the challenges you faced during deployment?",  # noqa
-        "You've developed APIs using FastAPI and employed asynchronous techniques for handling large API calls at both Spike Technologies and Spiky.AI. Could you walk us through the design and development process of one of your most complex APIs, particularly how you managed data fetching and processing?",  # noqa
-        "In your experience at Spiky.AI, you worked collaboratively using tools like Jira, Slack, and GitHub, and were involved in agile development. Can you discuss a particular instance where your team had to adapt or overcome a significant hurdle during a sprint, and how you contributed to resolving it?",  # noqa
-    ]
+    object_key = f"{user_id}/{interview_id}/{video_id}.mp4"
+    expiration = 3600
+    upload_url = s3_client.generate_presigned_url(
+        "put_object",
+        Params={"Bucket": "weprep-user-videos", "Key": object_key},
+        ExpiresIn=expiration,
+    )
+    video_url = "to be generated through cloudfront"
+
+    table_name = "userQuestionAndAnswers-dev"
+    table = dynamodb.Table(table_name)
+    response = table.get_item(Key={"interviewId": interview_id})
+    questions_data = []
+    if "Item" in response:
+        item = response["Item"]
+        questions_data = item.get("questions", [])
 
     return {
         "statusCode": 200,
-        "headers": {"Content-Type": "application/json"},
-        "body": json.dumps({"video_url": video_url, "questions": questions}),
+        "headers": {
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+            "Content-Type": "application/json",
+        },
+        "body": json.dumps(
+            {
+                "video_url": video_url,
+                "questions": questions_data,
+                "upload_url": upload_url,
+            }
+        ),
     }

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/{user-id}/audio-video/analysis/{video-id}": {
+      "name": "/{user-id}/audio-video/analysis/{video-id}",
+      "lambdaFunction": "fetchUserVideoAudioAnalysisHandler",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

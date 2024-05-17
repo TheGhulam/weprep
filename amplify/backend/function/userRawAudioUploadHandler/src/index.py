@@ -19,9 +19,10 @@ def handler(event, context):
     interview_id = event["pathParameters"]["interview-id"]
 
     resume_id = event.get("queryStringParameters", {}).get("resume-id", "")
+    video_id = event.get("queryStringParameters", {}).get("video-id", "")
+
     audio_data = event["body"]
     audio_data = base64.b64decode(audio_data)
-    video_id = str(uuid.uuid4())
 
     table_name = "userAudioDataTable-dev"
     table = dynamodb.Table(table_name)
@@ -42,7 +43,7 @@ def handler(event, context):
                 "feedbackAnalysis": [],
                 "SummaryAnalysis": None,
                 "webCrawlerResults": [],
-                "status": "Analyzing",
+                "status": "Processing",
             }
         )
         print("Initial item inserted successfully.")
@@ -72,6 +73,7 @@ def handler(event, context):
         }
 
     # Start the transcription job
+
     
 
     request_body = {}
@@ -93,6 +95,5 @@ def handler(event, context):
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
         },
-        "body": json.dumps(
-            {"message": "Audio File Upload successful", "videoId": video_id}
-        )}
+        "body": json.dumps({"message": "Audio File Upload successful"}),
+    }

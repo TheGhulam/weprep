@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "weprep38b852eb_identitypool_38b852eb",
+    "identityPoolName": "weprepc9d176cb_identitypool_c9d176cb",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "weprep38b852eb",
-    "userPoolName": "weprep38b852eb_userpool_38b852eb",
+    "resourceNameTruncated": "weprepc9d176cb",
+    "userPoolName": "weprepc9d176cb_userpool_c9d176cb",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -20,7 +20,10 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-      "email"
+      "email",
+      "family_name",
+      "name",
+      "phone_number"
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
@@ -31,21 +34,16 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "weprep38b852eb_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "weprepc9d176cb_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "38b852eb",
-    "resourceName": "weprep38b852eb",
+    "sharedId": "c9d176cb",
+    "resourceName": "weprepc9d176cb",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "defaultSocial",
-    "hostedUI": true,
+    "useDefault": "default",
     "usernameAttributes": [
       "email"
     ],
     "triggers": {},
-    "hostedUIDomainName": "weprep-auth",
-    "authProvidersUserPool": [],
-    "hostedUIProviderMeta": "[]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://www.weprep.co/home/\"],\"LogoutURLs\":[\"htpps://www.weprep.co/\"]}",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,

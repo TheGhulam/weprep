@@ -1,8 +1,8 @@
 {
   "version": 1,
   "paths": {
-    "/{user-id}/video/{interview-id}": {
-      "name": "/{user-id}/video/{interview-id}",
+    "/{user-id}/video/{interview-id}/{video-id}": {
+      "name": "/{user-id}/video/{interview-id}/{video-id}",
       "lambdaFunction": "userVideoService",
       "permissions": {
         "setting": "open"
