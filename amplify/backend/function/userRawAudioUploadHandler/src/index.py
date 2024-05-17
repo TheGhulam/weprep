@@ -74,7 +74,7 @@ def handler(event, context):
 
     # Start the transcription job
 
-    
+
 
     request_body = {}
     request_body["user_id"] = user_id
