@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/user/video/{user-id}/upload": {
+      "name": "/user/video/{user-id}/upload",
+      "lambdaFunction": "userSimpleVideoUploadHandlr",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

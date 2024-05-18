@@ -9,6 +9,7 @@ verify_ssl = true
 src = {editable = true, path = "./src"}
 requests = "*"
 urllib3 = "1.26.6"
+boto3 = "*"
 
 [requires]
 python_version = "3.8"

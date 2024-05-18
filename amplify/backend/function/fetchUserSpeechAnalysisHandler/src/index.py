@@ -1,5 +1,6 @@
 import boto3
 import simplejson as json
+import random
 
 dynamodb = boto3.resource("dynamodb")
 s3_client = boto3.client("s3")
@@ -16,6 +17,7 @@ def handler(event, context):
 
     try:
         response = table.get_item(Key={"videoId": video_id})
+        result = {}
         item = response.get("Item")
         if item:
             # Extract the required fields from the item
@@ -32,18 +34,54 @@ def handler(event, context):
                 "speechSpeed": item.get("speechSpeed"),
                 "feedbackAnalysis": item.get("feedbackAnalysis"),
                 "summaryAnalysis": item.get("SummaryAnalysis"),
+                "status": item.get("status"),
+                "averageMeetingScore": item.get("averageMeetingScore"),
             }
 
         user_id = result["userId"]
         interview_id = result["interviewId"]
-        object_key = f"{user_id}/{interview_id}/{video_id}.mp4"
-        expiration = 3600
-        upload_url = s3_client.generate_presigned_url(
-            "put_object",
-            Params={"Bucket": "weprep-user-videos", "Key": object_key},
-            ExpiresIn=expiration,
+
+        key = f"{user_id}/{interview_id}/transcripts/{video_id}_raw_audio_transcript.json"
+        object_response = s3_client.get_object(
+            Bucket="weprep-user-audios", Key=key
         )
-        result["uploadUrl"] = upload_url
+
+        transcript = object_response["Body"].read().decode("utf-8")
+        transcript = json.loads(transcript)
+        result["transcript"] = transcript["results"]["transcripts"][0][
+            "transcript"
+        ]
+        questions = []
+        # try:
+        #     table_name = "userQuestionAndAnswers-dev"
+        #     table = dynamodb.Table(table_name)
+        #     response = table.get_item(Key={"interviewId": interview_id})
+
+        #     if "Item" in response:
+        #         item = response["Item"]
+        #         questions_data = item.get("questions", [])
+        #         answers_data = item.get("answers", [])
+
+        #         print(questions_data, answers_data)
+
+        #         questions = []
+
+        #         for i in range(min(len(questions_data), len(answers_data))):
+        #             question = questions_data[i]["text"]
+        #             answer = answers_data[i]
+
+        #             question_answer_pair = {
+        #                 "question": question,
+        #                 "answer": answer,
+        #             }
+
+        #             questions.append(question_answer_pair)
+
+        #         result["questions"] = questions
+
+        # except Exception as e:
+        #     result["questions"] = []
+
     except Exception as e:
         print(f"Error fetching data from DynamoDB: {str(e)}")
         return {
@@ -53,7 +91,9 @@ def handler(event, context):
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
             },
-            "body": json.dumps({"error": "Failed to fetch data from DynamoDB"}),
+            "body": json.dumps(
+                {"error": "Failed to fetch data from DynamoDB"}
+            ),
         }
 
     return {

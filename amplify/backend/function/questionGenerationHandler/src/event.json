@@ -1,1 +1,13 @@
-{ "test": "event" }
+{
+    "practiceSetId": "1c23d35a-9be3-46d5-b601-a8de6895b09a",
+    "jobTitle": "Backend Dev",
+    "jobDescription": "backend development position that requires expertise in Python, FastAPI as well as AWS services like Lambdas and EC2",
+    "interviewType": "behavioral",
+    "interviewDuration": "medium",
+    "questionMode": "Unseen",
+    "interviewerTone": "Friendly",
+    "resumeId": "0939a887-36c2-4452-9620-24904d8d75ec",
+    "userId": "59c8dab4-2ce9-477c-b35f-d55ae911a750",
+    "interviewId": "ad8d73d3-4bc1-4327-9ff4-f97fc42f8b5c",
+    "createdAt": "2024-05-09T01:37:09.288272+00:00"
+}

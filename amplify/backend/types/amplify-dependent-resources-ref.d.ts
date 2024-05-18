@@ -1,5 +1,10 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
+    "api2f3f3761": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
+    },
     "cvService": {
       "ApiId": "string",
       "ApiName": "string",
@@ -11,6 +16,11 @@ export type AmplifyDependentResourcesAttributes = {
       "RootUrl": "string"
     },
     "fetchSpeechAnalysis": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
+    },
+    "fetchUserAudioVideoAnalysis": {
       "ApiId": "string",
       "ApiName": "string",
       "RootUrl": "string"
@@ -52,13 +62,12 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "auth": {
-    "weprep38b852eb": {
+    "weprepc9d176cb": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
-      "HostedUIDomain": "string",
+      "CreatedSNSRole": "string",
       "IdentityPoolId": "string",
       "IdentityPoolName": "string",
-      "OAuthMetadata": "string",
       "UserPoolArn": "string",
       "UserPoolId": "string",
       "UserPoolName": "string"
@@ -66,6 +75,13 @@ export type AmplifyDependentResourcesAttributes = {
   },
   "function": {
     "audioAnalysisProcessingHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "audioMetadataUploadHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -100,7 +116,28 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "fetchUserVideoAudioAnalysisHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "questionGenerationHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "s3TriggerThumbnailGenerationHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "thumbnailGenerationHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -163,6 +200,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "userSimpleVideoUploadHandlr": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "userSpeechAnalysesHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -192,6 +236,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "webCrawlerHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "websocketHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",

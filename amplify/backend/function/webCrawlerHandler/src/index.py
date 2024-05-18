@@ -177,7 +177,7 @@ def handler(event, context):
                         "content": [
                             {
                                 "type": "text",
-                                "text": f"I am giving you the summary that is generated for a user. Reply with only a query term focusing on the weak points in the summary. Keep it technical. Just one search query term. Understood? Keep it 1 or 2 words but technical. Here is the summary: {summary}",  # noqa
+                                "text": f"""I am giving you the summary that is generated for a user. Reply with only a query term and reason focusing on the weak points in the summary. Tell me the reason for it in 2 lines for each one over why and how looking into this topic will help the user improve. Keep it technical. Return me a list of JSON objects containing the query and the reason for it. Something like this: [{{query: some_query, reason: some_reason}}, {{query: some_query, reason: some_reason}}, ...]. Generate a total of 5 queries like this. Reply with only the JSON. Nothing else. Understood? Keep it 1 or 2 words but technical. Here is the summary: {summary}""",  # noqa
                             }
                         ],
                     }
@@ -188,18 +188,28 @@ def handler(event, context):
     response_body = response["body"].read()
     response_text = json.loads(response_body.decode("utf-8"))
     response_eval_list = response_text["content"]
-    query = response_eval_list[0]["text"]
+    queries = response_eval_list[0]["text"]
+    queries = json.loads(queries)
+    print(queries)
 
-    print(query)
-    google_results = google_search(query)
-    coursera_results = scrap_Coursera(query)
-    youtube_results = scrape_youtube_videos(query)
+    merged_results = []
 
-    merged_results = {
-        "Google": google_results,
-        "Coursera": coursera_results,
-        "YouTube": youtube_results,
-    }
+    for query_dict in queries:
+        print(query_dict)
+        query = query_dict["query"]
+        reason = query_dict["reason"]
+        google_results = google_search(query)
+        coursera_results = scrap_Coursera(query)
+        youtube_results = scrape_youtube_videos(query)
+
+        merged_result = {
+            "Query": query,
+            "Reason": reason,
+            "Google": google_results,
+            "Coursera": coursera_results,
+            "YouTube": youtube_results,
+        }
+        merged_results.append(merged_result)
 
     table_name = "userAudioDataTable-dev"
     table = dynamodb.Table(table_name)

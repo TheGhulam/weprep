@@ -6,7 +6,7 @@ dynamodb = boto3.client("dynamodb")
 s3 = boto3.client("s3")
 cognito = boto3.client("cognito-idp")
 
-USER_POOL_ID = "eu-central-1_zua4po97J"
+USER_POOL_ID = "eu-central-1_WmsK5drsR"
 TABLE_NAME = "userTable-dev"
 BUCKET_NAME = "user-profile-picture-data"
 
